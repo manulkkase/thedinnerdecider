@@ -27,7 +27,7 @@ export const CUISINE_OPTIONS = [
 
 export const ALL_FOODS: FoodItem[] = [
   // Italian
-  { id: 1, name: 'Margherita Pizza', imageUrl: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=2070&auto=format&fit=crop', tags: ['italian', 'vegetarian'] },
+  { id: 1, name: 'Margherita Pizza', imageUrl: 'https://live.staticflickr.com/675/23490191259_432bd5c0cf.jpg', tags: ['italian', 'vegetarian'] },
   { id: 2, name: 'Spaghetti Carbonara', imageUrl: 'https://images.unsplash.com/photo-1608796335039-f472198942ca?q=80&w=2070&auto=format&fit=crop', tags: ['italian'] },
   { id: 3, name: 'Lasagna', imageUrl: 'https://images.unsplash.com/photo-1574894709920-31b29d817b19?q=80&w=2070&auto=format&fit=crop', tags: ['italian'] },
   { id: 4, name: 'Mushroom Risotto', imageUrl: 'https://images.unsplash.com/photo-1595908129321-99a43640236a?q=80&w=2070&auto=format&fit=crop', tags: ['italian', 'vegetarian', 'gluten-free'] },

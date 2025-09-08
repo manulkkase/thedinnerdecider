@@ -127,14 +127,14 @@ const App: React.FC = () => {
          <div className="p-6">
             <h3 className="text-xl font-semibold text-slate-800">What's next?</h3>
              <div className="mt-4 space-y-3">
-                 <Button onClick={() => setModalContent({ title: "Find Nearby Restaurants", body: "This would open a map showing local restaurants serving " + tournament.winner?.name + " based on your location." })} variant="primary" className="w-full">
-                    Find Nearby Restaurants
+                 <Button onClick={() => window.open(`https://www.ubereats.com/search?q=${tournament.winner?.name}`)} variant="primary" className="w-full">
+                    Order Delivery (Uber Eats)
                 </Button>
-                 <Button onClick={() => setModalContent({ title: "Order Delivery", body: "This would open your favorite delivery app (like Uber Eats or DoorDash) pre-searched for " + tournament.winner?.name + "."})} variant="primary" className="w-full">
-                    Order Delivery
-                </Button>
-                 <Button onClick={() => setModalContent({ title: "Share Result", body: `Your dinner decision has been copied to clipboard! Share it with your mates: "I'm craving a ${tournament.winner?.name} tonight! Who's in?"` })} variant="secondary" className="w-full">
-                    Share
+                 <Button onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    setModalContent({ title: "Result Copied!", body: "The result page URL has been copied to your clipboard." });
+                }} variant="secondary" className="w-full">
+                    Share Result
                 </Button>
             </div>
         </div>

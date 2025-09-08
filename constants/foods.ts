@@ -8,21 +8,21 @@ export const DIETARY_OPTIONS = [
 ];
 
 export const CUISINE_OPTIONS = [
-  { value: 'italian', label: 'Italian' },
-  { value: 'mexican', label: 'Mexican' },
-  { value: 'japanese', label: 'Japanese' },
-  { value: 'indian', label: 'Indian' },
-  { value: 'american', label: 'American' },
-  { value: 'chinese', label: 'Chinese' },
-  { value: 'thai', label: 'Thai' },
-  { value: 'mediterranean', label: 'Mediterranean' },
-  { value: 'vietnamese', label: 'Vietnamese' },
-  { value: 'french', label: 'French' },
-  { value: 'british', label: 'British' },
-  { value: 'australian', label: 'Australian' },
-  { value: 'greek', label: 'Greek' },
-  { value: 'korean', label: 'Korean' },
-  { value: 'spanish', label: 'Spanish' },
+  { value: 'italian', label: 'Italian', icon: '🍕' },
+  { value: 'mexican', label: 'Mexican', icon: '🌮' },
+  { value: 'japanese', label: 'Japanese', icon: '🍣' },
+  { value: 'american', label: 'American', icon: '🍔' },
+  { value: 'indian', label: 'Indian', icon: '🍛' },
+  { value: 'chinese', label: 'Chinese', icon: '🥡' },
+  { value: 'thai', label: 'Thai', icon: '🌶️' },
+  { value: 'mediterranean', label: 'Mediterranean', icon: '🥗' },
+  { value: 'vietnamese', label: 'Vietnamese', icon: '🍜' },
+  { value: 'french', label: 'French', icon: '🥖' },
+  { value: 'british', label: 'British', icon: '☕' },
+  { value: 'australian', label: 'Australian', icon: '🇦🇺' },
+  { value: 'greek', label: 'Greek', icon: '🇬🇷' },
+  { value: 'korean', label: 'Korean', icon: '🇰🇷' },
+  { value: 'spanish', label: 'Spanish', icon: '🥘' },
 ];
 
 export const ALL_FOODS: FoodItem[] = [
@@ -158,5 +158,5 @@ export const ALL_FOODS: FoodItem[] = [
   { id: 97, name: 'Lobster Roll', imageUrl: 'https://live.staticflickr.com/2671/3949569972_c8bd3d0841.jpg', tags: ['american'] },
   { id: 98, name: 'Clam Chowder', imageUrl: 'https://live.staticflickr.com/4024/4258935558_071c74a224.jpg', tags: ['american'] },
   { id: 99, name: 'Gourmet Salad', imageUrl: 'https://live.staticflickr.com/812/40656963484_65280fb84c.jpg', tags: ['vegetarian', 'gluten-free'] },
-  { id: 100, name: 'HSP', imageUrl: 'https://live.staticflickr.com/3758/33441434790_5df970aeb0.jpg', tags: [] },
+  { id: 100, name: 'HSP', imageUrl: 'https://live.staticflickr.com/3758/33441434790_5df970aeb0.jpgg', tags: [] },
 ];

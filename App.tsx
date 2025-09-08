@@ -94,7 +94,7 @@ const App: React.FC = () => {
                         >
                             {opt.icon}
                         </Button>
-                        <div className="absolute -bottom-8 w-max px-2 py-1 text-sm text-white bg-slate-700 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none md:group-hover:opacity-100 md:opacity-0">
+                        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-max px-2 py-1 text-sm text-white bg-slate-700 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                             {opt.label}
                         </div>
                     </div>

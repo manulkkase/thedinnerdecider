@@ -83,11 +83,21 @@ const App: React.FC = () => {
         </div>
          <div className="mt-4">
             <h3 className="text-lg font-medium text-slate-600">Cuisine Type</h3>
-            <div className="flex flex-wrap justify-center gap-2 mt-2">
+            <div className="flex flex-wrap justify-center gap-4 mt-2">
                 {CUISINE_OPTIONS.map(opt => (
-                     <Button key={opt.value} onClick={() => toggleFilter('cuisine', opt.value)} variant={filters.cuisine.includes(opt.value) ? 'primary' : 'secondary'}>
-                        {opt.icon}
-                    </Button>
+                    <div key={opt.value} className="relative group flex flex-col items-center">
+                        <Button 
+                            onClick={() => toggleFilter('cuisine', opt.value)} 
+                            variant={filters.cuisine.includes(opt.value) ? 'primary' : 'secondary'}
+                            className="text-2xl w-16 h-16 flex items-center justify-center"
+                            aria-label={opt.label}
+                        >
+                            {opt.icon}
+                        </Button>
+                        <div className="absolute -bottom-8 w-max px-2 py-1 text-sm text-white bg-slate-700 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none md:group-hover:opacity-100 md:opacity-0">
+                            {opt.label}
+                        </div>
+                    </div>
                 ))}
             </div>
         </div>

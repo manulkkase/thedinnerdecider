@@ -86,7 +86,7 @@ const App: React.FC = () => {
             <div className="flex flex-wrap justify-center gap-2 mt-2">
                 {CUISINE_OPTIONS.map(opt => (
                      <Button key={opt.value} onClick={() => toggleFilter('cuisine', opt.value)} variant={filters.cuisine.includes(opt.value) ? 'primary' : 'secondary'}>
-                        {opt.label}
+                        {opt.icon}
                     </Button>
                 ))}
             </div>

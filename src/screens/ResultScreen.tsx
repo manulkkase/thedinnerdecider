@@ -40,8 +40,11 @@ const ResultScreen: React.FC = () => {
          <div className="p-6">
             <h3 className="text-xl font-semibold text-slate-800">What's next?</h3>
              <div className="mt-4 space-y-3">
-                 <Button onClick={() => window.open(`https://www.ubereats.com/search?q=${winner.name}`)} variant="primary" className="w-full">
+                 <Button onClick={() => window.open(`https://www.ubereats.com/search?q=${winner.name}`)} variant="primary" className="w-full bg-green-500 hover:bg-green-600">
                     Order Delivery (Uber Eats)
+                </Button>
+                <Button onClick={() => window.open(`https://www.doordash.com/en-AU/search/${winner.name}`)} variant="primary" className="w-full bg-red-600 hover:bg-red-700">
+                    Order Delivery (DoorDash)
                 </Button>
                  <Button onClick={() => {
                     navigator.clipboard.writeText(window.location.href);

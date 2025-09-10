@@ -14,6 +14,7 @@ const useTournament = (foods: FoodItem[], tournamentSize: number, isPlaying: boo
 
   useEffect(() => {
     if (isPlaying && foods.length >= tournamentSize) {
+
       const initialRound = shuffleArray(foods).slice(0, tournamentSize);
       setRound(initialRound);
       setNextRound([]);

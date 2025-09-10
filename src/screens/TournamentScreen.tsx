@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { FoodItem, FilterOptions } from '../../types';
+import { FoodItem } from '../../types';
 import { ALL_FOODS } from '../../constants/foods';
 import useTournament from '../../hooks/useTournament';
 import FoodCard from '../../components/FoodCard';
@@ -11,24 +11,25 @@ const TournamentScreen: React.FC = () => {
   const navigate = useNavigate();
 
   const tournamentSize = parseInt(searchParams.get('size') || '16');
-  const dietaryFilters = searchParams.get('dietary')?.split(',').filter(Boolean) || [];
-  const cuisineFilters = searchParams.get('cuisine')?.split(',').filter(Boolean) || [];
 
-  const filters: FilterOptions = {
-    dietary: dietaryFilters,
-    cuisine: cuisineFilters
-  };
+  const dietaryFilters = useMemo(() => 
+    searchParams.get('dietary')?.split(',').filter(Boolean) || []
+  , [searchParams]);
+
+  const cuisineFilters = useMemo(() => 
+    searchParams.get('cuisine')?.split(',').filter(Boolean) || []
+  , [searchParams]);
 
   const filteredFoods = useMemo(() => {
     let foods = ALL_FOODS;
-    if (filters.dietary.length > 0) {
-      foods = foods.filter(food => filters.dietary.every(tag => food.tags.includes(tag)));
+    if (dietaryFilters.length > 0) {
+      foods = foods.filter(food => dietaryFilters.every(tag => food.tags.includes(tag)));
     }
-    if (filters.cuisine.length > 0) {
-      foods = foods.filter(food => filters.cuisine.some(tag => food.tags.includes(tag)));
+    if (cuisineFilters.length > 0) {
+      foods = foods.filter(food => cuisineFilters.some(tag => food.tags.includes(tag)));
     }
     return foods;
-  }, [filters]);
+  }, [dietaryFilters, cuisineFilters]);
 
   const tournament = useTournament(filteredFoods, tournamentSize, true);
 

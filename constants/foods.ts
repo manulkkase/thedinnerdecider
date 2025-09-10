@@ -16,12 +16,12 @@ export const CUISINE_OPTIONS = [
   { value: 'chinese', label: 'Chinese', icon: '🥡' },
   { value: 'thai', label: 'Thai', icon: '🌶️' },
   { value: 'mediterranean', label: 'Mediterranean', icon: '🥗' },
-  { value: 'vietnamese', label: 'Vietnamese', icon: '🍜' },
+  { value: 'vietnamese', label: 'Vietnamese', icon: '🍲' },
   { value: 'french', label: 'French', icon: '🥖' },
   { value: 'british', label: 'British', icon: '☕' },
-  { value: 'australian', label: 'Australian', icon: '🇦🇺' },
-  { value: 'greek', label: 'Greek', icon: '🇬🇷' },
-  { value: 'korean', label: 'Korean', icon: '🇰🇷' },
+  { value: 'australian', label: 'Australian', icon: '🥧' },
+  { value: 'greek', label: 'Greek', icon: '🫒' },
+  { value: 'korean', label: 'Korean', icon: '🍗' },
   { value: 'spanish', label: 'Spanish', icon: '🥘' },
 ];
 

@@ -43,7 +43,7 @@ const ResultScreen: React.FC = () => {
                  <Button onClick={() => window.open(`https://www.ubereats.com/search?q=${winner.name}`)} variant="primary" className="w-full bg-green-500 hover:bg-green-600">
                     Order Delivery (Uber Eats)
                 </Button>
-                <Button onClick={() => window.open(`https://www.doordash.com/en-AU/search/${winner.name}`)} variant="primary" className="w-full bg-red-600 hover:bg-red-700">
+                <Button onClick={() => window.open(`https://www.doordash.com/search/store/${encodeURIComponent(winner.name)}`)} variant="primary" className="w-full bg-red-600 hover:bg-red-700">
                     Order Delivery (DoorDash)
                 </Button>
                  <Button onClick={() => {

@@ -18,6 +18,32 @@ const ResultScreen: React.FC = () => {
     navigate('/');
   };
 
+const handleShare = async () => {
+    const shareData = {
+      title: "The Dinner Decider",
+      text: `Tonight's winner is ${winner?.name}! Find out what you should eat:`,
+      url: window.location.href
+    };
+
+    // Check if the Web Share API is available
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        // You could show a success message here if you want
+      } catch (err) {
+        // This can happen if the user cancels the share action
+        console.error("Share failed:", err);
+      }
+    } else {
+      // Fallback for browsers that don't support Web Share API
+      navigator.clipboard.writeText(window.location.href);
+      setModalContent({ 
+        title: "Result Copied!", 
+        body: "The result page URL has been copied to your clipboard." 
+      });
+    }
+  };
+
   if (!winner) {
     return (
       <div className="text-center p-4 md:p-8 flex flex-col items-center justify-center min-h-screen">
@@ -46,10 +72,7 @@ const ResultScreen: React.FC = () => {
                 <Button onClick={() => window.open(`https://www.doordash.com/search/store/${encodeURIComponent(winner.name)}`)} variant="primary" className="w-full bg-red-600 hover:bg-red-700">
                     Order Delivery (DoorDash)
                 </Button>
-                 <Button onClick={() => {
-                    navigator.clipboard.writeText(window.location.href);
-                    setModalContent({ title: "Result Copied!", body: "The result page URL has been copied to your clipboard." });
-                }} variant="secondary" className="w-full">
+                  <Button onClick={handleShare} variant="secondary" className="w-full">
                     Share Result
                 </Button>
             </div>

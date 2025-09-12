@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { FilterOptions } from '../../types';
 import { ALL_FOODS, CUISINE_OPTIONS, DIETARY_OPTIONS } from '../../constants/foods';
 import Button from '../../components/Button';
+import HowToPlayModal from '../../components/HowToPlayModal';
 
 const StartScreen: React.FC = () => {
   const navigate = useNavigate();
   const [tournamentSize, setTournamentSize] = useState<number>(16);
   const [filters, setFilters] = useState<FilterOptions>({ dietary: [], cuisine: [] });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredFoods = useMemo(() => {
     let foods = ALL_FOODS;
@@ -48,10 +50,22 @@ const StartScreen: React.FC = () => {
 
   return (
     <div className="text-center p-4 md:p-8">
-      <h1 className="text-4xl md:text-6xl font-bold text-slate-800">The Dinner Decider</h1>
-      <p className="mt-4 text-lg text-slate-600">Can't decide what to eat? Let's turn it into a game!</p>
-      
-      <div className="mt-8 max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+    {/* 타이틀과 버튼을 감싸는 div */}
+    <div className="relative mb-8 md:mb-12"> {/* mb-8 md:mb-12로 아래쪽 여백 추가 */}
+        <h1 className="text-4xl md:text-6xl font-bold text-slate-800">The Dinner Decider</h1>
+        <p className="mt-4 text-lg text-slate-600">Can't decide what to eat? Let's turn it into a game!</p>
+        
+        {/* 'How to Play' 버튼 (수정된 부분) */}
+        <button
+            onClick={() => setIsModalOpen(true)}
+            className="absolute bottom-0 right-4 mb-0 md:mb-0 px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full font-semibold hover:bg-blue-200 transition-colors duration-200 translate-y-7
+            "
+        >
+            How to Play
+        </button>
+    </div>
+
+    <div className="mt-8 max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-lg">
         <h2 className="text-2xl font-semibold text-slate-700 mb-4">1. Choose Tournament Size</h2>
         <div className="flex justify-center gap-4">
           {[8, 16, 32].map(size => (
@@ -85,7 +99,7 @@ const StartScreen: React.FC = () => {
                         >
                             {opt.icon}
                         </Button>
-                        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-max px-2 py-1 text-sm text-white bg-slate-700 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-max px-2 py-1 text-sm text-white bg-slate-700 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                             {opt.label}
                         </div>
                     </div>
@@ -98,6 +112,7 @@ const StartScreen: React.FC = () => {
             <Button onClick={handleStartTournament} variant="primary" className="w-full text-xl py-4">
                 Start Tournament
             </Button>
+            {isModalOpen && <HowToPlayModal onClose={() => setIsModalOpen(false)} />}
         </div>
       </div>
     </div>

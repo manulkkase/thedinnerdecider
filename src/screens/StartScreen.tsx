@@ -115,6 +115,29 @@ const StartScreen: React.FC = () => {
             {isModalOpen && <HowToPlayModal onClose={() => setIsModalOpen(false)} />}
         </div>
       </div>
+      
+      <div className="mt-8 max-w-2xl mx-auto">
+  <a href="/blog/index.html" className="block relative rounded-xl shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1 overflow-hidden h-48 group">
+    {/* Background Image */}
+    <img 
+      src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=700&q=80" 
+      alt="A delicious looking meal" 
+      className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300" 
+    />
+    {/* Gradient Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30"></div>
+    
+    {/* Text Content */}
+    <div className="absolute inset-0 p-6 flex flex-col justify-end text-left">
+        <h3 className="text-2xl font-bold text-white mb-2">Stuck in a Food Rut?</h3>
+        <p className="text-white/90 mb-4">Discover fun facts, tips, and recipes about your favorite foods.</p>
+        <span className="font-bold text-orange-400 group-hover:text-orange-300 transition-colors">
+          Get Inspired →
+        </span>
+    </div>
+  </a>
+</div>
+
     </div>
   );
 };

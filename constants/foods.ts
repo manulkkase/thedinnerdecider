@@ -23,6 +23,7 @@ export const CUISINE_OPTIONS = [
   { value: 'greek', label: 'Greek', icon: '🫒' },
   { value: 'korean', label: 'Korean', icon: '🍗' },
   { value: 'spanish', label: 'Spanish', icon: '🥘' },
+  { value: 'dessert', label: 'Dessert', icon: '🍰' },
 ];
 
 export const ALL_FOODS: FoodItem[] = [
@@ -117,7 +118,8 @@ export const ALL_FOODS: FoodItem[] = [
   { id: 66, name: 'Sausage Sizzle', imageUrl: 'https://live.staticflickr.com/3675/19267974562_6447e66394.jpg', tags: ['australian'] },
   { id: 67, name: 'Lamb Roast', imageUrl: 'https://live.staticflickr.com/2619/4040499105_881816a8e7.jpg', tags: ['australian', 'gluten-free'] },
   { id: 68, name: 'Pavlova', imageUrl: 'https://live.staticflickr.com/5223/5883642894_45bb6ed410.jpg', tags: ['australian', 'vegetarian', 'gluten-free'] },
-  
+  { id: 100, name: 'Halal Snack Pack', imageUrl: 'https://live.staticflickr.com/65535/53234023644_0392736212.jpg', tags: ['australian'] },
+
   // Greek
   { id: 69, name: 'Gyro Wrap', imageUrl: 'https://live.staticflickr.com/2829/12131361206_d79275cfe5.jpg', tags: ['greek'] },
   { id: 70, name: 'Moussaka', imageUrl: 'https://live.staticflickr.com/3363/3611026570_364983d091.jpg', tags: ['greek'] },
@@ -149,14 +151,13 @@ export const ALL_FOODS: FoodItem[] = [
   { id: 90, name: 'Cauliflower Pizza', imageUrl: 'https://live.staticflickr.com/7262/7115347105_c89b973fd0.jpg', tags: ['vegetarian', 'gluten-free'] },
 
   // Desserts & Others
-  { id: 91, name: 'New York Cheesecake', imageUrl: 'https://live.staticflickr.com/65535/51262202550_a65c383757.jpg', tags: ['american', 'vegetarian'] },
-  { id: 92, name: 'Chocolate Brownie', imageUrl: 'https://live.staticflickr.com/6211/6307232813_8e17926d22.jpg', tags: ['american', 'vegetarian'] },
-  { id: 93, name: 'Tiramisu', imageUrl: 'https://live.staticflickr.com/5061/5774179251_b8b8f1b07f.jpg', tags: ['italian', 'vegetarian'] },
-  { id: 94, name: 'Acai Bowl', imageUrl: 'https://live.staticflickr.com/65535/51270106293_e940f395d7.jpg', tags: ['vegan', 'vegetarian', 'gluten-free'] },
-  { id: 95, name: 'Poke Bowl', imageUrl: 'https://live.staticflickr.com/5649/22019271524_344b58c33f.jpg', tags: ['japanese', 'gluten-free'] },
-  { id: 96, name: 'Shakshuka', imageUrl: 'https://live.staticflickr.com/8686/16130148254_4498d226e9.jpg', tags: ['mediterranean', 'vegetarian', 'gluten-free'] },
-  { id: 97, name: 'Lobster Roll', imageUrl: 'https://live.staticflickr.com/2671/3949569972_c8bd3d0841.jpg', tags: ['american'] },
-  { id: 98, name: 'Clam Chowder', imageUrl: 'https://live.staticflickr.com/4024/4258935558_071c74a224.jpg', tags: ['american'] },
-  { id: 99, name: 'Gourmet Salad', imageUrl: 'https://live.staticflickr.com/812/40656963484_65280fb84c.jpg', tags: ['vegetarian', 'gluten-free'] },
-  { id: 100, name: 'HSP', imageUrl: 'https://live.staticflickr.com/3758/33441434790_5df970aeb0.jpgg', tags: [] },
+  { id: 91, name: 'New York Cheesecake', imageUrl: 'https://live.staticflickr.com/65535/51262202550_a65c383757.jpg', tags: ['american', 'vegetarian', 'dessert'] },
+  { id: 92, name: 'Chocolate Brownie', imageUrl: 'https://live.staticflickr.com/6211/6307232813_8e17926d22.jpg', tags: ['american', 'vegetarian', 'dessert'] },
+  { id: 93, name: 'Tiramisu', imageUrl: 'https://live.staticflickr.com/5061/5774179251_b8b8f1b07f.jpg', tags: ['italian', 'vegetarian', 'dessert'] },
+  { id: 94, name: 'Acai Bowl', imageUrl: 'https://live.staticflickr.com/65535/51270106293_e940f395d7.jpg', tags: ['vegan', 'vegetarian', 'gluten-free', 'dessert'] },
+  { id: 95, name: 'Poke Bowl', imageUrl: 'https://live.staticflickr.com/5649/22019271524_344b58c33f.jpg', tags: ['japanese', 'gluten-free', 'dessert'] },
+  { id: 96, name: 'Shakshuka', imageUrl: 'https://live.staticflickr.com/8686/16130148254_4498d226e9.jpg', tags: ['mediterranean', 'vegetarian', 'gluten-free', 'dessert'] },
+  { id: 97, name: 'Lobster Roll', imageUrl: 'https://live.staticflickr.com/2671/3949569972_c8bd3d0841.jpg', tags: ['american', 'dessert'] },
+  { id: 98, name: 'Clam Chowder', imageUrl: 'https://live.staticflickr.com/4024/4258935558_071c74a224.jpg', tags: ['american', 'dessert'] },
+  { id: 99, name: 'Gourmet Salad', imageUrl: 'https://live.staticflickr.com/812/40656963484_65280fb84c.jpg', tags: ['vegetarian', 'gluten-free', 'dessert'] },
 ];

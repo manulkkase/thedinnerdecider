@@ -4,10 +4,19 @@ import { ALL_FOODS } from '../../constants/foods';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 
+
 const ResultScreen: React.FC = () => {
   const { foodName } = useParams<{ foodName: string }>();
   const navigate = useNavigate();
   const [modalContent, setModalContent] = useState<{ title: string; body: string } | null>(null);
+
+  const handleSearchNearby = () => {
+    if (foodName) {
+      const query = `${foodName} near me`;
+      const url = `https://www.google.com/maps/search/${encodeURIComponent(query)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   const winner = useMemo(() => {
     if (!foodName) return null;
@@ -66,6 +75,8 @@ const handleShare = async () => {
          <div className="p-6">
             <h3 className="text-xl font-semibold text-slate-800">What's next?</h3>
              <div className="mt-4 space-y-3">
+              <Button onClick={handleSearchNearby} variant="primary" className="w-full text-lg py-3 font-semibold tracking-wide shadow-lg hover:shadow-xl transition-shadow duration-200"> Find {foodName} Near Me 📍
+                </Button>
                  <Button onClick={() => window.open(`https://www.ubereats.com/search?q=${winner.name}`)} variant="primary" className="w-full bg-green-500 hover:bg-green-600">
                     Order Delivery (Uber Eats)
                 </Button>

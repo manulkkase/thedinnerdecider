@@ -12,8 +12,9 @@ const ResultScreen: React.FC = () => {
 
   const handleSearchNearby = () => {
     if (foodName) {
+      trackLinkClick('Google Maps');
       const query = `${foodName} near me`;
-      const url = `https://www.google.com/maps/search/${encodeURIComponent(query)}`;
+      const url = `https://www.google.com/maps/search/?q${encodeURIComponent(query)}`;
       window.open(url, '_blank', 'noopener,noreferrer');
     }
   };
@@ -22,6 +23,18 @@ const ResultScreen: React.FC = () => {
     if (!foodName) return null;
     return ALL_FOODS.find(food => food.name === decodeURIComponent(foodName)) || null;
   }, [foodName]);
+
+  // @ts-ignore - window.gtag may not be defined on the window object
+  const gtag = window.gtag;
+
+  const trackLinkClick = (linkName: string) => {
+    if (gtag && winner) {
+      gtag('event', 'outbound_link_click', {
+        'link_name': linkName,
+        'food_name': winner.name,
+      });
+    }
+  };
 
   const handlePlayAgain = () => {
     navigate('/');
@@ -77,10 +90,10 @@ const handleShare = async () => {
              <div className="mt-4 space-y-3">
               <Button onClick={handleSearchNearby} variant="primary" className="w-full text-lg py-3 font-semibold tracking-wide shadow-lg hover:shadow-xl transition-shadow duration-200"> Find {foodName} Near Me 📍
                 </Button>
-                 <Button onClick={() => window.open(`https://www.ubereats.com/search?q=${winner.name}`)} variant="primary" className="w-full bg-green-500 hover:bg-green-600">
+                 <Button onClick={() => { trackLinkClick('Uber Eats'); window.open(`https://www.ubereats.com/search?q=${winner.name}`)}} variant="primary" className="w-full bg-green-500 hover:bg-green-600">
                     Order Delivery (Uber Eats)
                 </Button>
-                <Button onClick={() => window.open(`https://www.doordash.com/search/store/${encodeURIComponent(winner.name)}`)} variant="primary" className="w-full bg-red-600 hover:bg-red-700">
+                <Button onClick={() => {trackLinkClick('DoorDash'); window.open(`https://www.doordash.com/search/store/${encodeURIComponent(winner.name)}`)}} variant="primary" className="w-full bg-red-600 hover:bg-red-700">
                     Order Delivery (DoorDash)
                 </Button>
                   <Button onClick={handleShare} variant="secondary" className="w-full">

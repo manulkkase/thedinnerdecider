@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import PrivacyPolicy from './src/screens/PrivacyPolicy';
 import TermsOfService from './src/screens/TermsOfService';
 import Contact from './src/screens/Contact';
+import { Analytics } from "@vercel/analytics/react"
 
 const App: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const App: React.FC = () => {
       </Routes>
      </div>
       <Footer />
+      <Analytics />
     </main>
   );
 };

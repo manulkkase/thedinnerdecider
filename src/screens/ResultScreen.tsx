@@ -14,7 +14,7 @@ const ResultScreen: React.FC = () => {
     if (foodName) {
       trackLinkClick('Google Maps');
       const query = `${foodName} near me`;
-      const url = `https://www.google.com/maps/search/?q${encodeURIComponent(query)}`;
+      const url = `https://www.google.com/maps/search/${encodeURIComponent(query)}`;
       window.open(url, '_blank', 'noopener,noreferrer');
     }
   };

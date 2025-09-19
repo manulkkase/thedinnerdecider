@@ -25,6 +25,7 @@ const App: React.FC = () => {
      </div>
       <Footer />
       <Analytics />
+      <SpeedInsights />
     </main>
   );
 };

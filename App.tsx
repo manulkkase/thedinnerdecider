@@ -8,6 +8,7 @@ import PrivacyPolicy from './src/screens/PrivacyPolicy';
 import TermsOfService from './src/screens/TermsOfService';
 import Contact from './src/screens/Contact';
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const App: React.FC = () => {
   return (

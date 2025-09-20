@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ALL_FOODS } from '../../constants/foods';
 import Button from '../../components/Button';
@@ -7,8 +7,17 @@ import Modal from '../../components/Modal';
 
 const ResultScreen: React.FC = () => {
   const { foodName } = useParams<{ foodName: string }>();
+  const [socialProofCount, setSocialProofCount] = useState<number>(0); useEffect(() => {
+    
+  const randomCount = Math.floor(Math.random() * 36) + 15; setSocialProofCount(randomCount); }, []); // 빈 배열을 전달하여 컴포넌트가 처음 렌더링될 때 한 번만 실행되도록 함
   const navigate = useNavigate();
   const [modalContent, setModalContent] = useState<{ title: string; body: string } | null>(null);
+
+  const getOrdinalSuffix = (num: number) => {
+  const s = ['th', 'st', 'nd', 'rd'];
+  const v = num % 100;
+  return s[(v - 20) % 10] || s[v] || s[0];
+  };
 
   const handleSearchNearby = () => {
     if (foodName) {
@@ -66,6 +75,7 @@ const handleShare = async () => {
     }
   };
 
+
   if (!winner) {
     return (
       <div className="text-center p-4 md:p-8 flex flex-col items-center justify-center min-h-screen">
@@ -83,6 +93,12 @@ const handleShare = async () => {
       <h1 className="text-4xl md:text-7xl font-extrabold text-amber-500 my-4">{winner.name}!</h1>
       <p className="text-lg text-slate-500">Good choice, mate!</p>
       
+      <div className="mt-3 inline-block bg-amber-100 text-amber-800 text-sm font-semibold px-4 py-1.5 rounded-full shadow-sm"> 
+      <p className="text-orange-800 text-center font-semibold">
+       Excellent pick! You're the <strong>{socialProofCount}{getOrdinalSuffix(socialProofCount)}</strong> person to land on {winner.name} today. 🏆
+       </p>
+      </div>
+
       <div className="mt-8 w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
         <img src={winner.imageUrl} alt={winner.name} className="w-full h-64 object-cover" />
          <div className="p-6">

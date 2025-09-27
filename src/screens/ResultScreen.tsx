@@ -3,9 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ALL_FOODS } from '../../constants/foods';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
+import './HomeScreen.css';
 
 
 const ResultScreen: React.FC = () => {
+  useEffect(() => {
+  // 👇 이 페이지가 보일 때, 'home-background' 클래스를 제거하기만 합니다.
+  document.body.classList.remove('home-background');
+}, []);
   const { foodName } = useParams<{ foodName: string }>();
   const [socialProofCount, setSocialProofCount] = useState<number>(0); useEffect(() => {
     

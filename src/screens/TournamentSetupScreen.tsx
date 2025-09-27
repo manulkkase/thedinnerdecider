@@ -1,11 +1,16 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FilterOptions } from '../../types';
 import { ALL_FOODS, CUISINE_OPTIONS, DIETARY_OPTIONS } from '../../constants/foods';
 import Button from '../../components/Button';
 import HowToPlayModal from '../../components/HowToPlayModal';
+import './HomeScreen.css';
 
-const StartScreen: React.FC = () => {
+const TournamentSetupScreen: React.FC = () => {
+  useEffect(() => {
+  // 👇 이 페이지가 보일 때, 'home-background' 클래스를 제거하기만 합니다.
+  document.body.classList.remove('home-background');
+}, []);
   const navigate = useNavigate();
   const [tournamentSize, setTournamentSize] = useState<number>(16);
   const [filters, setFilters] = useState<FilterOptions>({ dietary: [], cuisine: [] });
@@ -32,7 +37,7 @@ const StartScreen: React.FC = () => {
       if (filters.cuisine.length > 0) {
         params.append('cuisine', filters.cuisine.join(','));
       }
-      navigate(`/play?${params.toString()}`);
+      navigate(`/tournament?${params.toString()}`);
     } else {
       alert(`Not enough food options for a ${tournamentSize}-item tournament with the selected filters. Please select fewer items or change filters. Found ${filteredFoods.length} items.`);
     }
@@ -142,4 +147,4 @@ const StartScreen: React.FC = () => {
   );
 };
 
-export default StartScreen;
+export default TournamentSetupScreen;

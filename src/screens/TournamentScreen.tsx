@@ -1,12 +1,17 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { FoodItem } from '../../types';
 import { ALL_FOODS } from '../../constants/foods';
 import useTournament from '../../hooks/useTournament';
 import FoodCard from '../../components/FoodCard';
 import ProgressBar from '../../components/ProgressBar';
+import './HomeScreen.css';
 
 const TournamentScreen: React.FC = () => {
+  useEffect(() => {
+  // 👇 이 페이지가 보일 때, 'home-background' 클래스를 제거하기만 합니다.
+  document.body.classList.remove('home-background');
+}, []);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 

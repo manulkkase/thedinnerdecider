@@ -103,6 +103,31 @@ const ResultPage: React.FC = () => {
             setTimeout(() => setCopySuccess(''), 2000);
         });
     };
+    
+    const handleShare = async () => {
+  // 공유할 음식 정보가 없으면 함수를 종료합니다.
+  if (!matchedFood) return;
+
+  // 공유할 내용을 정의합니다.
+  const shareData = {
+    title: "The Dinner Decider - My Fated Dish!",
+    text: `The tarot cards have chosen '${matchedFood.name}' for me today! Find out your fated dish:`,
+    url: window.location.href
+  };
+
+  // 브라우저가 Web Share 기능을 지원하는지 확인합니다.
+  if (navigator.share) {
+    try {
+      // 지원하면, 기기의 기본 공유 메뉴를 엽니다.
+      await navigator.share(shareData);
+    } catch (err) {
+      console.error("Share failed:", err);
+    }
+  } else {
+    // 지원하지 않으면, 기존의 링크 복사 기능을 실행합니다.
+    handleCopyLink();
+  }
+};
 
     const styles: { [key: string]: React.CSSProperties } = {
         container: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', padding: '1rem', animation: 'fadeIn 1s ease-in-out' },
@@ -174,7 +199,8 @@ const ResultPage: React.FC = () => {
                     </div>
 
                     <div style={styles.actions}>
-                        <button style={styles.button} onClick={handleCopyLink}>Share Reading</button>
+    {/* 👇 onClick 부분을 handleShare로 변경 */}
+                        <button style={styles.button} onClick={handleShare}>Share Reading</button>
                         <button style={{ ...styles.button, color: '#FFC857', borderColor: '#FFC857' }} onClick={() => navigate('/')}>Try Again</button>
                     </div>
                 </div>

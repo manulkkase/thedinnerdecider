@@ -139,27 +139,27 @@ const ResultPage: React.FC = () => {
 };
 
     const styles: { [key: string]: React.CSSProperties } = {
-        container: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', padding: '1rem', animation: 'fadeIn 1s ease-in-out' },
+        container: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', padding: '1rem', animation: 'fadeIn 1s ease-in-out', boxSizing: 'border-box' },
         loadingText: { marginTop: '1rem', fontSize: '1.2rem', color: '#b3aed1', fontFamily: "'Cinzel', serif" },
         error: { color: '#FF6B6B', fontSize: '1.2rem', maxWidth: '500px' },
-        resultContent: { maxWidth: '800px', width: '100%' },
+        resultContent: { maxWidth: '800px', width: '100%', boxSizing: 'border-box' },
         selectedCards: { display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' },
         cardIconContainer: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', background: '#171423', padding: '1rem', borderRadius: '8px', border: '1px solid #332f44', width: '100px' },
         cardIcon: { width: '40px', height: '40px', color: '#B889FF' },
         cardName: { fontSize: '0.8rem', color: '#b3aed1' },
         headline: { fontFamily: "'Cinzel', serif", fontSize: 'clamp(2rem, 6vw, 3rem)', color: '#FFFFFF', textShadow: '0 0 15px #B889FF', margin: '0 0 1.5rem 0' },
         body: { color: '#E0E0E0', lineHeight: 1.7, textAlign: 'left', whiteSpace: 'pre-wrap', marginBottom: '2rem', background: 'rgba(23, 20, 35, 0.5)', padding: '1.5rem', borderRadius: '8px', border: '1px solid #332f44' },
-        menu: { background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '1.5rem', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)'},
+        menu: { background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '1.5rem', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)', boxSizing: 'border-box'},
         foodImage: { width: '100%', height: '300px', objectFit: 'cover', borderRadius: '4px', marginBottom: '1.5rem' },
         menuLabel: { color: '#6B7280', fontSize: '1rem', marginBottom: '0.5rem', display: 'block'},
         menuName: {fontFamily: "'Cinzel', serif",fontSize: 'clamp(1.5rem, 5vw, 2rem)', color: '#1F2937', margin: '0'},
         aiMenuName: { color: '#b3aed1', fontSize: '0.9rem', fontStyle: 'italic', marginTop: '0.5rem' },
         actions: { display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '3rem', flexWrap: 'wrap' },
-        button: { width: '200px', height: '55px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Lato', sans-serif", fontSize: '1rem', padding: '0.8rem 1.5rem', backgroundColor: 'transparent', color: '#b3aed1', border: '2px solid #332f44', borderRadius: '50px', cursor: 'pointer', transition: 'all 0.3s ease', whiteSpace: 'nowrap' },
+        button: { width: '180px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Lato', sans-serif", fontSize: '1rem', padding: '0.8rem 1.5rem', backgroundColor: 'transparent', color: '#b3aed1', border: '2px solid #332f44', borderRadius: '50px', cursor: 'pointer', transition: 'all 0.3s ease', whiteSpace: 'nowrap' },
         buttonPrimary: { fontFamily: "'Lato', sans-serif", fontSize: '1rem', padding: '0.8rem 1.5rem', backgroundColor: '#f59e0b', color: 'white', border: 'none', borderRadius: '50px', cursor: 'pointer', transition: 'all 0.3s ease', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)'},
         buttonGreen: { fontFamily: "'Lato', sans-serif", fontSize: '1rem', padding: '0.8rem 1.5rem', backgroundColor: '#22c55e', color: 'white', border: 'none', borderRadius: '50px', cursor: 'pointer', transition: 'all 0.3s ease', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(34, 197, 94, 0.4)' },
         buttonRed: { fontFamily: "'Lato', sans-serif", fontSize: '1rem', padding: '0.8rem 1.5rem', backgroundColor: '#ef4444', color: 'white', border: 'none', borderRadius: '50px', cursor: 'pointer', transition: 'all 0.3s ease', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(239, 68, 68, 0.4)'},
-        actionsContainer: { marginTop: '2rem', width: '100%', background: '#FFFFFF', borderRadius: '12px', padding: '1.5rem', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)' },
+        actionsContainer: { marginTop: '2rem', width: '100%', background: '#FFFFFF', borderRadius: '12px', padding: '1.5rem', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)', boxSizing: 'border-box' },
         actionsTitle: { fontSize: '1.25rem', fontWeight: 'bold', color: '#1F2937', marginBottom: '1rem' },
         actionsGrid: { display: 'grid', gap: '0.75rem' },
         copySuccess: { position: 'fixed', bottom: '20px', background: '#5BE7A9', color: '#0E0B14', padding: '10px 20px', borderRadius: '5px', boxShadow: '0 2px 10px rgba(0,0,0,0.2)', animation: 'fadeInOut 2s ease-in-out' }
@@ -266,7 +266,7 @@ const ResultPage: React.FC = () => {
                         <div style={{ borderTop: '1px solid #e5e7eb', margin: '1rem 0' }} />
 
                         {/* 최종 동작 버튼 그룹 */}
-                        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                             <button style={styles.button} onClick={handleShare}>
                                 Share Result
                             </button>

@@ -66,6 +66,15 @@ const ResultPage: React.FC = () => {
         flavor: getCardInfo('flavor', c3)
     };
 
+    // handleShare 함수 아래에 추가
+     const handleSearchNearby = () => {
+       if (matchedFood) {
+     const query = `${matchedFood.name} near me`;
+     const url = `https://www.google.com/maps/search/${encodeURIComponent(query)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+      }
+    };
+
     const fetchResult = useCallback(async () => {
         if (!c1 || !c2 || !c3) {
             setError("Invalid reading. Please start again.");
@@ -140,13 +149,19 @@ const ResultPage: React.FC = () => {
         cardName: { fontSize: '0.8rem', color: '#b3aed1' },
         headline: { fontFamily: "'Cinzel', serif", fontSize: 'clamp(2rem, 6vw, 3rem)', color: '#FFFFFF', textShadow: '0 0 15px #B889FF', margin: '0 0 1.5rem 0' },
         body: { color: '#E0E0E0', lineHeight: 1.7, textAlign: 'left', whiteSpace: 'pre-wrap', marginBottom: '2rem', background: 'rgba(23, 20, 35, 0.5)', padding: '1.5rem', borderRadius: '8px', border: '1px solid #332f44' },
-        menu: { background: '#171423', border: '1px solid #FFC857', padding: '1.5rem', borderRadius: '8px', overflow: 'hidden' },
+        menu: { background: '#FFFFFF', border: '1px solid #E5E7EB', padding: '1.5rem', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)'},
         foodImage: { width: '100%', height: '300px', objectFit: 'cover', borderRadius: '4px', marginBottom: '1.5rem' },
-        menuLabel: { color: '#b3aed1', fontSize: '1rem', marginBottom: '0.5rem', display: 'block' },
-        menuName: { fontFamily: "'Cinzel', serif", fontSize: 'clamp(1.5rem, 5vw, 2rem)', color: '#FFC857', margin: '0' },
+        menuLabel: { color: '#6B7280', fontSize: '1rem', marginBottom: '0.5rem', display: 'block'},
+        menuName: {fontFamily: "'Cinzel', serif",fontSize: 'clamp(1.5rem, 5vw, 2rem)', color: '#1F2937', margin: '0'},
         aiMenuName: { color: '#b3aed1', fontSize: '0.9rem', fontStyle: 'italic', marginTop: '0.5rem' },
         actions: { display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '3rem', flexWrap: 'wrap' },
-        button: { fontFamily: "'Lato', sans-serif", fontSize: '1rem', padding: '0.8rem 1.5rem', backgroundColor: 'transparent', color: '#b3aed1', border: '2px solid #332f44', borderRadius: '50px', cursor: 'pointer', transition: 'all 0.3s ease' },
+        button: { width: '200px', height: '55px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Lato', sans-serif", fontSize: '1rem', padding: '0.8rem 1.5rem', backgroundColor: 'transparent', color: '#b3aed1', border: '2px solid #332f44', borderRadius: '50px', cursor: 'pointer', transition: 'all 0.3s ease', whiteSpace: 'nowrap' },
+        buttonPrimary: { fontFamily: "'Lato', sans-serif", fontSize: '1rem', padding: '0.8rem 1.5rem', backgroundColor: '#f59e0b', color: 'white', border: 'none', borderRadius: '50px', cursor: 'pointer', transition: 'all 0.3s ease', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)'},
+        buttonGreen: { fontFamily: "'Lato', sans-serif", fontSize: '1rem', padding: '0.8rem 1.5rem', backgroundColor: '#22c55e', color: 'white', border: 'none', borderRadius: '50px', cursor: 'pointer', transition: 'all 0.3s ease', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(34, 197, 94, 0.4)' },
+        buttonRed: { fontFamily: "'Lato', sans-serif", fontSize: '1rem', padding: '0.8rem 1.5rem', backgroundColor: '#ef4444', color: 'white', border: 'none', borderRadius: '50px', cursor: 'pointer', transition: 'all 0.3s ease', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(239, 68, 68, 0.4)'},
+        actionsContainer: { marginTop: '2rem', width: '100%', background: '#FFFFFF', borderRadius: '12px', padding: '1.5rem', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)' },
+        actionsTitle: { fontSize: '1.25rem', fontWeight: 'bold', color: '#1F2937', marginBottom: '1rem' },
+        actionsGrid: { display: 'grid', gap: '0.75rem' },
         copySuccess: { position: 'fixed', bottom: '20px', background: '#5BE7A9', color: '#0E0B14', padding: '10px 20px', borderRadius: '5px', boxShadow: '0 2px 10px rgba(0,0,0,0.2)', animation: 'fadeInOut 2s ease-in-out' }
     };
 
@@ -169,45 +184,103 @@ const ResultPage: React.FC = () => {
         );
     }
 
-    return (
-        <div style={styles.container}>
-             <style>{`
-                @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-                @keyframes fadeInOut { 0%, 100% { opacity: 0; transform: translateY(20px); } 10%, 90% { opacity: 1; transform: translateY(0); } }
-            `}</style>
-            {content && (
-                <div style={styles.resultContent}>
-                    <div style={styles.selectedCards}>
-                        {Object.values(selections).map((card, index) => card && (
-                            <div key={index} style={styles.cardIconContainer}>
-                                <img src={card.imageUrl} alt={card.name} style={styles.cardIcon} />
-                                <span style={styles.cardName}>{card.name}</span>
+  return (
+    <div style={styles.container}>
+         <style>{`
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes fadeInOut { 0%, 100% { opacity: 0; transform: translateY(20px); } 10%, 90% { opacity: 1; transform: translateY(0); } }
+        `}</style>
+        {content && (
+            <div style={styles.resultContent}>
+                <div style={styles.selectedCards}>
+                    {Object.values(selections).map((card, index) => card && (
+                        <div key={index} style={styles.cardIconContainer}>
+                            <img src={card.imageUrl} alt={card.name} style={styles.cardIcon} />
+                            <span style={styles.cardName}>{card.name}</span>
+                        </div>
+                    ))}
+                </div>
+
+                <h1 style={styles.headline}>{content.headline}</h1>
+                <p style={styles.body}>{content.body}</p>
+                
+                {/* 음식 결과 카드 */}
+                <div style={styles.menu}>
+                     {matchedFood && (
+                       <img src={matchedFood.imageUrl} alt={matchedFood.name} style={styles.foodImage} />
+                    )}
+                    <span style={styles.menuLabel}>Your Fated Dish is:</span>
+                    <h2 style={styles.menuName}>{matchedFood ? matchedFood.name : content.menu}</h2>
+                    {matchedFood && <p style={styles.aiMenuName}>Oracle's Decree: "{content.menu}"</p>}
+                </div>
+
+                {/* 'What's next?' 기능 카드 */}
+                <div style={styles.actionsContainer}>
+                    <h3 style={styles.actionsTitle}>What's next?</h3>
+                    <div style={styles.actionsGrid}>
+                        <button style={styles.buttonPrimary} onClick={handleSearchNearby}>
+                            Find {matchedFood?.name} Near Me 📍
+                        </button>
+
+                        {/* 맛집 체크리스트 */}
+                        {matchedFood?.checklist && matchedFood.checklist.length > 0 && (
+                            <div style={{ marginTop: '0.5rem', textAlign: 'left', padding: '1rem', borderTop: '1px solid #f0f0f0' }}>
+                                <h4 style={{ fontWeight: 'bold', color: '#374151', marginBottom: '0.5rem' }}>A great spot usually has...</h4>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '0.5rem' }}>
+                                    {matchedFood.checklist.map((item, index) => (
+                                        <li key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                                            <span style={{ color: '#22c55e', marginRight: '0.5rem' }}>✓</span>
+                                            <span style={{ color: '#6B7280' }}>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
-                        ))}
-                    </div>
-
-                    <h1 style={styles.headline}>{content.headline}</h1>
-                    <p style={styles.body}>{content.body}</p>
-                    
-                    <div style={styles.menu}>
-                         {matchedFood && (
-                           <img src={matchedFood.imageUrl} alt={matchedFood.name} style={styles.foodImage} />
                         )}
-                        <span style={styles.menuLabel}>Your Fated Dish is:</span>
-                        <h2 style={styles.menuName}>{matchedFood ? matchedFood.name : content.menu}</h2>
-                        {matchedFood && <p style={styles.aiMenuName}>Oracle's Decree: "{content.menu}"</p>}
-                    </div>
 
-                    <div style={styles.actions}>
-    {/* 👇 onClick 부분을 handleShare로 변경 */}
-                        <button style={styles.button} onClick={handleShare}>Share Reading</button>
-                        <button style={{ ...styles.button, color: '#FFC857', borderColor: '#FFC857' }} onClick={() => navigate('/')}>Try Again</button>
+                        <button style={styles.buttonGreen} onClick={() => window.open(`https://www.ubereats.com/search?q=${matchedFood?.name}`)}>
+                            Order Delivery (Uber Eats)
+                        </button>
+                        <button style={styles.buttonRed} onClick={() => window.open(`https://www.doordash.com/search/store/${encodeURIComponent(matchedFood?.name ?? '')}`)}>
+                            Order Delivery (DoorDash)
+                        </button>
+
+                        {/* 완벽한 조합 추천 */}
+                        {matchedFood?.pairings && matchedFood.pairings.length > 0 && (
+                            <div style={{ marginTop: '0.5rem', textAlign: 'left', padding: '1rem', backgroundColor: '#f9fafb', borderRadius: '8px' }}>
+                                <h4 style={{ fontWeight: 'bold', color: '#1F2937', marginBottom: '0.75rem' }}>Complete Your Meal</h4>
+                                <div style={{ display: 'grid', gap: '0.75rem' }}>
+                                    {matchedFood.pairings.map((item, index) => (
+                                        <div key={index} style={{ display: 'flex', alignItems: 'flex-start' }}>
+                                            <span style={{ fontSize: '1.25rem', marginRight: '0.75rem', marginTop: '0.25rem' }}>{item.icon}</span>
+                                            <div>
+                                                <p style={{ fontWeight: 'bold', color: '#4B5563', margin: 0 }}>{item.type}</p>
+                                                <p style={{ color: '#6B7280', margin: 0 }}>{item.suggestion}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* 구분선 */}
+                        <div style={{ borderTop: '1px solid #e5e7eb', margin: '1rem 0' }} />
+
+                        {/* 최종 동작 버튼 그룹 */}
+                        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+                            <button style={styles.button} onClick={handleShare}>
+                                Share Result
+                            </button>
+                            <button style={styles.button} onClick={() => navigate('/')}>
+                                Play Again
+                            </button>
+                        </div>
                     </div>
                 </div>
-            )}
-            {copySuccess && <div style={styles.copySuccess}>{copySuccess}</div>}
-        </div>
-    );
+            </div>
+        )}
+        {copySuccess && <div style={styles.copySuccess}>{copySuccess}</div>}
+    </div>
+);
 };
 
 export default ResultPage;

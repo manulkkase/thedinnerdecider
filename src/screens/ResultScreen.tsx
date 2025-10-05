@@ -109,7 +109,7 @@ const handleShare = async () => {
          <div className="p-6">
             <h3 className="text-xl font-semibold text-slate-800">What's next?</h3>
              <div className="mt-4 space-y-3">
-              <Button onClick={handleSearchNearby} variant="primary" className="w-full text-lg py-3 font-semibold tracking-wide shadow-lg hover:shadow-xl transition-shadow duration-200"> Find {foodName} Near Me 📍
+              <Button onClick={handleSearchNearby} variant="primary" className="w-full text-lg py-3 font-semibold tracking-wide shadow-lg hover:shadow-xl transition-shadow duration-200"> Search on Google Maps
                 </Button>
                  <Button onClick={() => { trackLinkClick('Uber Eats'); window.open(`https://www.ubereats.com/search?q=${winner.name}`)}} variant="primary" className="w-full bg-green-500 hover:bg-green-600">
                     Order Delivery (Uber Eats)

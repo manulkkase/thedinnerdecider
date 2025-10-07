@@ -4,6 +4,13 @@ export interface FoodItem {
   name: string;
   imageUrl: string;
   tags: string[];
+  checklist?: string[]; // 👈 이 줄 추가
+  pairings?: {         // 👈 이 블록 추가
+    type: string;
+    suggestion: string;
+    icon: string;
+  }[];
+  funFact?: string;
 }
 
 export enum GameState {

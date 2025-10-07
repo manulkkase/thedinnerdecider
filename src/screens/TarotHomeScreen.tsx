@@ -40,6 +40,8 @@ const HomePage: React.FC = () => {
       justifyContent: 'center',
       minHeight: '80vh',
       animation: 'fadeIn 1s ease-in-out',
+      padding: '0 1.5rem', 
+      boxSizing: 'border-box'
     },
     title: {
       fontFamily: "'Cinzel', serif",
@@ -50,12 +52,19 @@ const HomePage: React.FC = () => {
       margin: '0',
     },
     subtitle: {
-      fontSize: 'clamp(1rem, 3vw, 1.25rem)',
-      color: '#b3aed1',
-      marginTop: '1rem',
-      maxWidth: '600px',
-      lineHeight: 1.6,
+  fontSize: 'clamp(1rem, 3vw, 1.25rem)',
+  color: '#b3aed1',
+  marginTop: '1rem',
+  maxWidth: '600px',
+  lineHeight: 1.7,
+  textAlign: 'center',
     },
+    subtitleLine: {
+  display: 'block', // 각 줄을 별도의 블록으로 만듦
+  opacity: 0, // 기본적으로 투명하게
+  animation: 'fadeInUp 0.8s ease-out forwards', // 애니메이션 적용
+    },
+    
     button: {
       fontFamily: "'Cinzel', serif",
       fontSize: '1.2rem',
@@ -75,16 +84,26 @@ const HomePage: React.FC = () => {
   return (
     <div style={styles.container}>
        <style>{`
-          @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-        `}</style>
+       @keyframes fadeIn { ... }
+       @keyframes fadeInUp {
+       from { opacity: 0; transform: translateY(20px); }
+       to { opacity: 1; transform: translateY(0); }
+       }
+     `}</style>
+
       <h1 style={styles.title}>Food Tarot</h1>
       <p style={styles.subtitle}>
-        Tired of the eternal question, "What's for dinner?"
-        Let the cosmos decide. Draw three cards to reveal your culinary fate.
-      </p>
+        <span style={{...styles.subtitleLine, animationDelay: '0.2s'}}>
+          Your culinary destiny is written in the cards.
+          </span>
+          <span style={{...styles.subtitleLine, animationDelay: '0.7s'}}>
+            Answer the call of the cosmos.
+            </span>
+            <span style={{...styles.subtitleLine, animationDelay: '1.2s'}}>
+              Draw three cards and reveal the feast that awaits.
+              </span>
+        </p>
+
       <button
         style={styles.button}
         onClick={() => navigate('/food-tarot/game')}

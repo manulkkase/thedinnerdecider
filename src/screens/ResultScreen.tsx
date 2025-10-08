@@ -176,7 +176,6 @@ const ResultScreen: React.FC = () => {
       {/* 👇 Contentful 데이터가 있을 때만 보임 */}
       {foodDetails && foodDetails.fields.foodHistory && (
         <div className="mt-8 w-full max-w-md bg-white p-6 rounded-xl shadow-lg text-left">
-          <h3 className="text-xl font-semibold text-slate-800 mb-4">The Story of {winner.name}</h3>
           <div className="prose text-slate-600 max-w-none">
             {documentToReactComponents(foodDetails.fields.foodHistory)}
             </div>

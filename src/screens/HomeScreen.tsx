@@ -1,8 +1,14 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './HomeScreen.css';
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 
 const HomeScreen: React.FC = () => {
+
+  const pageTitle = 'The Dinner Decider - Settle Your Dinner Debates';
+  const pageDescription = "What's for dinner tonight? Will you let your cravings battle it out in a tournament, or let the cards reveal your fated dish? The Dinner Decider helps you choose. Find your winner!";
+  useDocumentTitle(pageTitle, pageDescription);
+
   useEffect(() => {
     document.body.classList.add('home-background');
     return () => {

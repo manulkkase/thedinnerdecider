@@ -11,6 +11,11 @@ export interface FoodItem {
     icon: string;
   }[];
   funFact?: string;
+  eatLikeLocal?: { // 👈 이 블록을 추가하세요.
+    icon: string;
+    title: string;
+    description: string;
+  }[];
 }
 
 export enum GameState {

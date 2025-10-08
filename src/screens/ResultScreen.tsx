@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ALL_FOODS } from '../../constants/foods';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
+import { contentfulClient } from '../services/contentfulClient';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 const ResultScreen: React.FC = () => {
   // 👇 배경 관리를 위한 useEffect 추가 (기존 밝은 테마 유지를 위해 home-background 제거)
@@ -14,11 +16,37 @@ const ResultScreen: React.FC = () => {
   const navigate = useNavigate();
   const [modalContent, setModalContent] = useState<{ title: string; body: string } | null>(null);
   const [socialProofCount, setSocialProofCount] = useState<number>(0);
+  const [foodDetails, setFoodDetails] = useState<any>(null); // Contentful 데이터를 저장할 state
+  const [isLoading, setIsLoading] = useState(true); // 로딩 상태를 관리할 state
 
   const winner = useMemo(() => {
     if (!foodName) return null;
     return ALL_FOODS.find(food => food.name === decodeURIComponent(foodName)) || null;
   }, [foodName]);
+
+  useEffect(() => {
+  if (winner) {
+    const fetchFoodDetails = async () => {
+      setIsLoading(true);
+      try {
+        const response = await contentfulClient.getEntries({
+          content_type: 'food',
+          'fields.foodName': winner.name,
+        });
+        if (response.items.length > 0) {
+          setFoodDetails(response.items[0]);
+        }
+      } catch (error) {
+        console.error("Error fetching Contentful data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchFoodDetails();
+  } else {
+    setIsLoading(false);
+  }
+}, [winner]);
 
   useEffect(() => {
     const randomCount = Math.floor(Math.random() * 36) + 15;
@@ -68,6 +96,10 @@ const ResultScreen: React.FC = () => {
     }
   };
 
+  if (isLoading) {
+  return <div className="text-center p-8 flex flex-col items-center justify-center min-h-screen text-slate-500">Loading delicious details...</div>;
+}
+
   if (!winner) {
     return (
       <div className="text-center p-4 md:p-8 flex flex-col items-center justify-center min-h-screen">
@@ -79,8 +111,19 @@ const ResultScreen: React.FC = () => {
     );
   }
 
+  const options = {
+  renderNode: {
+    'embedded-asset-block': (node: any) => {
+      const { file, title } = node.data.target.fields;
+      const { width, height } = file.details.image;
+      // next/image가 아닌 일반 img 태그 사용
+      return <img src={`https:${file.url}`} width={width} height={height} alt={title} style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px' }} />;
+    },
+  },
+};
+
   return (
-    <div className="text-center p-4 md:p-8 flex flex-col items-center justify-center min-h-screen">
+    <div className="text-center p-4 md:p-8 flex flex-col items-center pt-16 sm:pt-24 pb-16">
       <h2 className="text-2xl md:text-3xl font-bold text-slate-600">Tonight's winner is...</h2>
       <h1 className="text-4xl md:text-7xl font-extrabold text-amber-500 my-4">{winner.name}!</h1>
       <p className="text-lg text-slate-500">Good choice, mate!</p>
@@ -91,14 +134,16 @@ const ResultScreen: React.FC = () => {
         </p>
       </div>
       
-      
-{/* 👇 1. 사진 섹션 (가장 위로 이동) */}
       <div className="mt-8 w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
+        {foodDetails && foodDetails.fields.recipeImage ? (
+          <img src={'https:' + foodDetails.fields.recipeImage.fields.file.url} alt={winner.name} className="w-full h-64 object-cover" />
+        ) : (
         <img src={winner.imageUrl} alt={winner.name} className="w-full h-64 object-cover" />
-      </div>
+        )}
+        </div>
 
-      {/* 👇 2. Fun Fact 섹션 */}
-      {winner.funFact && (
+      {/* 👇 Contentful 데이터가 없을 때만 보임 */}
+      {!foodDetails && winner.funFact && (
         <div className="mt-8 w-full max-w-md bg-sky-100 text-sky-800 p-4 rounded-xl shadow-lg text-left">
           <div className="flex items-start">
             <span className="text-2xl mr-3">💡</span>
@@ -110,8 +155,8 @@ const ResultScreen: React.FC = () => {
         </div>
       )}
 
-      {/* 👇 3. Eat Like a Local 섹션 */}
-      {winner.eatLikeLocal && winner.eatLikeLocal.length > 0 && (
+      {/* 👇 Contentful 데이터가 없을 때만 보임 */}
+      {!foodDetails && winner.eatLikeLocal && winner.eatLikeLocal.length > 0 && (
         <div className="mt-8 w-full max-w-md bg-white p-6 rounded-xl shadow-lg text-left">
           <h3 className="text-xl font-semibold text-slate-800 mb-4">Eat Like a Local</h3>
           <div className="space-y-4">
@@ -128,14 +173,60 @@ const ResultScreen: React.FC = () => {
         </div>
       )}
 
-      {/* 👇 4. Checklist & Pairings 섹션 (기존 'What's next?' 카드) */}
+      {/* 👇 Contentful 데이터가 있을 때만 보임 */}
+      {foodDetails && foodDetails.fields.foodHistory && (
+        <div className="mt-8 w-full max-w-md bg-white p-6 rounded-xl shadow-lg text-left">
+          <h3 className="text-xl font-semibold text-slate-800 mb-4">The Story of {winner.name}</h3>
+          <div className="prose text-slate-600 max-w-none">
+            {documentToReactComponents(foodDetails.fields.foodHistory)}
+            </div>
+            </div>
+          )}
+
+       {foodDetails && (
+        <div className="mt-8 w-full max-w-md bg-white p-6 rounded-xl shadow-lg text-left">
+    
+       {/* Recipe Title */}
+    <h3 className="text-xl font-semibold text-slate-800 mb-4">
+      {foodDetails.fields.recipeTitle}
+    </h3>
+    
+    {/* Recipe Ingredients */}
+    {foodDetails.fields.recipeIngredients && (
+      <>
+        <h4 className="font-semibold text-slate-700 mt-6 mb-2">Ingredients</h4>
+        <div className="prose text-slate-600 max-w-none">
+          {documentToReactComponents(foodDetails.fields.recipeIngredients, options)}
+        </div>
+      </>
+    )}
+
+    {/* Recipe Instructions */}
+    {foodDetails.fields.recipeInstructions && (
+      <>
+        <h4 className="font-semibold text-slate-700 mt-6 mb-2">Instructions</h4>
+        <div className="prose text-slate-600 max-w-none">
+          {documentToReactComponents(foodDetails.fields.recipeInstructions, options)}
+        </div>
+      </>
+    )}
+
+    {/* Chef's Tip */}
+    {foodDetails.fields.chefsTip && (
+      <>
+        <h4 className="font-semibold text-slate-700 mt-6 mb-2">Chef's Tip</h4>
+        <p className="text-slate-600">{foodDetails.fields.chefsTip}</p>
+      </>
+    )}
+  </div>
+)}   
+
+      {/* 👇 'What's next?' 섹션은 항상 보임 */}
       <div className="mt-8 w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="p-6">
           <h3 className="text-xl font-semibold text-slate-800 mb-6 text-left">What's next?</h3>
           
-          {/* checklist 데이터 유무에 따라 다른 UI를 보여줌 */}
           {winner.checklist && winner.checklist.length > 0 ? (
-            // 데이터가 있을 경우: 새로운 리치 레이아웃
             <div className="grid gap-4">
               <div className="text-left p-4 bg-slate-50 rounded-lg">
                 <h4 className="font-semibold text-slate-700 mb-3">Find a Great Spot</h4>
@@ -151,7 +242,6 @@ const ResultScreen: React.FC = () => {
                   Search on Google Maps 📍
                 </Button>
               </div>
-
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Button onClick={() => { trackLinkClick('Uber Eats'); window.open(`https://www.ubereats.com/search?q=${winner.name}`)}} variant="primary" className="w-full bg-green-500 hover:bg-green-600">
                   Order Delivery (Uber Eats)
@@ -160,7 +250,6 @@ const ResultScreen: React.FC = () => {
                   Order Delivery (DoorDash)
                 </Button>
               </div>
-
               {winner.pairings && winner.pairings.length > 0 && (
                 <div className="text-left p-4 bg-slate-50 rounded-lg">
                   <h4 className="font-semibold text-slate-700 mb-3">Complete Your Meal</h4>

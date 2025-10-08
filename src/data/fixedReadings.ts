@@ -8,7 +8,7 @@ export const fixedReadings: Record<string, number> = {
   'sun-pot-sugar': 31, // BBQ Ribs
   'sun-knife-spice': 8,  // Tacos al Pastor
   'sun-knife-herb': 52, // Banh Mi
-  'sun-knife-sugar': 33, // New York Hot Dog
+  'sun-knife-sugar': 33, // New York Hot Dog  
 
   // Moon (Comfort)
   'moon-wok-spice': 76, // Kimchi Fried Rice

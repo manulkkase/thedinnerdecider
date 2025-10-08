@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   background-color: #FFFFFF; /* 👈 밝은 배경 (흰색) */

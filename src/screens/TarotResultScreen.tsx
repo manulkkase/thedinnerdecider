@@ -7,6 +7,7 @@ import { foodData, FoodItem } from '../data/foodData';
 import { fixedReadings } from '../data/fixedReadings';
 import { contentfulClient } from '../services/contentfulClient';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 
 
 const LoadingSpinner: React.FC = () => {
@@ -38,6 +39,10 @@ const ResultPage: React.FC = () => {
     const [copySuccess, setCopySuccess] = useState('');
     const [sensoryMap, setSensoryMap] = useState<any>(null);
     const [activeNode, setActiveNode] = useState<any>(null);
+
+    const pageTitle = content ? `${content.headline} - The Dinner Decider` : 'Your Food Tarot Result - The Dinner Decider';
+    const pageDescription = matchedFood ? `Your fated dish is ${matchedFood.name}. Discover what the food tarot says about your cravings.` : 'Find out your fated dish with The Dinner Decider.';
+    useDocumentTitle(pageTitle, pageDescription);
 
     useEffect(() => {
         document.body.style.backgroundColor = '#0c0a14';

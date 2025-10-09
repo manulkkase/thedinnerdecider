@@ -19,6 +19,16 @@ const tarotResultRoutes = [
   '/food-tarot/result/star/pot/spice', '/food-tarot/result/star/pot/herb', '/food-tarot/result/star/pot/sugar',
   '/food-tarot/result/star/knife/spice', '/food-tarot/result/star/knife/herb', '/food-tarot/result/star/knife/sugar'
 ];
+const staticRoutes = [
+  '/',
+  '/tournament-setup',
+  '/food-tarot',
+  '/about',
+  '/explore-foods',
+  '/privacy',
+  '/terms',
+  '/contact'
+];
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
@@ -28,6 +38,7 @@ export default defineConfig(({ mode }) => {
         sitemap({
           hostname: 'https://thedinnerdecider.au',
           dynamicRoutes: [
+            ...staticRoutes,
             ...tarotResultRoutes,
             ...tournamentResultRoutes
           ]

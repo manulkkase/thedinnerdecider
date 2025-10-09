@@ -16,6 +16,8 @@ import { SpeedInsights } from "@vercel/speed-insights/react"
 import TarotHomeScreen from './src/screens/TarotHomeScreen';
 import TarotGameScreen from './src/screens/TarotGameScreen';
 import TarotResultScreen from './src/screens/TarotResultScreen';
+import ExploreFoodsScreen from './src/screens/ExploreFoodsScreen';
+import AboutUsScreen from './src/screens/AboutUsScreen';
 
 const App: React.FC = () => {
   return (
@@ -35,6 +37,8 @@ const App: React.FC = () => {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/explore-foods" element={<ExploreFoodsScreen />} /> 
+        <Route path="/about" element={<AboutUsScreen />} />
       </Routes>
      </div>
       <Footer />

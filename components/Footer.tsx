@@ -8,6 +8,8 @@ const Footer: React.FC = () => {
   return (
     <footer className="w-full mt-12 py-6 text-center text-slate-500 border-t border-slate-200">
       <div className="flex justify-center items-center gap-4 mb-2">
+        <Link to="/explore-foods" className="text-sm font-semibold text-slate-600 hover:text-blue-600">Explore All Dishes</Link>
+        <Link to="/about" className="hover:text-white hover:underline">About Us</Link>
         <Link to="/privacy" className="text-sm hover:text-blue-600">Privacy Policy</Link>
         <Link to="/terms" className="text-sm hover:text-blue-600">Terms of Service</Link>
         <Link to="/contact" className="text-sm hover:text-blue-600">Contact Us</Link>

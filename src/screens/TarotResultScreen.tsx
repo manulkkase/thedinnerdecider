@@ -10,6 +10,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 
 
+
 const LoadingSpinner: React.FC = () => {
     const styles: { [key: string]: React.CSSProperties } = {
         spinner: {
@@ -39,6 +40,7 @@ const ResultPage: React.FC = () => {
     const [copySuccess, setCopySuccess] = useState('');
     const [sensoryMap, setSensoryMap] = useState<any>(null);
     const [activeNode, setActiveNode] = useState<any>(null);
+    const [richFoodContent, setRichFoodContent] = useState<any>(null); 
 
     const pageTitle = content ? `${content.headline} - The Dinner Decider` : 'Your Food Tarot Result - The Dinner Decider';
     const pageDescription = matchedFood ? `Your fated dish is ${matchedFood.name}. Discover what the food tarot says about your cravings.` : 'Find out your fated dish with The Dinner Decider.';
@@ -127,6 +129,15 @@ const ResultPage: React.FC = () => {
               setSensoryMap(response.items[0]);
               console.log("Fetched Sensory Map Data:", response.items[0]); // 데이터 확인용 로그
             }
+
+        const foodContentResponse = await contentfulClient.getEntries({
+          content_type: 'food',
+          'fields.foodName': matchedFood.name
+        });
+        if (foodContentResponse.items.length > 0) {
+          setRichFoodContent(foodContentResponse.items[0]);
+        }    
+
           } catch (error) {
             console.error("Error fetching sensory map data:", error);
           }
@@ -170,6 +181,7 @@ const ResultPage: React.FC = () => {
   }
 };
 
+
     const styles: { [key: string]: React.CSSProperties } = {
         container: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', padding: '1rem', animation: 'fadeIn 1s ease-in-out', boxSizing: 'border-box' },
         loadingText: { marginTop: '1rem', fontSize: '1.2rem', color: '#b3aed1', fontFamily: "'Cinzel', serif" },
@@ -203,6 +215,25 @@ const ResultPage: React.FC = () => {
         flavorBarFill: { height: '100%', backgroundColor: '#B889FF', borderRadius: '4px', transition: 'width 0.5s ease-in-out' }, // 👆 여기까지 붙여넣기
         copySuccess: { position: 'fixed', bottom: '20px', background: '#5BE7A9', color: '#0E0B14', padding: '10px 20px', borderRadius: '5px', boxShadow: '0 2px 10px rgba(0,0,0,0.2)', animation: 'fadeInOut 2s ease-in-out' }
     };
+
+    const options = {
+    renderNode: {
+      'embedded-asset-block': (node: any) => {
+        const { file, title } = node.data.target.fields;
+        // 일반 img 태그를 사용하고, 간단한 스타일 추가
+        return <img 
+                 src={`https:${file.url}`} 
+                 alt={title} 
+                 style={{ 
+                   maxWidth: '100%', 
+                   height: 'auto', 
+                   borderRadius: '8px', 
+                   margin: '1rem 0' 
+                 }} 
+               />;
+      },
+    },
+  };
 
     if (loading) {
         return (
@@ -315,11 +346,51 @@ const ResultPage: React.FC = () => {
                     )}
                         </div>
                         // ================= SENSORY MAP AREA END =================
+                        
                     )}
                     <span style={styles.menuLabel}>Your Fated Dish is:</span>
                     <h2 style={styles.menuName}>{matchedFood ? matchedFood.name : content.menu}</h2>
                     {matchedFood && <p style={styles.aiMenuName}>Oracle's Decree: "{content.menu}"</p>}
                 </div>
+                {richFoodContent && (
+                  <div style={{ marginTop: '2rem', width: '100%', background: '#FFFFFF', color: '#1F2937', borderRadius: '12px', padding: '1.5rem', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)', textAlign: 'left' }}>
+                    <div className="prose max-w-none">
+                      {/* Food History */}
+                      {richFoodContent.fields.foodHistory && 
+                        documentToReactComponents(richFoodContent.fields.foodHistory)
+                      }
+                      
+                      {/* Recipe Section */}
+                      {richFoodContent.fields.recipeTitle && 
+                        <h3 style={{ marginTop: '2rem' }}>{richFoodContent.fields.recipeTitle}</h3>
+                      }
+                      
+                      {/* Ingredients */}
+                      {richFoodContent.fields.recipeIngredients && (
+                        <>
+                          <h4>Ingredients</h4>
+                          {documentToReactComponents(richFoodContent.fields.recipeIngredients, options)}
+                        </>
+                      )}
+                      
+                      {/* Instructions */}
+                      {richFoodContent.fields.recipeInstructions && (
+                        <>
+                          <h4>Instructions</h4>
+                          {documentToReactComponents(richFoodContent.fields.recipeInstructions, options)}
+                        </>
+                      )}
+
+                      {/* Chef's Tip */}
+                      {richFoodContent.fields.chefsTip && (
+                        <>
+                          <h4>Chef's Tip</h4>
+                          <p>{richFoodContent.fields.chefsTip}</p>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  )}
 
                 {/* ... (What's next? 카드와 버튼들) ... */}
                  <div style={styles.actionsContainer}>

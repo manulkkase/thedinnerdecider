@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import { contentfulClient } from '../services/contentfulClient';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 
 const ResultScreen: React.FC = () => {
   // 👇 배경 관리를 위한 useEffect 추가 (기존 밝은 테마 유지를 위해 home-background 제거)
@@ -18,31 +19,54 @@ const ResultScreen: React.FC = () => {
   const [socialProofCount, setSocialProofCount] = useState<number>(0);
   const [foodDetails, setFoodDetails] = useState<any>(null); // Contentful 데이터를 저장할 state
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태를 관리할 state
+  const [sensoryMap, setSensoryMap] = useState<any>(null); // 👈 이 줄을 추가하세요
+  const [activeNode, setActiveNode] = useState<any>(null); // 👈 이 줄을 추가하세요
 
   const winner = useMemo(() => {
     if (!foodName) return null;
     return ALL_FOODS.find(food => food.name === decodeURIComponent(foodName)) || null;
   }, [foodName]);
 
+  const pageTitle = winner ? `${winner.name} - The Dinner Decider` : 'Result - The Dinner Decider';
+  const pageDescription = winner ? `Tonight's winner is ${winner.name}! Discover the story, recipe, and more.` : 'Find out what you should eat tonight!';
+  useDocumentTitle(pageTitle, pageDescription);
+
   useEffect(() => {
   if (winner) {
-    const fetchFoodDetails = async () => {
+    const fetchContentfulData = async () => {
       setIsLoading(true);
+      // 데이터 초기화
+      setFoodDetails(null);
+      setSensoryMap(null);
+      setActiveNode(null);
+
       try {
-        const response = await contentfulClient.getEntries({
+        // Food 상세 콘텐츠 가져오기
+        const foodContentResponse = await contentfulClient.getEntries({
           content_type: 'food',
           'fields.foodName': winner.name,
         });
-        if (response.items.length > 0) {
-          setFoodDetails(response.items[0]);
+        if (foodContentResponse.items.length > 0) {
+          setFoodDetails(foodContentResponse.items[0]);
         }
+
+        // Sensory Map 데이터 가져오기
+        const sensoryMapResponse = await contentfulClient.getEntries({
+          content_type: 'sensoryMapPage',
+          'fields.dishName': winner.name,
+          include: 2
+        });
+        if (sensoryMapResponse.items.length > 0) {
+          setSensoryMap(sensoryMapResponse.items[0]);
+        }
+
       } catch (error) {
         console.error("Error fetching Contentful data:", error);
       } finally {
         setIsLoading(false);
       }
     };
-    fetchFoodDetails();
+    fetchContentfulData();
   } else {
     setIsLoading(false);
   }
@@ -134,13 +158,75 @@ const ResultScreen: React.FC = () => {
         </p>
       </div>
       
-      <div className="mt-8 w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
-        {foodDetails && foodDetails.fields.recipeImage ? (
-          <img src={'https:' + foodDetails.fields.recipeImage.fields.file.url} alt={winner.name} className="w-full h-64 object-cover" />
-        ) : (
-        <img src={winner.imageUrl} alt={winner.name} className="w-full h-64 object-cover" />
-        )}
+      <div className="mt-8 w-full max-w-md bg-white rounded-xl shadow-lg">
+        <div className="relative">
+    {/* 1. 이미지 표시 (Sensory Map 이미지가 있으면 그것을, 없으면 기존 이미지를 사용) */}
+    <img 
+      src={sensoryMap ? 'https:' + sensoryMap.fields.heroImage.fields.file.url : (foodDetails && foodDetails.fields.recipeImage ? 'https:' + foodDetails.fields.recipeImage.fields.file.url : winner.imageUrl)}
+      alt={winner.name} 
+      className="w-full aspect-[4/3] object-cover" 
+    />
+
+    {/* 2. 점(dot)들 렌더링 */}
+    {sensoryMap && sensoryMap.fields.sensoryNodes?.map((node: any) => (
+      <div 
+        key={node.sys.id}
+        className="absolute w-5 h-5 bg-purple-500 bg-opacity-80 rounded-full border-2 border-white cursor-pointer transform -translate-x-1/2 -translate-y-1/2 z-10 hover:scale-125 transition-transform"
+        style={{ top: `${node.fields.yPosition}%`, left: `${node.fields.xPosition}%` }}
+        onClick={() => setActiveNode(node)}
+      />
+    ))}
+
+    {/* 3. 팝업창 렌더링 */}
+    {activeNode && (
+      <div className="absolute top-5 right-5 w-72 bg-gray-800 bg-opacity-90 backdrop-blur-sm border border-gray-600 rounded-xl p-6 text-white shadow-2xl z-20 animate-fade-in">
+        <button className="absolute top-2 right-3 text-gray-400 text-2xl" onClick={() => setActiveNode(null)}>×</button>
+        <h3 className="font-bold text-lg text-yellow-400 mb-2">{activeNode.fields.nodeTitle}</h3>
+        <div className="text-sm text-gray-300 prose prose-invert prose-sm max-w-none">
+          {documentToReactComponents(activeNode.fields.description, options)}
         </div>
+
+        <div className="mt-4 border-t border-gray-600 pt-4">
+  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Flavor Profile</h4>
+  {[
+    { label: 'Umami', field: 'flavorProfileUmami' },
+    { label: 'Aromatic', field: 'flavorProfileAromatic' },
+    { label: 'Salty', field: 'flavorProfileSalty' },
+    { label: 'Richness', field: 'flavorProfileRichness' },
+    { label: 'Sweet', field: 'flavorProfileSweet' },
+    { label: 'Spicy', field: 'flavorProfileSpicy' },
+  ].map(profile => {
+    const value = activeNode.fields[profile.field] || 0;
+    // Contentful에 해당 필드 값이 없으면 렌더링하지 않음
+    if (!activeNode.fields.hasOwnProperty(profile.field)) return null;
+
+    return (
+      <div key={profile.field} className="mb-2">
+        <div className="flex justify-between text-xs text-gray-300 mb-1">
+          <span>{profile.label}</span>
+          <span>{value} / 5</span>
+        </div>
+        <div className="w-full bg-gray-700 rounded-full h-1.5">
+          <div className="bg-purple-500 h-1.5 rounded-full" style={{ width: `${(value / 5) * 100}%` }}></div>
+        </div>
+      </div>
+    );
+  })}
+</div>
+      </div>
+    )}
+    </div>
+  </div>
+
+      {foodDetails && foodDetails.fields.purposeTags && (
+        <div className="mt-4 w-full max-w-md flex justify-center flex-wrap gap-2">
+          {foodDetails.fields.purposeTags.map((tag: string) => (
+            <span key={tag} className="text-sm bg-amber-100 text-amber-800 font-semibold px-3 py-1 rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
 
       {/* 👇 Contentful 데이터가 없을 때만 보임 */}
       {!foodDetails && winner.funFact && (

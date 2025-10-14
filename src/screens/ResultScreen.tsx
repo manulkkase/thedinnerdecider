@@ -41,25 +41,26 @@ const ResultScreen: React.FC = () => {
       setActiveNode(null);
 
       try {
-        // Food 상세 콘텐츠 가져오기
-        const foodContentResponse = await contentfulClient.getEntries({
-          content_type: 'food',
-          'fields.foodName': winner.name,
-        });
-        if (foodContentResponse.items.length > 0) {
-          setFoodDetails(foodContentResponse.items[0]);
-        }
+        // 👇 두 개의 요청을 동시에 보냅니다.
+          const [foodContentResponse, sensoryMapResponse] = await Promise.all([
+            contentfulClient.getEntries({
+              content_type: 'food',
+              'fields.foodName': winner.name,
+            }),
+            contentfulClient.getEntries({
+              content_type: 'sensoryMapPage',
+              'fields.dishName': winner.name,
+              include: 2
+            })
+          ]);
 
-        // Sensory Map 데이터 가져오기
-        const sensoryMapResponse = await contentfulClient.getEntries({
-          content_type: 'sensoryMapPage',
-          'fields.dishName': winner.name,
-          include: 2
-        });
-        if (sensoryMapResponse.items.length > 0) {
-          setSensoryMap(sensoryMapResponse.items[0]);
-        }
-
+          // 👇 받아온 결과를 각각 state에 저장합니다.
+          if (foodContentResponse.items.length > 0) {
+            setFoodDetails(foodContentResponse.items[0]);
+          }
+          if (sensoryMapResponse.items.length > 0) {
+            setSensoryMap(sensoryMapResponse.items[0]);
+          }
       } catch (error) {
         console.error("Error fetching Contentful data:", error);
       } finally {
@@ -167,7 +168,6 @@ const ResultScreen: React.FC = () => {
       className="w-full aspect-[4/3] object-cover" 
       width={sensoryMap ? sensoryMap.fields.heroImage.fields.file.details.image.width : (foodDetails ? foodDetails.fields.recipeImage.fields.file.details.image.width : 400)}
       height={sensoryMap ? sensoryMap.fields.heroImage.fields.file.details.image.height : (foodDetails ? foodDetails.fields.recipeImage.fields.file.details.image.height : 300)}
-      loading="lazy"
     />
 
     {/* 2. 점(dot)들 렌더링 */}

@@ -119,24 +119,27 @@ const ResultPage: React.FC = () => {
       if (matchedFood) {
         const fetchSensoryMap = async () => {
           try {
-            const response = await contentfulClient.getEntries({
+            // 👇 두 개의 요청을 동시에 보냅니다.
+          const [sensoryMapResponse, foodContentResponse] = await Promise.all([
+            contentfulClient.getEntries({
               content_type: 'sensoryMapPage',
               'fields.dishName': matchedFood.name,
               include: 2
-            });
+            }),
+            contentfulClient.getEntries({
+              content_type: 'food',
+              'fields.foodName': matchedFood.name
+            })
+          ]);
 
-            if (response.items.length > 0) {
-              setSensoryMap(response.items[0]);
-              console.log("Fetched Sensory Map Data:", response.items[0]); // 데이터 확인용 로그
-            }
-
-        const foodContentResponse = await contentfulClient.getEntries({
-          content_type: 'food',
-          'fields.foodName': matchedFood.name
-        });
-        if (foodContentResponse.items.length > 0) {
-          setRichFoodContent(foodContentResponse.items[0]);
-        }    
+          // 👇 받아온 결과를 각각 state에 저장합니다.
+          if (sensoryMapResponse.items.length > 0) {
+            setSensoryMap(sensoryMapResponse.items[0]);
+            console.log("Fetched Sensory Map Data:", sensoryMapResponse.items[0]);
+          }
+          if (foodContentResponse.items.length > 0) {
+            setRichFoodContent(foodContentResponse.items[0]);
+          }
 
           } catch (error) {
             console.error("Error fetching sensory map data:", error);
@@ -220,10 +223,13 @@ const ResultPage: React.FC = () => {
     renderNode: {
       'embedded-asset-block': (node: any) => {
         const { file, title } = node.data.target.fields;
+        const { width, height } = file.details.image;
         // 일반 img 태그를 사용하고, 간단한 스타일 추가
         return <img 
                  src={`https:${file.url}`} 
-                 alt={title} 
+                 alt={title}
+                 width={width}  
+                 height={height}
                  style={{ 
                    maxWidth: '100%', 
                    height: 'auto', 
@@ -277,7 +283,6 @@ const ResultPage: React.FC = () => {
                             alt={matchedFood.name} style={styles.foodImage} 
                             width={sensoryMap ? sensoryMap.fields.heroImage.fields.file.details.image.width : 400}
                             height={sensoryMap ? sensoryMap.fields.heroImage.fields.file.details.image.height : 300}
-                            loading="lazy"
                             />
 
                             {/* 2. 점(dot)들을 렌더링하고, 클릭 시 activeNode state를 설정 */}

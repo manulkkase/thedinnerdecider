@@ -43,7 +43,7 @@ const PrivacyPolicy: React.FC = () => {
         <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
 
         <h2 className="text-2xl font-semibold mt-6 mb-2 text-slate-800">7. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:[privacy@thedinnerdecider.com]" className="text-blue-600 hover:underline">privacy@thedinnerdecider.com</a></p>
+        <p>If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:[privacy@thedinnerdecider.au]" className="text-blue-600 hover:underline">privacy@thedinnerdecider.au</a></p>
       </div>
     </div>
   );

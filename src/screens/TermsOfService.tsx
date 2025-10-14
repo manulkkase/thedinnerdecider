@@ -31,7 +31,7 @@ const TermsOfService: React.FC = () => {
         <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time.</p>
 
         <h2 className="text-2xl font-semibold mt-6 mb-2 text-slate-800">8. Contact Us</h2>
-        <p>If you have any questions about these Terms, please contact us at: <a href="mailto:[legal@thedinnerdecider.com]" className="text-blue-600 hover:underline">legal@thedinnerdecider.com</a></p>
+        <p>If you have any questions about these Terms, please contact us at: <a href="mailto:[legal@thedinnerdecider.au]" className="text-blue-600 hover:underline">legal@thedinnerdecider.au</a></p>
       </div>
     </div>
   );

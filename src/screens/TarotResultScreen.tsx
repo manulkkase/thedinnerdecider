@@ -275,6 +275,8 @@ const ResultPage: React.FC = () => {
                             {/* 1. 음식 이미지 */}
                             <img src={sensoryMap ? 'https:' + sensoryMap.fields.heroImage.fields.file.url : matchedFood.imageUrl} 
                             alt={matchedFood.name} style={styles.foodImage} 
+                            width={sensoryMap ? sensoryMap.fields.heroImage.fields.file.details.image.width : 400}
+                            height={sensoryMap ? sensoryMap.fields.heroImage.fields.file.details.image.height : 300}
                             />
 
                             {/* 2. 점(dot)들을 렌더링하고, 클릭 시 activeNode state를 설정 */}

@@ -12,10 +12,10 @@ const Contact: React.FC = () => {
         <p>The best way to reach us is by email:</p>
         <p>
           <a 
-            href="mailto:[hello@thedinnerdecider.com]" 
+            href="mailto:[hello@thedinnerdecider.au]" 
             className="text-xl font-semibold text-blue-600 hover:underline"
           >
-            hello@thedinnerdecider.com
+            hello@thedinnerdecider.au
           </a>
         </p>
         <p className="text-sm text-slate-500 mt-4">We'll do our best to respond to all inquiries within 48 hours. Thank you for using The Dinner Decider!</p>

@@ -62,7 +62,7 @@ const ExploreFoodsScreen: React.FC = () => {
               className="group block bg-white rounded-lg overflow-hidden border border-slate-200 hover:shadow-xl hover:border-amber-500 transition-all duration-300"
             >
               <div className="aspect-w-1 aspect-h-1">
-                <img src={food.imageUrl} alt={food.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" />
+                <img src={food.imageUrl} alt={food.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" loading="lazy" />
               </div>
               <div className="p-4">
                 <h3 className="font-semibold text-slate-800 group-hover:text-amber-600 transition-colors">{food.name}</h3>

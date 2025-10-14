@@ -165,6 +165,9 @@ const ResultScreen: React.FC = () => {
       src={sensoryMap ? 'https:' + sensoryMap.fields.heroImage.fields.file.url : (foodDetails && foodDetails.fields.recipeImage ? 'https:' + foodDetails.fields.recipeImage.fields.file.url : winner.imageUrl)}
       alt={winner.name} 
       className="w-full aspect-[4/3] object-cover" 
+      width={sensoryMap ? sensoryMap.fields.heroImage.fields.file.details.image.width : (foodDetails ? foodDetails.fields.recipeImage.fields.file.details.image.width : 400)}
+      height={sensoryMap ? sensoryMap.fields.heroImage.fields.file.details.image.height : (foodDetails ? foodDetails.fields.recipeImage.fields.file.details.image.height : 300)}
+      loading="lazy"
     />
 
     {/* 2. 점(dot)들 렌더링 */}

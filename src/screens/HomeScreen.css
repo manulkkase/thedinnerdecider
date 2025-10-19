@@ -1,42 +1,29 @@
-/* HomeScreen.css - 최종 수정본 */
-
-/* 전체 페이지 배경 및 기본 폰트 색상 설정 */
-.home-background {
-  /* 'public' 폴더 안의 파일은 / 부터 바로 시작합니다.
-    '/public' 경로는 쓰지 않습니다.
-  */
+.home-container {
+  /* .home-background에서 속성을 가져옵니다. */
   background-image: url('/images/bg.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-}
-
-.home-container {
+  
+  /* 기존 속성 */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  
+  /* 3. max-width와 margin을 삭제합니다. */
 }
 
-.header {
-  margin-bottom: 4rem;
-}
-
-/* 메인 타이틀에 빛나는 효과 강화 */
-.header h1 {
-  font-family: 'Cinzel', serif;
-  font-size: 3rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  /* ✨수정: 빛나는 효과 강화 */
-  text-shadow: 0 0 5px #fff, 0 0 15px #fff, 0 0 25px #a78bfa, 0 0 45px #a78bfa;
+/* 4. 새로 추가한 .home-content-wrapper에 max-width와 margin을 적용합니다. */
+.home-content-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .header p {

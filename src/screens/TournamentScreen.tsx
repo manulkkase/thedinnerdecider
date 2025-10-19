@@ -1,5 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { FoodItem } from '../../types';
 import { ALL_FOODS } from '../../constants/foods';
 import useTournament from '../../hooks/useTournament';
@@ -46,13 +47,27 @@ const TournamentScreen: React.FC = () => {
   };
 
   if (!tournament.currentMatchup) {
-    return <div>Loading...</div>;
+    return 
+    <div>
+      <Helmet>
+          <title>Loading Tournament... - The Dinner Decider</title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
+        Loading...
+    </div>;
   }
 
   const [item1, item2] = tournament.currentMatchup;
 
   return (
     <div className="w-full max-w-7xl mx-auto p-4">
+      <Helmet>
+        {/* 토너먼트 진행 상황에 따라 동적 제목을 부여합니다. */}
+        <title>{tournament.roundName}: {item1.name} vs {item2.name} - The Dinner Decider</title>
+        <meta name="description" content={`Vote for your dinner! Which one will win this round: ${item1.name} or ${item2.name}?`} />
+        <meta name="robots" content="noindex" /> {/* 게임 진행 화면은 구글 색인에서 제외 */}
+      </Helmet>
+      
       <ProgressBar current={tournament.progress.current} total={tournament.progress.total} roundName={tournament.roundName} />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 h-[calc(100vh-150px)]">
         <FoodCard food={item1} onSelect={() => handleSelectWinner(item1)} />

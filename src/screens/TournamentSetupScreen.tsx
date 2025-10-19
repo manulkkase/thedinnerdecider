@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { FilterOptions } from '../../types';
 import { ALL_FOODS, CUISINE_OPTIONS, DIETARY_OPTIONS } from '../../constants/foods';
 import Button from '../../components/Button';
@@ -55,6 +56,12 @@ const TournamentSetupScreen: React.FC = () => {
 
   return (
     <div className="text-center p-4 md:p-8">
+      <Helmet>
+        <title>Start a Food Battle Royale - The Dinner Decider</title>
+        <meta name="description" content="Set up your dinner tournament. Choose your tournament size, filter by dietary needs or cuisine, and let the battle begin!" />
+        <link rel="canonical" href="https://thedinnerdecider.au/tournament-setup" />
+      </Helmet>
+      
     {/* 타이틀과 버튼을 감싸는 div */}
     <div className="relative mb-8 md:mb-12"> {/* mb-8 md:mb-12로 아래쪽 여백 추가 */}
         <h1 className="text-4xl md:text-6xl font-bold text-slate-800">The Dinner Decider</h1>

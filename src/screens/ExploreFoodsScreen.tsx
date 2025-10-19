@@ -3,15 +3,12 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ALL_FOODS, CUISINE_OPTIONS } from '../../constants/foods'; // foods.ts에서 데이터 가져오기
-import { useDocumentTitle } from '../../hooks/useDocumentTitle'; // SEO를 위한 훅
+import { Helmet } from 'react-helmet-async';
 
 // 필터 버튼에 'All'을 추가하고, CUISINE_OPTIONS의 value만 추출하여 배열 생성
 const filterCategories = ['All', ...CUISINE_OPTIONS.map(opt => opt.value)];
 
 const ExploreFoodsScreen: React.FC = () => {
-  // SEO를 위한 페이지 제목 및 설명 설정
-  useDocumentTitle('Explore All Dishes - The Dinner Decider', 'Browse, filter, and discover all 100 delicious food options available in The Dinner Decider game.');
-  
   // 현재 활성화된 필터를 관리하는 state
   const [activeFilter, setActiveFilter] = useState('All');
 
@@ -25,6 +22,11 @@ const ExploreFoodsScreen: React.FC = () => {
 
   return (
     <div className="bg-white min-h-screen">
+      <Helmet>
+        <title>Explore All Dishes - The Dinner Decider</title>
+        <meta name="description" content="Browse, filter, and discover all 100 delicious food options available in The Dinner Decider game." />
+        <link rel="canonical" href="https://thedinnerdecider.au/explore-foods" />
+      </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         
         {/* 1. 페이지 헤더 */}

@@ -1,10 +1,16 @@
 // src/screens/PrivacyPolicy.tsx
 
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const PrivacyPolicy: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto p-8 text-slate-700 bg-white rounded-lg shadow-md">
+      <Helmet>
+        <title>Privacy Policy - The Dinner Decider</title>
+        <meta name="description" content="Read the Privacy Policy for The Dinner Decider. We comply with the Australian Privacy Principles (APPs)." />
+        <link rel="canonical" href="https://thedinnerdecider.au/privacy" />
+      </Helmet>
       <h1 className="text-3xl font-bold mb-6 text-slate-800">Privacy Policy for The Dinner Decider</h1>
       <div className="space-y-4 text-left">
         <p><strong>Last Updated:</strong> 12 September 2025</p>

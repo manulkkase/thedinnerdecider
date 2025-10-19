@@ -2,13 +2,17 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDocumentTitle } from '../../hooks/useDocumentTitle';
+import { Helmet } from 'react-helmet-async';
 
 const AboutUsScreen: React.FC = () => {
-  useDocumentTitle('About Us - The Dinner Decider', 'Learn the story behind The Dinner Decider and our mission to end dinner indecision everywhere.');
-
+  
   return (
     <div className="bg-white py-16 px-4 sm:px-6 lg:px-8">
+      <Helmet>
+        <title>About Us - The Dinner Decider</title>
+        <meta name="description" content="Learn the story behind The Dinner Decider and our mission to end dinner indecision everywhere." />
+        <link rel="canonical" href="https://thedinnerdecider.au/about" />
+      </Helmet>
       <div className="max-w-3xl mx-auto">
         
         <div className="text-center">

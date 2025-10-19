@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../components/TarotCard';
 import { CARD_DATA, QUESTIONS } from '../data/tarotSetup';
 import { Selections, CardCategory, CardData } from '../types/tarotTypes';
+import { Helmet } from 'react-helmet-async';
 
 // Utility function to shuffle an array (Fisher-Yates shuffle)
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -129,7 +130,12 @@ const GamePage: React.FC = () => {
   };
   
   if (!currentCategory || !shuffledCardData) {
-    return <div style={styles.loadingText}>Brewing your fate...</div>;
+    return <div style={styles.loadingText}>
+      <Helmet>
+          <title>Consulting the Oracle... - The Dinner Decider</title>
+          <meta name="robots" content="noindex" /> 
+        </Helmet>
+      Brewing your fate...</div>;
   }
 
   const cardOptions = shuffledCardData[currentCategory];
@@ -138,6 +144,11 @@ const GamePage: React.FC = () => {
 
   return (
     <div style={styles.container}>
+      <Helmet>
+        <title>Food Tarot: {question} - The Dinner Decider</title>
+        <meta name="description" content="Choose a card and let the food tarot guide your meal decision." />
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }

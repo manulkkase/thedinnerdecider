@@ -1,10 +1,16 @@
 // src/screens/TermsOfService.tsx
 
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const TermsOfService: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto p-8 text-slate-700 bg-white rounded-lg shadow-md">
+      <Helmet>
+        <title>Terms of Service - The Dinner Decider</title>
+        <meta name="description" content="Please read the Terms of Service for using The Dinner Decider web application." />
+        <link rel="canonical" href="https://thedinnerdecider.au/terms" />
+      </Helmet>
       <h1 className="text-3xl font-bold mb-6 text-slate-800">Terms of Service for The Dinner Decider</h1>
       <div className="space-y-4 text-left">
         <p><strong>Last Updated:</strong> 12 September 2025</p>

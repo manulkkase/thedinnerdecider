@@ -7,8 +7,8 @@ import { foodData, FoodItem } from '../data/foodData';
 import { fixedReadings } from '../data/fixedReadings';
 import { contentfulClient } from '../services/contentfulClient';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { useDocumentTitle } from '../../hooks/useDocumentTitle';
-
+import { Helmet } from 'react-helmet-async'; // 1. Helmet import
+// 2. useDocumentTitle import 제거
 
 
 const LoadingSpinner: React.FC = () => {
@@ -42,10 +42,10 @@ const ResultPage: React.FC = () => {
     const [activeNode, setActiveNode] = useState<any>(null);
     const [richFoodContent, setRichFoodContent] = useState<any>(null); 
 
+    // 2. useDocumentTitle 훅 제거됨 (대신 아래 변수를 Helmet에서 사용)
     const pageTitle = content ? `${content.headline} - The Dinner Decider` : 'Your Food Tarot Result - The Dinner Decider';
     const pageDescription = matchedFood ? `Your fated dish is ${matchedFood.name}. Discover what the food tarot says about your cravings.` : 'Find out your fated dish with The Dinner Decider.';
-    useDocumentTitle(pageTitle, pageDescription);
-
+    
     useEffect(() => {
         document.body.style.backgroundColor = '#0c0a14';
         return () => {
@@ -244,6 +244,11 @@ const ResultPage: React.FC = () => {
     if (loading) {
         return (
             <div style={styles.container}>
+                {/* 3. Helmet 블록 추가 (동적) */}
+                <Helmet>
+                  <title>Interpreting your fate... - The Dinner Decider</title>
+                  <meta name="robots" content="noindex" />
+                </Helmet>
                 <LoadingSpinner />
                 <p style={styles.loadingText}>Interpreting your culinary fate...</p>
             </div>
@@ -253,6 +258,11 @@ const ResultPage: React.FC = () => {
     if (error || !matchedFood) {
         return (
             <div style={styles.container}>
+                {/* 3. Helmet 블록 추가 (동적) */}
+                <Helmet>
+                  <title>Error - Food Tarot Result - The Dinner Decider</title>
+                  <meta name="robots" content="noindex" />
+                </Helmet>
                 <p style={styles.error}>{error || "Could not determine your fated meal."}</p>
                 <button style={{...styles.button, color: '#FFC857', borderColor: '#FFC857', marginTop: '2rem'}} onClick={fetchResult}>Retry</button>
                 <button style={styles.button} onClick={() => navigate('/')}>Start Over</button>
@@ -262,6 +272,13 @@ const ResultPage: React.FC = () => {
 
   return (
     <div style={styles.container}>
+        {/* 3. Helmet 블록 추가 (동적) */}
+        <Helmet>
+          <title>{pageTitle}</title>
+          <meta name="description" content={pageDescription} />
+          <link rel="canonical" href={`https://thedinnerdecider.au/food-tarot/result/${c1}/${c2}/${c3}`} />
+        </Helmet>
+        
         <style>{`
             @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
             @keyframes fadeInOut { 0%, 100% { opacity: 0; transform: translateY(20px); } 10%, 90% { opacity: 1; transform: translateY(0); } }
@@ -316,7 +333,7 @@ const ResultPage: React.FC = () => {
                             {/* 3. activeNode state가 있을 때만 팝업창을 렌더링 */}
                             {activeNode && (
                                 <div style={styles.nodePopup}>
-                                    <button style={styles.nodePopupClose} onClick={() => setActiveNode(null)}>&times;</button>
+                                    <button style={styles.nodePopupClose} onClick={() => setActiveNode(null)}>×</button>
                                     <h3 style={{fontFamily: "'Cinzel', serif", color: '#FFC857', margin: 0}}>{activeNode.fields.nodeTitle}</h3>
                                     <div style={{fontSize: '0.9rem', lineHeight: 1.6, color: '#CBD5E0'}}>
                                         {documentToReactComponents(activeNode.fields.description)}

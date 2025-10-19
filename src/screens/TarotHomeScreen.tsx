@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -83,6 +84,11 @@ const HomePage: React.FC = () => {
 
   return (
     <div style={styles.container}>
+      <Helmet>
+        <title>Food Tarot - The Dinner Decider</title>
+        <meta name="description" content="Let the mystical Food Tarot cards reveal your fated dish. Answer the call of the cosmos and find what you're destined to eat." />
+        <link rel="canonical" href="https://thedinnerdecider.au/food-tarot" />
+      </Helmet>
        <style>{`
        @keyframes fadeIn { ... }
        @keyframes fadeInUp {

@@ -5,7 +5,7 @@ import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import { contentfulClient } from '../services/contentfulClient';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { useDocumentTitle } from '../../hooks/useDocumentTitle';
+import { Helmet } from 'react-helmet-async'; // 1. Helmet import
 
 const ResultScreen: React.FC = () => {
   // 👇 배경 관리를 위한 useEffect 추가 (기존 밝은 테마 유지를 위해 home-background 제거)
@@ -27,10 +27,10 @@ const ResultScreen: React.FC = () => {
     return ALL_FOODS.find(food => food.name === decodeURIComponent(foodName)) || null;
   }, [foodName]);
 
+  // 2. useDocumentTitle 훅 제거됨 (대신 아래 변수를 Helmet에서 사용)
   const pageTitle = winner ? `${winner.name} - The Dinner Decider` : 'Result - The Dinner Decider';
   const pageDescription = winner ? `Tonight's winner is ${winner.name}! Discover the story, recipe, and more.` : 'Find out what you should eat tonight!';
-  useDocumentTitle(pageTitle, pageDescription);
-
+  
   useEffect(() => {
   if (winner) {
     const fetchContentfulData = async () => {
@@ -122,12 +122,23 @@ const ResultScreen: React.FC = () => {
   };
 
   if (isLoading) {
-  return <div className="text-center p-8 flex flex-col items-center justify-center min-h-screen text-slate-500">Loading delicious details...</div>;
+  return (
+      <div className="text-center p-8 flex flex-col items-center justify-center min-h-screen text-slate-500">
+        <Helmet>
+          <title>Finding your result... - The Dinner Decider</title>
+        </Helmet>
+        Loading delicious details...
+      </div>
+    );
 }
 
   if (!winner) {
     return (
       <div className="text-center p-4 md:p-8 flex flex-col items-center justify-center min-h-screen">
+        <Helmet>
+          <title>Result Not Found - The Dinner Decider</title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
         <h2 className="text-2xl md:text-3xl font-bold text-slate-600">Food not found</h2>
         <Button onClick={handlePlayAgain} variant="primary" className="mt-8">
           Back to Start
@@ -149,6 +160,13 @@ const ResultScreen: React.FC = () => {
 
   return (
     <div className="text-center p-4 md:p-8 flex flex-col items-center pt-16 sm:pt-24 pb-16">
+      {/* 3. Helmet 블록 추가 (동적) */}
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={`https://thedinnerdecider.au/result/${foodName}`} />
+      </Helmet>
+
       <h2 className="text-2xl md:text-3xl font-bold text-slate-600">Tonight's winner is...</h2>
       <h1 className="text-4xl md:text-7xl font-extrabold text-amber-500 my-4">{winner.name}!</h1>
       <p className="text-lg text-slate-500">Good choice, mate!</p>

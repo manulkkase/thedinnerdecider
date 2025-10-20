@@ -24,8 +24,8 @@ const AboutUsScreen = React.lazy(() => import('./src/screens/AboutUsScreen'));
 
 const App: React.FC = () => {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center font-sans">
-     <div>
+    <main className="min-h-screen flex flex-col justify-center font-sans">
+     <div className="w-full">
       {/* 3. <Routes> 전체를 <Suspense>로 감싸줍니다. */}
       {/* fallback은 다음 페이지 코드를 로딩하는 동안 사용자에게 보여줄 화면입니다. (예: 로딩 스피너) */}
       <Suspense fallback={<div>Loading page...</div>}>

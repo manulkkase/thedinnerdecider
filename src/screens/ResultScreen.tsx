@@ -5,10 +5,9 @@ import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import { contentfulClient } from '../services/contentfulClient';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Helmet } from 'react-helmet-async'; // 1. Helmet import
+import { Helmet } from 'react-helmet-async';
 
 const ResultScreen: React.FC = () => {
-  // 👇 배경 관리를 위한 useEffect 추가 (기존 밝은 테마 유지를 위해 home-background 제거)
   useEffect(() => {
     document.body.classList.remove('home-background');
   }, []);
@@ -17,31 +16,30 @@ const ResultScreen: React.FC = () => {
   const navigate = useNavigate();
   const [modalContent, setModalContent] = useState<{ title: string; body: string } | null>(null);
   const [socialProofCount, setSocialProofCount] = useState<number>(0);
-  const [foodDetails, setFoodDetails] = useState<any>(null); // Contentful 데이터를 저장할 state
-  const [isLoading, setIsLoading] = useState(true); // 로딩 상태를 관리할 state
-  const [sensoryMap, setSensoryMap] = useState<any>(null); // 👈 이 줄을 추가하세요
-  const [activeNode, setActiveNode] = useState<any>(null); // 👈 이 줄을 추가하세요
+  const [foodDetails, setFoodDetails] = useState<any>(null);
+  // 👇 1. isLoading의 기본값을 'true'에서 'false'로 변경 (삭제해도 되지만, 로직 유지를 위해 false로 둠)
+  const [isLoading, setIsLoading] = useState(false); 
+  const [sensoryMap, setSensoryMap] = useState<any>(null);
+  const [activeNode, setActiveNode] = useState<any>(null);
 
   const winner = useMemo(() => {
     if (!foodName) return null;
     return ALL_FOODS.find(food => food.name === decodeURIComponent(foodName)) || null;
   }, [foodName]);
 
-  // 2. useDocumentTitle 훅 제거됨 (대신 아래 변수를 Helmet에서 사용)
   const pageTitle = winner ? `${winner.name} - The Dinner Decider` : 'Result - The Dinner Decider';
   const pageDescription = winner ? `Tonight's winner is ${winner.name}! Discover the story, recipe, and more.` : 'Find out what you should eat tonight!';
   
   useEffect(() => {
   if (winner) {
     const fetchContentfulData = async () => {
-      setIsLoading(true);
+      // 👇 2. setIsLoading(true); 코드를 삭제합니다.
       // 데이터 초기화
       setFoodDetails(null);
       setSensoryMap(null);
       setActiveNode(null);
 
       try {
-        // 👇 두 개의 요청을 동시에 보냅니다.
           const [foodContentResponse, sensoryMapResponse] = await Promise.all([
             contentfulClient.getEntries({
               content_type: 'food',
@@ -54,7 +52,6 @@ const ResultScreen: React.FC = () => {
             })
           ]);
 
-          // 👇 받아온 결과를 각각 state에 저장합니다.
           if (foodContentResponse.items.length > 0) {
             setFoodDetails(foodContentResponse.items[0]);
           }
@@ -64,12 +61,12 @@ const ResultScreen: React.FC = () => {
       } catch (error) {
         console.error("Error fetching Contentful data:", error);
       } finally {
-        setIsLoading(false);
+        // 👇 3. finally 블록의 setIsLoading(false); 코드를 삭제합니다.
       }
     };
     fetchContentfulData();
   } else {
-    setIsLoading(false);
+    // isLoading(false)는 이미 삭제됨
   }
 }, [winner]);
 
@@ -121,16 +118,7 @@ const ResultScreen: React.FC = () => {
     }
   };
 
-  if (isLoading) {
-  return (
-      <div className="text-center p-8 flex flex-col items-center justify-center min-h-screen text-slate-500">
-        <Helmet>
-          <title>Finding your result... - The Dinner Decider</title>
-        </Helmet>
-        Loading delicious details...
-      </div>
-    );
-}
+  // 👇 4. LCP를 차단하던 'if (isLoading)' 블록 전체를 삭제합니다. (152-160줄)
 
   if (!winner) {
     return (
@@ -152,7 +140,6 @@ const ResultScreen: React.FC = () => {
     'embedded-asset-block': (node: any) => {
       const { file, title } = node.data.target.fields;
       const { width, height } = file.details.image;
-      // next/image가 아닌 일반 img 태그 사용
       return <img src={`https:${file.url}`} width={width} height={height} alt={title} style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px' }} />;
     },
   },
@@ -160,11 +147,13 @@ const ResultScreen: React.FC = () => {
 
   return (
     <div className="text-center p-4 md:p-8 flex flex-col items-center pt-16 sm:pt-24 pb-16">
-      {/* 3. Helmet 블록 추가 (동적) */}
+      {/* 👇 5. Helmet 블록을 수정합니다. */}
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
         <link rel="canonical" href={`https://thedinnerdecider.au/result/${foodName}`} />
+        {/* LCP 이미지를 즉시 미리 로드하도록 이 줄을 추가합니다. (fetchPriority로 수정) */}
+        {winner && <link rel="preload" fetchPriority="high" as="image" href={winner.imageUrl} />}
       </Helmet>
 
       <h2 className="text-2xl md:text-3xl font-bold text-slate-600">Tonight's winner is...</h2>
@@ -179,13 +168,14 @@ const ResultScreen: React.FC = () => {
       
       <div className="mt-8 w-full max-w-md bg-white rounded-xl shadow-lg">
         <div className="relative">
-    {/* 1. 이미지 표시 (Sensory Map 이미지가 있으면 그것을, 없으면 기존 이미지를 사용) */}
+    {/* 👇 6. <img> 태그를 수정합니다. */}
     <img 
       src={sensoryMap ? 'https:' + sensoryMap.fields.heroImage.fields.file.url : (foodDetails && foodDetails.fields.recipeImage ? 'https:' + foodDetails.fields.recipeImage.fields.file.url : winner.imageUrl)}
       alt={winner.name} 
       className="w-full aspect-[4/3] object-cover" 
-      width={sensoryMap ? sensoryMap.fields.heroImage.fields.file.details.image.width : (foodDetails ? foodDetails.fields.recipeImage.fields.file.details.image.width : 400)}
-      height={sensoryMap ? sensoryMap.fields.heroImage.fields.file.details.image.height : (foodDetails ? foodDetails.fields.recipeImage.fields.file.details.image.height : 300)}
+      width={400}  /* Contentful을 기다리지 않도록 정적 너비 지정 */
+      height={300} /* Contentful을 기다리지 않도록 정적 높이 지정 */
+      fetchPriority="high" /* React에서는 fetchpriority가 아닌 fetchPriority를 사용 */
     />
 
     {/* 2. 점(dot)들 렌더링 */}
@@ -218,7 +208,6 @@ const ResultScreen: React.FC = () => {
     { label: 'Spicy', field: 'flavorProfileSpicy' },
   ].map(profile => {
     const value = activeNode.fields[profile.field] || 0;
-    // Contentful에 해당 필드 값이 없으면 렌더링하지 않음
     if (!activeNode.fields.hasOwnProperty(profile.field)) return null;
 
     return (
@@ -374,7 +363,6 @@ const ResultScreen: React.FC = () => {
               )}
             </div>
           ) : (
-            // 데이터가 없을 경우: 기존의 단순한 버튼 레이아웃
             <div className="space-y-3">
               <Button onClick={handleSearchNearby} variant="primary" className="w-full text-lg py-3">
                 Search on Google Maps 📍

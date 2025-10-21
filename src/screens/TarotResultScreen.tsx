@@ -9,6 +9,14 @@ import { contentfulClient } from '../services/contentfulClient';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Helmet } from 'react-helmet-async';
 
+
+const Skeleton: React.FC<{ height: string; className?: string }> = ({ height, className = '' }) => (
+  <div
+    className={`w-full bg-gray-700/50 rounded-lg animate-pulse ${className}`}
+    style={{ height }}
+  />
+);
+
 // [추가] Contentful 이미지 최적화 파라미터
 const imageParams = '?w=800&fm=webp&q=75';
 
@@ -181,17 +189,37 @@ const ResultPage: React.FC = () => {
 
 
   if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[80vh] p-4 animate-fadeIn box-border">
-        <Helmet>
-          <title>Interpreting your fate... - The Dinner Decider</title>
-          <meta name="robots" content="noindex" />
-        </Helmet>
-        <LoadingSpinner />
-        <p className="mt-4 text-lg text-[#b3aed1] font-cinzel">Interpreting your culinary fate...</p>
+  return (
+    // [수정] 스켈레톤 레이아웃으로 변경
+    <div className="flex flex-col items-center justify-center min-h-[80vh] p-4 animate-fadeIn box-border w-full">
+      <Helmet>
+        <title>Interpreting your fate... - The Dinner Decider</title>
+        <meta name="robots" content="noindex" />
+      </Helmet>
+
+      <div className="max-w-3xl w-full box-border">
+        {/* 카드 선택 영역 스켈레톤 */}
+        <div className="flex justify-center gap-4 mb-8">
+          <Skeleton height="88px" className="w-24" />
+          <Skeleton height="88px" className="w-24" />
+          <Skeleton height="88px" className="w-24" />
+        </div>
+        {/* 헤드라인 스켈레톤 */}
+        <Skeleton height="50px" className="max-w-lg mx-auto mb-6" />
+        {/* 본문 스켈레톤 */}
+        <Skeleton height="150px" className="mb-8" />
+
+        {/* 이미지/지도 영역 스켈레톤 */}
+        <div className="bg-white/10 border border-gray-700 p-6 rounded-xl shadow-2xl">
+          <Skeleton height="400px" className="aspect-[4/3] mb-6" />
+          <Skeleton height="28px" className="w-1/3 mb-2" />
+          <Skeleton height="36px" className="w-2/3" />
+        </div>
       </div>
-    );
-  }
+
+    </div>
+  );
+}
 
   if (error || !matchedFood) {
     return (

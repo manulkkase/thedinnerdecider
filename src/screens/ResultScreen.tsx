@@ -24,7 +24,7 @@ const ResultScreen: React.FC = () => {
   const { foodName } = useParams<{ foodName: string }>();
   const navigate = useNavigate();
   const [modalContent, setModalContent] = useState<{ title: string; body: string } | null>(null);
-  const [socialProofCount, setSocialProofCount] = useState<number>(0);
+  // [삭제] socialProofCount State 삭제
   const [foodDetails, setFoodDetails] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [sensoryMap, setSensoryMap] = useState<any>(null);
@@ -77,16 +77,9 @@ const ResultScreen: React.FC = () => {
     }
   }, [winner]);
 
-  useEffect(() => {
-    const randomCount = Math.floor(Math.random() * 36) + 15;
-    setSocialProofCount(randomCount);
-  }, []);
-
-  const getOrdinalSuffix = (num: number) => {
-    const s = ['th', 'st', 'nd', 'rd'];
-    const v = num % 100;
-    return s[(v - 20) % 10] || s[v] || s[0];
-  };
+  // [삭제] socialProofCount 관련 useEffect 삭제
+  
+  // [삭제] getOrdinalSuffix 함수 삭제
 
   // @ts-ignore
   const gtag = window.gtag;
@@ -191,11 +184,7 @@ const ResultScreen: React.FC = () => {
       <h1 className="text-4xl md:text-7xl font-extrabold text-amber-500 my-4">{winner.name}!</h1>
       <p className="text-lg text-slate-500">Good choice, mate!</p>
       
-      <div className="mt-3 inline-block bg-amber-100 text-amber-800 text-sm font-semibold px-4 py-1.5 rounded-full shadow-sm"> 
-        <p className="text-orange-800 text-center font-semibold">
-          Excellent pick! You're the <strong>{socialProofCount}{getOrdinalSuffix(socialProofCount)}</strong> person to land on {winner.name} today. 🏆
-        </p>
-      </div>
+      {/* [삭제] socialProofCount 렌더링 div 블록 삭제 */}
       
       
       <div className="mt-8 w-full max-w-md bg-white rounded-xl shadow-lg">
@@ -258,14 +247,20 @@ const ResultScreen: React.FC = () => {
         </div>
       </div>
 
-      {foodDetails && foodDetails.fields.purposeTags && (
-        <div className="mt-4 w-full max-w-md flex justify-center flex-wrap gap-2">
-          {foodDetails.fields.purposeTags.map((tag: string) => (
-            <span key={tag} className="text-sm bg-amber-100 text-amber-800 font-semibold px-3 py-1 rounded-full">
-              {tag}
-            </span>
-          ))}
-        </div>
+      {/* --- [CLS 해결: 'purposeTags' 스켈레톤 추가] --- */}
+      {isLoading ? (
+        // [수정] 태그 영역이 차지할 공간(높이)을 미리 확보합니다. (mt-8 대신 mt-4 사용)
+        <SkeletonBlock height="50px" className="mt-4" /> 
+      ) : (
+        foodDetails && foodDetails.fields.purposeTags && (
+          <div className="mt-4 w-full max-w-md flex justify-center flex-wrap gap-2">
+            {foodDetails.fields.purposeTags.map((tag: string) => (
+              <span key={tag} className="text-sm bg-amber-100 text-amber-800 font-semibold px-3 py-1 rounded-full">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )
       )}
 
       {/* ... (Fallback 로직은 변경 없음) ... */}
@@ -297,7 +292,7 @@ const ResultScreen: React.FC = () => {
         </div>
       )}
 
-      {/* --- [CLS 해결 1: '음식 역사' 스켈레톤] --- */}
+      {/* --- [CLS 해결: '음식 역사' 스켈레톤] --- */}
       {/* [수정] isLoading일 때 minHeight 대신 SkeletonBlock을 렌더링합니다. */}
       {isLoading ? (
         <SkeletonBlock height="300px" />
@@ -311,7 +306,7 @@ const ResultScreen: React.FC = () => {
         )
       )}
 
-      {/* --- [CLS 해결 2: '레시피' 스켈레톤] --- */}
+      {/* --- [CLS 해결: '레시피' 스켈레톤] --- */}
       {/* [수정] isLoading일 때 minHeight 대신 SkeletonBlock을 렌더링합니다. */}
       {isLoading ? (
         <SkeletonBlock height="400px" />

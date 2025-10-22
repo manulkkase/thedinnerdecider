@@ -9,7 +9,7 @@ const PrivacyPolicy: React.FC = () => {
       <Helmet>
         <title>Privacy Policy - The Dinner Decider</title>
         <meta name="description" content="Read the Privacy Policy for The Dinner Decider. We comply with the Australian Privacy Principles (APPs)." />
-        <link rel="canonical" href="https://thedinnerdecider.au/privacy" />
+        <link rel="canonical" href="https://www.thedinnerdecider.au/privacy" />
       </Helmet>
       <h1 className="text-3xl font-bold mb-6 text-slate-800">Privacy Policy for The Dinner Decider</h1>
       <div className="space-y-4 text-left">

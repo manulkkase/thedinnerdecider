@@ -1,4 +1,13 @@
 {
+  "redirects": [
+    {
+      "source": "/(.*)", 
+      "has": [{ "type": "host", "value": "thedinnerdecider.au" }], 
+      "destination": "https://www.thedinnerdecider.au/$1", 
+      "permanent": true 
+    }
+  ],
+
   "rewrites": [
     {
       "source": "/(.*)",
@@ -6,3 +15,4 @@
     }
   ]
 }
+

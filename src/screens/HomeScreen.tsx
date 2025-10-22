@@ -16,7 +16,7 @@ const HomeScreen: React.FC = () => {
           name="description" 
           content="What's for dinner tonight? Will you let your cravings battle it out in a tournament, or let the cards reveal your fated dish? The Dinner Decider helps you choose." 
         />
-        <link rel="canonical" href="https://thedinnerdecider.au/" />
+        <link rel="canonical" href="https://www.thedinnerdecider.au/" />
       </Helmet>
 
       {/* 2. 콘텐츠를 감싸는 내부 wrapper div를 추가합니다. */}

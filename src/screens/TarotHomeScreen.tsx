@@ -87,7 +87,7 @@ const HomePage: React.FC = () => {
       <Helmet>
         <title>Food Tarot - The Dinner Decider</title>
         <meta name="description" content="Let the mystical Food Tarot cards reveal your fated dish. Answer the call of the cosmos and find what you're destined to eat." />
-        <link rel="canonical" href="https://thedinnerdecider.au/food-tarot" />
+        <link rel="canonical" href="https://www.thedinnerdecider.au/food-tarot" />
       </Helmet>
        <style>{`
        @keyframes fadeIn { ... }

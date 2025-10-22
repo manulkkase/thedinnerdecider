@@ -9,7 +9,7 @@ const TermsOfService: React.FC = () => {
       <Helmet>
         <title>Terms of Service - The Dinner Decider</title>
         <meta name="description" content="Please read the Terms of Service for using The Dinner Decider web application." />
-        <link rel="canonical" href="https://thedinnerdecider.au/terms" />
+        <link rel="canonical" href="https://www.thedinnerdecider.au/terms" />
       </Helmet>
       <h1 className="text-3xl font-bold mb-6 text-slate-800">Terms of Service for The Dinner Decider</h1>
       <div className="space-y-4 text-left">

@@ -26,6 +26,22 @@
   margin: 0 auto;
 }
 
+.home-content-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+.header h1 {
+  font-family: 'Cinzel', serif; /* h2와 통일 (선택 사항) */
+  font-size: 3rem; /* 원하는 크기로 조절 (예: 48px) */
+  font-weight: 700; /* 굵게 */
+  color: #ffffff; /* 흰색 (혹은 원하는 색상) */
+  margin-bottom: 0.75rem; /* 아래 p 태그와의 간격 */
+}
+
+
 .header p {
   color: #b3aed1;
   font-size: 1.1rem;

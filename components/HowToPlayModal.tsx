@@ -22,7 +22,7 @@ const HowToPlayModal: React.FC<HowToPlayModalProps> = ({ onClose }) => {
         <div className="text-right mt-6">
           <button
             onClick={onClose}
-            className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            className="px-6 py-2 bg-slate-200 text-slate-800 font-semibold rounded-lg hover:bg-slate-300 transition-colors"
           >
             Got it!
           </button>

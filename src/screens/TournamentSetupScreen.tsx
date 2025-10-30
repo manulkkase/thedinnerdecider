@@ -62,8 +62,8 @@ const TournamentSetupScreen: React.FC = () => {
         <link rel="canonical" href="https://www.thedinnerdecider.au/tournament-setup" />
       </Helmet>
       
-    {/* 타이틀과 버튼을 감싸는 div */}
-    <div className="relative mb-8 md:mb-12"> {/* mb-8 md:mb-12로 아래쪽 여백 추가 */}
+    
+    <div className="relative mb-8 md:mb-12 max-w-2xl mx-auto"> {/* max-w-2xl mx-auto 추가 */}
         <h1 className="text-4xl md:text-6xl font-bold text-slate-800">The Dinner Decider</h1>
         <p className="mt-4 text-lg text-slate-600">Can't decide what to eat? Let's turn it into a game!</p>
         

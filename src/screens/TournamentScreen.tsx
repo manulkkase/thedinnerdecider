@@ -10,21 +10,21 @@ import './HomeScreen.css';
 
 const TournamentScreen: React.FC = () => {
   useEffect(() => {
-  // 👇 이 페이지가 보일 때, 'home-background' 클래스를 제거하기만 합니다.
-  document.body.classList.remove('home-background');
-}, []);
+    // 👇 이 페이지가 보일 때, 'home-background' 클래스를 제거하기만 합니다.
+    document.body.classList.remove('home-background');
+  }, []);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const tournamentSize = parseInt(searchParams.get('size') || '16');
 
-  const dietaryFilters = useMemo(() => 
+  const dietaryFilters = useMemo(() =>
     searchParams.get('dietary')?.split(',').filter(Boolean) || []
-  , [searchParams]);
+    , [searchParams]);
 
-  const cuisineFilters = useMemo(() => 
+  const cuisineFilters = useMemo(() =>
     searchParams.get('cuisine')?.split(',').filter(Boolean) || []
-  , [searchParams]);
+    , [searchParams]);
 
   const filteredFoods = useMemo(() => {
     let foods = ALL_FOODS;
@@ -47,14 +47,15 @@ const TournamentScreen: React.FC = () => {
   };
 
   if (!tournament.currentMatchup) {
-    return 
-    <div>
-      <Helmet>
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Helmet>
           <title>Loading Tournament... - The Dinner Decider</title>
           <meta name="robots" content="noindex" />
         </Helmet>
-        Loading...
-    </div>;
+        <p className="text-lg text-slate-600">Loading your tournament...</p>
+      </div>
+    );
   }
 
   const [item1, item2] = tournament.currentMatchup;
@@ -67,7 +68,7 @@ const TournamentScreen: React.FC = () => {
         <meta name="description" content={`Vote for your dinner! Which one will win this round: ${item1.name} or ${item2.name}?`} />
         <meta name="robots" content="noindex" /> {/* 게임 진행 화면은 구글 색인에서 제외 */}
       </Helmet>
-      
+
       <ProgressBar current={tournament.progress.current} total={tournament.progress.total} roundName={tournament.roundName} />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 h-[calc(100vh-150px)]">
         <FoodCard food={item1} onSelect={() => handleSelectWinner(item1)} />

@@ -93,7 +93,7 @@ const ResultPage: React.FC = () => {
   const handleSearchNearby = () => {
     if (matchedFood) {
       const query = `${matchedFood.name} near me`;
-      const url = `http://googleusercontent.com/maps/google.com/1{encodeURIComponent(query)}`;
+      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
       window.open(url, '_blank', 'noopener,noreferrer');
     }
   };

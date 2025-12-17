@@ -8,22 +8,22 @@ const HomePage: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-      document.body.style.backgroundColor = '#0c0a14';
-      return () => {
-        document.body.style.backgroundColor = '#f0f8ff'; // 원래 배경색으로 복원
-      };
-    }, []);
-  
-    useEffect(() => {
+    document.body.style.backgroundColor = '#0c0a14';
+    return () => {
+      document.body.style.backgroundColor = '#f0f8ff'; // 원래 배경색으로 복원
+    };
+  }, []);
+
+  useEffect(() => {
     // 1. body 배경색을 어둡게 변경합니다.
     document.body.style.backgroundColor = '#0c0a14';
-    
+
     // 2. App.tsx의 main 태그를 찾아서 배경색을 투명하게 만듭니다.
     const mainElement = document.querySelector('main');
     if (mainElement) {
       mainElement.style.backgroundColor = 'transparent';
     }
-  
+
     // 3. 페이지를 떠날 때 모든 배경색을 원래대로 복원합니다.
     return () => {
       document.body.style.backgroundColor = '#f0f8ff'; // body 원래 배경색
@@ -41,7 +41,7 @@ const HomePage: React.FC = () => {
       justifyContent: 'center',
       minHeight: '80vh',
       animation: 'fadeIn 1s ease-in-out',
-      padding: '0 1.5rem', 
+      padding: '0 1.5rem',
       boxSizing: 'border-box'
     },
     title: {
@@ -53,19 +53,19 @@ const HomePage: React.FC = () => {
       margin: '0',
     },
     subtitle: {
-  fontSize: 'clamp(1rem, 3vw, 1.25rem)',
-  color: '#b3aed1',
-  marginTop: '1rem',
-  maxWidth: '600px',
-  lineHeight: 1.7,
-  textAlign: 'center',
+      fontSize: 'clamp(1rem, 3vw, 1.25rem)',
+      color: '#b3aed1',
+      marginTop: '1rem',
+      maxWidth: '600px',
+      lineHeight: 1.7,
+      textAlign: 'center',
     },
     subtitleLine: {
-  display: 'block', // 각 줄을 별도의 블록으로 만듦
-  opacity: 0, // 기본적으로 투명하게
-  animation: 'fadeInUp 0.8s ease-out forwards', // 애니메이션 적용
+      display: 'block', // 각 줄을 별도의 블록으로 만듦
+      opacity: 0, // 기본적으로 투명하게
+      animation: 'fadeInUp 0.8s ease-out forwards', // 애니메이션 적용
     },
-    
+
     button: {
       fontFamily: "'Cinzel', serif",
       fontSize: '1.2rem',
@@ -87,9 +87,9 @@ const HomePage: React.FC = () => {
       <Helmet>
         <title>Food Tarot - The Dinner Decider</title>
         <meta name="description" content="Let the mystical Food Tarot cards reveal your fated dish. Answer the call of the cosmos and find what you're destined to eat." />
-        <link rel="canonical" href="https://www.thedinnerdecider.au/food-tarot" />
+        <link rel="canonical" href="https://thedinnerdecider.au/food-tarot" />
       </Helmet>
-       <style>{`
+      <style>{`
        @keyframes fadeIn { ... }
        @keyframes fadeInUp {
        from { opacity: 0; transform: translateY(20px); }
@@ -99,16 +99,16 @@ const HomePage: React.FC = () => {
 
       <h1 style={styles.title}>Food Tarot</h1>
       <p style={styles.subtitle}>
-        <span style={{...styles.subtitleLine, animationDelay: '0.2s'}}>
+        <span style={{ ...styles.subtitleLine, animationDelay: '0.2s' }}>
           Your culinary destiny is written in the cards.
-          </span>
-          <span style={{...styles.subtitleLine, animationDelay: '0.7s'}}>
-            Answer the call of the cosmos.
-            </span>
-            <span style={{...styles.subtitleLine, animationDelay: '1.2s'}}>
-              Draw three cards and reveal the feast that awaits.
-              </span>
-        </p>
+        </span>
+        <span style={{ ...styles.subtitleLine, animationDelay: '0.7s' }}>
+          Answer the call of the cosmos.
+        </span>
+        <span style={{ ...styles.subtitleLine, animationDelay: '1.2s' }}>
+          Draw three cards and reveal the feast that awaits.
+        </span>
+      </p>
 
       <button
         style={styles.button}

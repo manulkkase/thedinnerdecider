@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block game play pages (temporary states, not indexable content)
+Disallow: /tournament
+Disallow: /food-tarot/game
+
+# Sitemap location
+Sitemap: https://thedinnerdecider.au/sitemap.xml

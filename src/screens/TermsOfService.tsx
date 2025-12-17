@@ -9,7 +9,7 @@ const TermsOfService: React.FC = () => {
       <Helmet>
         <title>Terms of Service - The Dinner Decider</title>
         <meta name="description" content="Please read the Terms of Service for using The Dinner Decider web application." />
-        <link rel="canonical" href="https://www.thedinnerdecider.au/terms" />
+        <link rel="canonical" href="https://thedinnerdecider.au/terms" />
       </Helmet>
       <h1 className="text-3xl font-bold mb-6 text-slate-800">Terms of Service for The Dinner Decider</h1>
       <div className="space-y-4 text-left">
@@ -26,7 +26,7 @@ const TermsOfService: React.FC = () => {
 
         <h2 className="text-2xl font-semibold mt-6 mb-2 text-slate-800">4. Intellectual Property</h2>
         <p>The Service and its original content, features, and functionality are and will remain the exclusive property of The Dinner Decider and its licensors.</p>
-        
+
         <h2 className="text-2xl font-semibold mt-6 mb-2 text-slate-800">5. Limitation of Liability</h2>
         <p>In no event shall The Dinner Decider, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.</p>
 

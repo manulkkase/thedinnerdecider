@@ -9,7 +9,7 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "The Dinner Decider",
-  "url": "https://www.thedinnerdecider.au",
+  "url": "https://thedinnerdecider.au",
   "description": "Interactive food decision games to help you decide what to eat.",
   "applicationCategory": "GameApplication",
   "operatingSystem": "Any",
@@ -48,11 +48,11 @@ const HomeScreen: React.FC = () => {
           name="description"
           content="What's for dinner tonight? Will you let your cravings battle it out in a tournament, or let the cards reveal your fated dish? The Dinner Decider helps you choose."
         />
-        <link rel="canonical" href="https://www.thedinnerdecider.au/" />
+        <link rel="canonical" href="https://thedinnerdecider.au/" />
         <meta property="og:title" content="The Dinner Decider - Fun Food Games" />
         <meta property="og:description" content="Play Food Battle Royale or Food Tarot to decide what to eat tonight!" />
-        <meta property="og:image" content="https://www.thedinnerdecider.au/images/og-image.jpg" />
-        <meta property="og:url" content="https://www.thedinnerdecider.au" />
+        <meta property="og:image" content="https://thedinnerdecider.au/images/og-image.jpg" />
+        <meta property="og:url" content="https://thedinnerdecider.au" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">

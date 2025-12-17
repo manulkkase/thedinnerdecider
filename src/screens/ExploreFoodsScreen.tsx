@@ -23,7 +23,7 @@ const ExploreFoodsScreen: React.FC = () => {
       <Helmet>
         <title>Explore All Dishes - The Dinner Decider</title>
         <meta name="description" content="Browse, filter, and discover all 100 delicious food options available in The Dinner Decider game." />
-        <link rel="canonical" href="https://www.thedinnerdecider.au/explore-foods" />
+        <link rel="canonical" href="https://thedinnerdecider.au/explore-foods" />
       </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
@@ -40,8 +40,8 @@ const ExploreFoodsScreen: React.FC = () => {
               key={category}
               onClick={() => setActiveFilter(category)}
               className={`px-4 py-2 text-sm font-semibold rounded-full transition-all duration-200 ease-in-out transform hover:scale-105 ${activeFilter === category
-                  ? 'bg-amber-500 text-white shadow-md'
-                  : 'bg-slate-200 text-slate-600 hover:bg-slate-300'
+                ? 'bg-amber-500 text-white shadow-md'
+                : 'bg-slate-200 text-slate-600 hover:bg-slate-300'
                 }`}
             >
               {category.charAt(0).toUpperCase() + category.slice(1)}

@@ -31,27 +31,27 @@ const staticRoutes = [
 ];
 
 export default defineConfig(({ mode }) => {
-    const env = loadEnv(mode, '.', '');
-    return {
-      plugins: [
-        react(),
-        sitemap({
-          hostname: 'https://www.thedinnerdecider.au',
-          dynamicRoutes: [
-            ...staticRoutes,
-            ...tarotResultRoutes,
-            ...tournamentResultRoutes
-          ]
-        })
-      ],
-      define: {
-        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
-      },
-      resolve: {
-        alias: {
-          '@': path.resolve(__dirname, '.'),
-        }
+  const env = loadEnv(mode, '.', '');
+  return {
+    plugins: [
+      react(),
+      sitemap({
+        hostname: 'https://thedinnerdecider.au',
+        dynamicRoutes: [
+          ...staticRoutes,
+          ...tarotResultRoutes,
+          ...tournamentResultRoutes
+        ]
+      })
+    ],
+    define: {
+      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '.'),
       }
-    };
+    }
+  };
 });

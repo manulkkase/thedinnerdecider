@@ -7,12 +7,27 @@
   <meta name="apple-mobile-web-app-title" content="Dinner Decider">
   <title>The Dinner Decider</title>
 
+  <!-- Preconnect to external domains for faster resource loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap">
+  </noscript>
+
+  <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
+  <!-- Preload hero background image (LCP element) -->
   <link rel="preload" fetchpriority="high" as="image" href="/images/bg_new.webp" type="image/webp">
 
   <script type="importmap">
@@ -25,19 +40,7 @@
 }
 </script>
 
-  <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-VJ9P1B7YTK"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-VJ9P1B7YTK');
-  </script>
-
-  <script async defer
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8105671322406442"
-    crossorigin="anonymous"></script>
-
+  <!-- SEO Meta Tags -->
   <meta name="description"
     content="Can't decide what to eat? Play fun food games - Food Battle Royale tournament and Food Tarot card picker. Make dinner decisions easy!">
   <meta name="keywords" content="dinner ideas, what to eat, food games, meal decider, dinner decision">
@@ -55,6 +58,33 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
+
+  <!-- Analytics & Ads: Load after page content (non-blocking) -->
+  <script>
+    // Defer loading of analytics until after page load
+    window.addEventListener('load', function () {
+      // Google Analytics
+      var gaScript = document.createElement('script');
+      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-VJ9P1B7YTK';
+      gaScript.async = true;
+      document.head.appendChild(gaScript);
+
+      gaScript.onload = function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'G-VJ9P1B7YTK');
+      };
+
+      // Google AdSense
+      var adsScript = document.createElement('script');
+      adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8105671322406442';
+      adsScript.async = true;
+      adsScript.crossOrigin = 'anonymous';
+      document.head.appendChild(adsScript);
+    });
+  </script>
 </body>
 
 </html>

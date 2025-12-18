@@ -2,279 +2,272 @@
   {
     "id": "TC001",
     "title": "Tournament Setup - Valid Size and Filter Selection",
-    "description": "Verify the user can select valid tournament sizes and dietary filters and the selections are accepted without errors.",
+    "description": "Verify that the user can select tournament size and dietary filters correctly on the Tournament Setup screen and proceed without errors.",
     "category": "functional",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Open the Tournament Setup screen"
+        "description": "Navigate to Tournament Setup screen"
       },
       {
         "type": "action",
-        "description": "Select each available tournament size option individually"
+        "description": "Select a valid tournament size (e.g., 8, 16, 32)"
       },
       {
         "type": "action",
-        "description": "Apply different combinations of dietary filters (e.g. vegetarian, gluten-free, dairy-free)"
+        "description": "Apply one or more dietary filters (e.g., vegetarian, gluten-free)"
+      },
+      {
+        "type": "action",
+        "description": "Click the 'Start Tournament' or equivalent button"
       },
       {
         "type": "assertion",
-        "description": "Ensure the size and filter selections are displayed correctly and no error messages appear"
+        "description": "Verify no errors occur and the Tournament Game screen loads with filtered food items"
       }
     ]
   },
   {
     "id": "TC002",
-    "title": "Tournament Setup - Invalid or Edge Filter Combinations",
-    "description": "Test edge cases where dietary filters exclude all or most foods to confirm graceful handling.",
+    "title": "Tournament Setup - Invalid or No Tournament Size Selected",
+    "description": "Ensure the system handles cases when no tournament size or an invalid size is selected and prevents proceeding.",
     "category": "error handling",
-    "priority": "Medium",
+    "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Open Tournament Setup screen"
+        "description": "Navigate to Tournament Setup screen"
       },
       {
         "type": "action",
-        "description": "Apply dietary filters combination that excludes all foods from dataset"
+        "description": "Do not select any tournament size or select an invalid size (if possible)"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to start the tournament"
       },
       {
         "type": "assertion",
-        "description": "Verify user is notified of no available foods or the UI disables starting the tournament"
+        "description": "Verify appropriate error messages or validation prevents proceeding to Tournament Game screen"
       }
     ]
   },
   {
     "id": "TC003",
-    "title": "Tournament Game - Bracket Progression and Battle Animations",
-    "description": "Validate bracket-style tournament progresses correctly through all rounds with animated battle cards.",
+    "title": "Tournament Setup - Dietary Filters Affect Food Items Correctly",
+    "description": "Validate that applying dietary filters limits the tournament food items to only those matching the selected filters.",
     "category": "functional",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Start a tournament with default size and no filters"
-      },
-      {
-        "type": "assertion",
-        "description": "Check initial bracket and food pairings shown correctly"
+        "description": "Navigate to Tournament Setup screen"
       },
       {
         "type": "action",
-        "description": "Select winners repeatedly to progress through each round"
+        "description": "Select a tournament size"
+      },
+      {
+        "type": "action",
+        "description": "Apply specific dietary filters (e.g., vegetarian)"
+      },
+      {
+        "type": "action",
+        "description": "Start the tournament"
       },
       {
         "type": "assertion",
-        "description": "Observe battle cards animate smoothly between rounds with no rendering glitches"
-      },
-      {
-        "type": "assertion",
-        "description": "Ensure tournament proceeds until final winner is determined"
+        "description": "Verify all foods in the tournament meet the dietary filter criteria"
       }
     ]
   },
   {
     "id": "TC004",
-    "title": "Result Screen - Display Winner with Full Contentful Data",
-    "description": "Verify the Result Screen shows winner's image, recipe, history, and sensory map when Contentful CMS data is available.",
+    "title": "Tournament Game - Correct Pairings and Animated Battles",
+    "description": "Ensure that the bracket displays correct pairings and that food battles are animated smoothly without glitches.",
     "category": "functional",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Complete a tournament with a food item known to have complete Contentful data"
+        "description": "Start a tournament with known size and food items"
       },
       {
         "type": "assertion",
-        "description": "Result Screen loads winner's image correctly"
+        "description": "Verify initial bracket pairs correspond correctly to selected tournament size and filters"
+      },
+      {
+        "type": "action",
+        "description": "Proceed through multiple rounds of the tournament"
       },
       {
         "type": "assertion",
-        "description": "Verify Recipe, History, and Sensory Map sections are displayed with correct content"
-      },
-      {
-        "type": "assertion",
-        "description": "Check confetti animation triggers once upon displaying results"
-      },
-      {
-        "type": "assertion",
-        "description": "Confirm dark theme styling is applied consistently on the Result Screen"
+        "description": "Verify that battles animate smoothly and results update bracket correctly with no rendering glitches"
       }
     ]
   },
   {
     "id": "TC005",
-    "title": "Result Screen - Handle Missing Contentful Data Gracefully",
-    "description": "Ensure the Result Screen fallback UI displays when Contentful CMS returns no data for winner.",
-    "category": "error handling",
-    "priority": "High",
+    "title": "Tournament Game - Support for Edge Case Tournament Sizes",
+    "description": "Verify tournament supports edge case sizes such as the minimum (e.g., 2) and maximum (e.g., 100+) without errors.",
+    "category": "functional",
+    "priority": "Medium",
     "steps": [
       {
         "type": "action",
-        "description": "Complete a tournament with a food item known to have missing Contentful CMS content"
+        "description": "Set tournament size to minimum (2) and start the tournament"
       },
       {
         "type": "assertion",
-        "description": "Verify fallback content is shown for missing recipe, history, and sensory map"
+        "description": "Verify the tournament runs without errors"
+      },
+      {
+        "type": "action",
+        "description": "Set tournament size to maximum (e.g., 128 or closest supported) and start the tournament"
       },
       {
         "type": "assertion",
-        "description": "Confirm no broken images or blank fields are present"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify confetti animation still triggers on winner display"
+        "description": "Verify the tournament processes correctly with no performance or UI issues"
       }
     ]
   },
   {
     "id": "TC006",
-    "title": "Contentful CMS Integration - API Success Handling",
-    "description": "Test that the Contentful API calls succeed and data is fetched and rendered accurately on Result Screen.",
+    "title": "Result Screen - Display Winner Details from Contentful CMS",
+    "description": "Check that the Result Screen loads winner's detailed recipe, history, and sensory map data correctly from Contentful CMS after tournament completion.",
     "category": "functional",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Mock API success response with rich food content"
-      },
-      {
-        "type": "action",
-        "description": "Navigate to Result Screen for the mocked food item"
+        "description": "Complete a tournament to reach the Result Screen"
       },
       {
         "type": "assertion",
-        "description": "Check that recipe, history, and sensory map data are displayed as per API response"
+        "description": "Verify winner's image, recipe, history, and sensory maps display with data fetched live from Contentful CMS"
       }
     ]
   },
   {
     "id": "TC007",
-    "title": "Contentful CMS Integration - API Failure and Timeout",
-    "description": "Verify that API failures or timeouts are handled gracefully with fallback UI and error messages.",
+    "title": "Result Screen - Handle Missing Contentful Data Gracefully",
+    "description": "Verify fallback UI is shown when Contentful CMS data for the winner is unavailable or API call fails.",
     "category": "error handling",
     "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Simulate Contentful API failure or timeout when loading Result Screen"
+        "description": "Simulate Contentful API failure or missing data for winner"
+      },
+      {
+        "type": "action",
+        "description": "Complete a tournament and load Result Screen"
       },
       {
         "type": "assertion",
-        "description": "Ensure fallback content is shown and UI remains responsive"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify appropriate error notifications or messages are displayed to the user"
+        "description": "Verify fallback content is displayed instead of missing data and no unhandled error is visible"
       }
     ]
   },
   {
     "id": "TC008",
-    "title": "Deep Linking - Result Screen loads correct winner data",
-    "description": "Validate that accessing deep links (e.g. /result/FoodName) loads the accurate winner data and UI.",
+    "title": "Result Screen - Confetti Animation Triggers Only on Tournament Completion",
+    "description": "Validate that confetti animation triggers only on tournament completion and winner display, not during gameplay or navigation.",
     "category": "functional",
-    "priority": "High",
+    "priority": "Medium",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate directly to /result/{foodName} with a valid food name in URL"
+        "description": "Navigate through tournament battles without completing tournament"
       },
       {
         "type": "assertion",
-        "description": "Confirm winner data loads correctly from Contentful or fallback UI is shown if data missing"
+        "description": "Verify confetti does not trigger during ongoing battles"
+      },
+      {
+        "type": "action",
+        "description": "Complete tournament to reach Result Screen"
       },
       {
         "type": "assertion",
-        "description": "Verify page adheres to dark theme styling"
+        "description": "Verify confetti animation triggers once winner is displayed"
       }
     ]
   },
   {
     "id": "TC009",
-    "title": "UI Dark Theme Consistency and Responsiveness",
-    "description": "Verify the entire application UI consistently applies dark theme styling and is responsive across screen sizes.",
+    "title": "Dark Theme UI Styling Across All Screens",
+    "description": "Ensure that all UI elements across Tournament Setup, Game, and Result screens adhere to the dark theme styling with no styling inconsistencies.",
     "category": "ui",
     "priority": "Medium",
     "steps": [
       {
         "type": "action",
-        "description": "Visit Tournament Setup, Tournament Game, and Result screens on desktop resolution"
+        "description": "Navigate through Tournament Setup, Tournament Game, and Result screens"
       },
       {
         "type": "assertion",
-        "description": "Check all UI elements adhere to dark theme color palette"
-      },
-      {
-        "type": "action",
-        "description": "Resize viewport to various mobile and tablet sizes"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify UI elements remain legible and accessible with no overlap or clipping"
+        "description": "Verify all screens apply dark theme styling uniformly and no light or inconsistent elements appear"
       }
     ]
   },
   {
     "id": "TC010",
-    "title": "Navigation - Seamless navigation between screens and browser history support",
-    "description": "Ensure React Router-based navigation works smoothly including forward, back, and deep links.",
+    "title": "Deep Linking to Result Screen Loads Correct Winner Data",
+    "description": "Verify that navigating directly to a deep link URL (e.g., /result/FoodName) loads the correct winner's data consistently and correctly.",
     "category": "functional",
-    "priority": "Medium",
+    "priority": "High",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate from Tournament Setup to Tournament Game screen after configuration"
-      },
-      {
-        "type": "action",
-        "description": "Progress through a tournament and navigate to Result Screen"
-      },
-      {
-        "type": "action",
-        "description": "Use browser back and forward buttons to navigate between screens"
+        "description": "Enter a deep link URL for a known food winner (e.g., /result/MeatPie)"
       },
       {
         "type": "assertion",
-        "description": "Verify application state and data reflect correct screens without errors"
-      },
-      {
-        "type": "action",
-        "description": "Access deep link URLs for result pages directly"
-      },
-      {
-        "type": "assertion",
-        "description": "Confirm correct screen loads with proper data and UI"
+        "description": "Verify the Result Screen loads with correct winner details from Contentful CMS"
       }
     ]
   },
   {
     "id": "TC011",
-    "title": "Tournament Game - Edge Case Handling with Minimum and Maximum Sizes",
-    "description": "Test starting tournaments at minimum and maximum allowed sizes to verify smooth gameplay and UI stability.",
-    "category": "functional",
+    "title": "Responsive and Accessible UI Elements",
+    "description": "Test UI responsiveness and accessibility across different screen sizes and verify UI components have appropriate accessibility attributes.",
+    "category": "ui",
     "priority": "Medium",
     "steps": [
       {
         "type": "action",
-        "description": "Select smallest tournament size and start tournament"
+        "description": "Open the application in various screen sizes (mobile, tablet, desktop)"
       },
       {
         "type": "assertion",
-        "description": "Confirm tournament runs and results display correctly"
+        "description": "Verify UI elements adjust layout correctly with no overflow or clipping"
       },
       {
         "type": "action",
-        "description": "Select largest tournament size available (e.g. 64 or 128) and start tournament"
+        "description": "Use accessibility tools or keyboard navigation through screens"
       },
       {
         "type": "assertion",
-        "description": "Verify bracket UI handles large number of foods and animations perform smoothly"
+        "description": "Verify all interactive elements are accessible with meaningful labels and focus states"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Static Food Data - Load and Display Properly in Tournament",
+    "description": "Confirm that the static data of 100+ Australian food items load correctly and display with correct images and metadata in tournament battles.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Start a tournament without any dietary filters"
       },
       {
         "type": "assertion",
-        "description": "Ensure no crashes or rendering issues occur during gameplay"
+        "description": "Verify that food items appear with appropriate images and metadata from the static dataset"
       }
     ]
   }

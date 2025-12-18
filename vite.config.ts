@@ -52,6 +52,21 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': path.resolve(__dirname, '.'),
       }
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // Separate vendor chunks for better caching
+            'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+            'vendor-motion': ['framer-motion'],
+            'vendor-contentful': ['@contentful/rich-text-react-renderer'],
+            'vendor-helmet': ['react-helmet-async'],
+          }
+        }
+      },
+      // Increase chunk size warning limit
+      chunkSizeWarningLimit: 500
     }
   };
 });

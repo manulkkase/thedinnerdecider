@@ -117,7 +117,7 @@
 
 .home-container {
   /* 새로운 트렌디한 배경 이미지 */
-  background-image: url('/images/bg_new.png');
+  background-image: url('/images/bg_new.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -208,12 +208,12 @@
 
 /* 🔥 토너먼트 패널 */
 .tournament-panel {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/foodbattleroyalebg_new.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/foodbattleroyalebg_new.webp');
   border-image: linear-gradient(to top, #f59e0b, #d97706) 1;
 }
 
 .tournament-panel .panel-icon {
-  background-image: url('/images/foodbattleroyale_new.png');
+  background-image: url('/images/foodbattleroyale_new.webp');
 }
 
 .tournament-panel:hover {
@@ -223,12 +223,12 @@
 
 /* 🌙 타로 패널 */
 .tarot-panel {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/leavittodestinybg_new.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/leavittodestinybg_new.webp');
   border-image: linear-gradient(to top, #a78bfa, #7c3aed) 1;
 }
 
 .tarot-panel .panel-icon {
-  background-image: url('/images/leavittodestiny_new.png');
+  background-image: url('/images/leavittodestiny_new.webp');
 }
 
 .tarot-panel:hover {

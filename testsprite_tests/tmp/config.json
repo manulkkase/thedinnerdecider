@@ -1,7 +1,19 @@
 {
-  "status": "init",
-  "scope": "codebase",
+  "status": "commited",
   "type": "frontend",
-  "localEndpoint": "http://localhost:5173/",
-  "serverPort": 57995
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:5173/result/Pad%20Thai",
+  "executionArgs": {
+    "projectName": "the-dinner-decider-(aussie-edition)",
+    "projectPath": "/Users/jnk/the-dinner-decider-(aussie-edition)",
+    "testIds": [
+      "TC004",
+      "TC005",
+      "TC008"
+    ],
+    "additionalInstruction": "Focus on Result Screen tests (TC004, TC005, TC008). Test with foods that have Contentful data like 'Pad Thai' and foods without like 'Chicken Teriyaki Don'. Verify dark theme styling, prose text visibility, and confetti animation.",
+    "envs": {
+      "API_KEY": "sk-user-UmrC2YxQCA-L5qxKMJ3Yv54pfi3bhY9211LzmnPlxX9Arl6nINaNaa6b6EvxDRvMIRcqmwBKpkPMCheWCHRl0pfAzHRRnP9TwsPkOGbANWoP5raTiHUkFoZGYLWIoBSdWlU"
+    }
+  }
 }

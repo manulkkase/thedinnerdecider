@@ -1,0 +1,281 @@
+[
+  {
+    "id": "TC001",
+    "title": "Tournament Setup - Valid Size and Filter Selection",
+    "description": "Verify the user can select valid tournament sizes and dietary filters and the selections are accepted without errors.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the Tournament Setup screen"
+      },
+      {
+        "type": "action",
+        "description": "Select each available tournament size option individually"
+      },
+      {
+        "type": "action",
+        "description": "Apply different combinations of dietary filters (e.g. vegetarian, gluten-free, dairy-free)"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure the size and filter selections are displayed correctly and no error messages appear"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Tournament Setup - Invalid or Edge Filter Combinations",
+    "description": "Test edge cases where dietary filters exclude all or most foods to confirm graceful handling.",
+    "category": "error handling",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open Tournament Setup screen"
+      },
+      {
+        "type": "action",
+        "description": "Apply dietary filters combination that excludes all foods from dataset"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user is notified of no available foods or the UI disables starting the tournament"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Tournament Game - Bracket Progression and Battle Animations",
+    "description": "Validate bracket-style tournament progresses correctly through all rounds with animated battle cards.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Start a tournament with default size and no filters"
+      },
+      {
+        "type": "assertion",
+        "description": "Check initial bracket and food pairings shown correctly"
+      },
+      {
+        "type": "action",
+        "description": "Select winners repeatedly to progress through each round"
+      },
+      {
+        "type": "assertion",
+        "description": "Observe battle cards animate smoothly between rounds with no rendering glitches"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure tournament proceeds until final winner is determined"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Result Screen - Display Winner with Full Contentful Data",
+    "description": "Verify the Result Screen shows winner's image, recipe, history, and sensory map when Contentful CMS data is available.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Complete a tournament with a food item known to have complete Contentful data"
+      },
+      {
+        "type": "assertion",
+        "description": "Result Screen loads winner's image correctly"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify Recipe, History, and Sensory Map sections are displayed with correct content"
+      },
+      {
+        "type": "assertion",
+        "description": "Check confetti animation triggers once upon displaying results"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm dark theme styling is applied consistently on the Result Screen"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Result Screen - Handle Missing Contentful Data Gracefully",
+    "description": "Ensure the Result Screen fallback UI displays when Contentful CMS returns no data for winner.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Complete a tournament with a food item known to have missing Contentful CMS content"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify fallback content is shown for missing recipe, history, and sensory map"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm no broken images or blank fields are present"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify confetti animation still triggers on winner display"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Contentful CMS Integration - API Success Handling",
+    "description": "Test that the Contentful API calls succeed and data is fetched and rendered accurately on Result Screen.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Mock API success response with rich food content"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to Result Screen for the mocked food item"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that recipe, history, and sensory map data are displayed as per API response"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Contentful CMS Integration - API Failure and Timeout",
+    "description": "Verify that API failures or timeouts are handled gracefully with fallback UI and error messages.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Simulate Contentful API failure or timeout when loading Result Screen"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure fallback content is shown and UI remains responsive"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify appropriate error notifications or messages are displayed to the user"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Deep Linking - Result Screen loads correct winner data",
+    "description": "Validate that accessing deep links (e.g. /result/FoodName) loads the accurate winner data and UI.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate directly to /result/{foodName} with a valid food name in URL"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm winner data loads correctly from Contentful or fallback UI is shown if data missing"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page adheres to dark theme styling"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "UI Dark Theme Consistency and Responsiveness",
+    "description": "Verify the entire application UI consistently applies dark theme styling and is responsive across screen sizes.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Visit Tournament Setup, Tournament Game, and Result screens on desktop resolution"
+      },
+      {
+        "type": "assertion",
+        "description": "Check all UI elements adhere to dark theme color palette"
+      },
+      {
+        "type": "action",
+        "description": "Resize viewport to various mobile and tablet sizes"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI elements remain legible and accessible with no overlap or clipping"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Navigation - Seamless navigation between screens and browser history support",
+    "description": "Ensure React Router-based navigation works smoothly including forward, back, and deep links.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate from Tournament Setup to Tournament Game screen after configuration"
+      },
+      {
+        "type": "action",
+        "description": "Progress through a tournament and navigate to Result Screen"
+      },
+      {
+        "type": "action",
+        "description": "Use browser back and forward buttons to navigate between screens"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify application state and data reflect correct screens without errors"
+      },
+      {
+        "type": "action",
+        "description": "Access deep link URLs for result pages directly"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm correct screen loads with proper data and UI"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Tournament Game - Edge Case Handling with Minimum and Maximum Sizes",
+    "description": "Test starting tournaments at minimum and maximum allowed sizes to verify smooth gameplay and UI stability.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Select smallest tournament size and start tournament"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm tournament runs and results display correctly"
+      },
+      {
+        "type": "action",
+        "description": "Select largest tournament size available (e.g. 64 or 128) and start tournament"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify bracket UI handles large number of foods and animations perform smoothly"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure no crashes or rendering issues occur during gameplay"
+      }
+    ]
+  }
+]

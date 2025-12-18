@@ -1,0 +1,56 @@
+{
+    "tech_stack": [
+        "TypeScript",
+        "React",
+        "Vite",
+        "Tailwind CSS",
+        "Framer Motion",
+        "React Router",
+        "Contentful CMS",
+        "React Helmet Async"
+    ],
+    "features": [
+        {
+            "name": "ResultScreen",
+            "description": "Tournament winner result page showing food details, recipe, history from Contentful CMS, with confetti celebration and dark theme UI",
+            "files": [
+                "src/screens/ResultScreen.tsx",
+                "src/screens/ResultScreen.css"
+            ]
+        },
+        {
+            "name": "ContentfulIntegration",
+            "description": "Fetches food details, recipes, and sensory map data from Contentful CMS API",
+            "files": [
+                "src/services/contentfulClient.ts",
+                "src/screens/ResultScreen.tsx"
+            ]
+        },
+        {
+            "name": "TournamentGame",
+            "description": "Bracket-style food tournament game with battle animations",
+            "files": [
+                "src/screens/TournamentScreen.tsx",
+                "src/screens/TournamentScreen.css",
+                "hooks/useTournament.ts",
+                "components/BattleCard.tsx",
+                "components/VSDivider.tsx"
+            ]
+        },
+        {
+            "name": "TournamentSetup",
+            "description": "Tournament configuration screen with size selection and dietary filters",
+            "files": [
+                "src/screens/TournamentSetupScreen.tsx",
+                "src/screens/TournamentSetupScreen.css"
+            ]
+        },
+        {
+            "name": "FoodData",
+            "description": "Static food data with 100+ Australian food items including images, tags, and metadata",
+            "files": [
+                "constants/foods.ts"
+            ]
+        }
+    ]
+}

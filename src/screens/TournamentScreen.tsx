@@ -132,6 +132,13 @@ const TournamentScreen: React.FC = () => {
     }
   }, [tournament.roundName, lastRoundName]);
 
+  // 🏆 우승자 감지 - winner 상태가 변경되면 결과 페이지로 이동
+  useEffect(() => {
+    if (tournament.winner) {
+      navigate(`/result/${encodeURIComponent(tournament.winner.name)}`);
+    }
+  }, [tournament.winner, navigate]);
+
   const handleSelectWinner = useCallback((food: FoodItem) => {
     if (selectedFood) return; // 이미 선택 중이면 무시
 
@@ -142,12 +149,9 @@ const TournamentScreen: React.FC = () => {
       tournament.selectWinner(food);
       setSelectedFood(null);
       setMatchupKey(prev => prev + 1);
-
-      if (tournament.winner) {
-        navigate(`/result/${encodeURIComponent(tournament.winner.name)}`);
-      }
+      // winner 체크는 위 useEffect에서 처리
     }, 800);
-  }, [selectedFood, tournament, navigate]);
+  }, [selectedFood, tournament]);
 
   const handleRoundSplashComplete = useCallback(() => {
     setShowRoundSplash(false);

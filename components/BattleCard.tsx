@@ -29,7 +29,7 @@ const BattleCard: React.FC<BattleCardProps> = ({
             opacity: 1,
             scale: 1,
             transition: {
-                type: 'spring',
+                type: 'spring' as const,
                 stiffness: 300,
                 damping: 25,
                 delay: position === 'left' ? 0 : 0.1
@@ -41,16 +41,24 @@ const BattleCard: React.FC<BattleCardProps> = ({
             scale: 0.9,
             transition: { duration: 0.3 }
         },
+        // 🏆 승자: 더 크게 확대 + 강한 글로우 + 살짝 위로
         selected: {
-            scale: 1.05,
-            boxShadow: '0 0 60px rgba(255, 200, 87, 0.8)',
-            transition: { duration: 0.3 }
+            scale: 1.1,
+            y: -20,
+            boxShadow: '0 0 80px rgba(255, 200, 87, 0.9)',
+            transition: {
+                type: 'spring' as const,
+                stiffness: 400,
+                damping: 15
+            }
         },
+        // ❌ 패자: 빠르게 축소 + 투명 + 흑백
         loser: {
-            scale: 0.9,
-            opacity: 0.3,
-            filter: 'grayscale(100%)',
-            transition: { duration: 0.3 }
+            scale: 0.7,
+            opacity: 0.2,
+            y: 30,
+            filter: 'grayscale(100%) blur(2px)',
+            transition: { duration: 0.15 }
         }
     };
 

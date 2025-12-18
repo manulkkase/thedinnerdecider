@@ -1,11 +1,128 @@
+/* ======= MODERN UI EFFECTS ======= */
+
+/* 그라디언트 텍스트 */
+.gradient-text {
+  background: linear-gradient(135deg, #FFC857 0%, #f59e0b 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: #b3aed1;
+  font-size: 1.1rem;
+}
+
+/* 플로팅 파티클 배경 */
+.floating-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(255, 200, 87, 0.6) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 15s infinite ease-in-out;
+}
+
+.particle-1 {
+  left: 10%;
+  top: 20%;
+  animation-delay: 0s;
+  animation-duration: 18s;
+}
+
+.particle-2 {
+  left: 30%;
+  top: 60%;
+  animation-delay: 2s;
+  animation-duration: 22s;
+}
+
+.particle-3 {
+  left: 50%;
+  top: 30%;
+  animation-delay: 4s;
+  animation-duration: 16s;
+}
+
+.particle-4 {
+  left: 70%;
+  top: 70%;
+  animation-delay: 1s;
+  animation-duration: 20s;
+}
+
+.particle-5 {
+  left: 85%;
+  top: 40%;
+  animation-delay: 3s;
+  animation-duration: 24s;
+}
+
+.particle-6 {
+  left: 20%;
+  top: 80%;
+  animation-delay: 5s;
+  animation-duration: 19s;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.3;
+  }
+
+  25% {
+    transform: translateY(-30px) translateX(10px) scale(1.2);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateY(-15px) translateX(-15px) scale(0.9);
+    opacity: 0.4;
+  }
+
+  75% {
+    transform: translateY(-40px) translateX(5px) scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+/* 스포트라이트 호버 효과 */
+.spotlight-effect {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 70%);
+  opacity: var(--spotlight-opacity, 0);
+  transition: opacity 0.3s ease;
+}
+
+/* ======= BASE STYLES ======= */
+
 .home-container {
-  /* .home-background에서 속성을 가져옵니다. */
-  background-image: url('/images/bg.webp');
+  /* 새로운 트렌디한 배경 이미지 */
+  background-image: url('/images/bg_new.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  
+
   /* 기존 속성 */
   display: flex;
   flex-direction: column;
@@ -15,8 +132,8 @@
   width: 100%;
   padding: 2rem;
   text-align: center;
-  
-  /* 3. max-width와 margin을 삭제합니다. */
+  position: relative;
+  z-index: 1;
 }
 
 /* 4. 새로 추가한 .home-content-wrapper에 max-width와 margin을 적용합니다. */
@@ -34,11 +151,11 @@
 
 
 .header h1 {
-  font-family: 'Cinzel', serif; /* h2와 통일 (선택 사항) */
-  font-size: 3rem; /* 원하는 크기로 조절 (예: 48px) */
-  font-weight: 700; /* 굵게 */
-  color: #ffffff; /* 흰색 (혹은 원하는 색상) */
-  margin-bottom: 0.75rem; /* 아래 p 태그와의 간격 */
+  font-family: 'Cinzel', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  /* 그라디언트 텍스트 클래스가 적용됨 */
 }
 
 
@@ -81,38 +198,42 @@
 
 /* ❗추가: 아이콘 영역 스타일 */
 .panel-icon {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 1.5rem;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1.5rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* 🔥 토너먼트 패널 */
 .tournament-panel {
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/foodbattleroyalebg.webp');
-    border-image: linear-gradient(to top, #f59e0b, #d97706) 1;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/foodbattleroyalebg_new.png');
+  border-image: linear-gradient(to top, #f59e0b, #d97706) 1;
 }
+
 .tournament-panel .panel-icon {
-    background-image: url('/images/foodbattleroyale.webp');
+  background-image: url('/images/foodbattleroyale_new.png');
 }
+
 .tournament-panel:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 0 30px rgba(245, 158, 11, 0.7);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.7);
 }
 
 /* 🌙 타로 패널 */
 .tarot-panel {
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/leavittodestinybg.webp');
-    border-image: linear-gradient(to top, #a78bfa, #7c3aed) 1;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/leavittodestinybg_new.png');
+  border-image: linear-gradient(to top, #a78bfa, #7c3aed) 1;
 }
+
 .tarot-panel .panel-icon {
-    background-image: url('/images/leavittodestiny.webp');
+  background-image: url('/images/leavittodestiny_new.png');
 }
+
 .tarot-panel:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 0 30px rgba(167, 139, 250, 0.7);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 30px rgba(167, 139, 250, 0.7);
 }
 
 
@@ -143,7 +264,7 @@
   cursor: pointer;
   border: none;
   transition: all 0.2s;
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 /* ❗수정: 버튼 빛 효과 추가 */
@@ -152,6 +273,7 @@
   color: white;
   box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
 }
+
 .tournament-panel .choice-button:hover {
   background-color: #d97706;
   box-shadow: 0 0 25px rgba(245, 158, 11, 1);
@@ -162,6 +284,7 @@
   color: white;
   box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
 }
+
 .tarot-panel .choice-button:hover {
   background-color: #7c3aed;
   box-shadow: 0 0 25px rgba(139, 92, 246, 1);
@@ -193,8 +316,17 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
 }
 
 /* 긴급성 배너 */
@@ -211,8 +343,15 @@
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* 패널 배지 */
@@ -262,8 +401,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* 배지 포지셔닝용 추가 */
-  overflow: visible; /* 배지가 밖으로 나올 수 있도록 */
+  position: relative;
+  /* 배지 포지셔닝용 추가 */
+  overflow: visible;
+  /* 배지가 밖으로 나올 수 있도록 */
 }
 
 /* 인기 음식 미리보기 섹션 */
@@ -342,12 +483,12 @@
     font-size: 0.875rem;
     padding: 0.5rem 1rem;
   }
-  
+
   .food-preview-item img {
     width: 60px;
     height: 60px;
   }
-  
+
   .panel-badge {
     font-size: 0.65rem;
     padding: 0.25rem 0.5rem;

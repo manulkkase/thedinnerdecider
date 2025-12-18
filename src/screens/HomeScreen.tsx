@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './HomeScreen.css';
 import { Helmet } from 'react-helmet-async';
 import { ALL_FOODS } from '../../constants/foods';
@@ -26,6 +27,83 @@ const getTodaysPopularFoods = () => {
   const seed = today.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
   const shuffled = [...ALL_FOODS].sort(() => 0.5 - ((seed * Math.random()) % 1));
   return shuffled.slice(0, 3);
+};
+
+// 애니메이션 variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5 }
+  }
+};
+
+// 스포트라이트 카드 컴포넌트
+const SpotlightCard: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  to: string;
+}> = ({ children, className, to }) => {
+  const cardRef = useRef<HTMLAnchorElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+  };
+
+  return (
+    <motion.div
+      variants={cardVariants}
+      whileHover={{ y: -8, scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+    >
+      <Link
+        ref={cardRef}
+        to={to}
+        className={`choice-panel ${className}`}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{
+          '--mouse-x': `${mousePosition.x}px`,
+          '--mouse-y': `${mousePosition.y}px`,
+          '--spotlight-opacity': isHovered ? 1 : 0
+        } as React.CSSProperties}
+      >
+        {children}
+        <div className="spotlight-effect" />
+      </Link>
+    </motion.div>
+  );
 };
 
 const HomeScreen: React.FC = () => {
@@ -60,30 +138,49 @@ const HomeScreen: React.FC = () => {
         </script>
       </Helmet>
 
-      <div className="home-content-wrapper">
+      {/* 플로팅 파티클 배경 */}
+      <div className="floating-particles">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className={`particle particle-${i + 1}`} />
+        ))}
+      </div>
+
+      <motion.div
+        className="home-content-wrapper"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* 헤더 섹션 */}
-        <div className="header">
-          <h1>The Dinner Decider</h1>
-          <p>Can't decide what to eat? Let's turn it into a game!</p>
+        <motion.div className="header" variants={itemVariants}>
+          <h1 className="gradient-text">The Dinner Decider</h1>
+          <p className="subtitle">Can't decide what to eat? Let's turn it into a game!</p>
 
           {/* 소셜 증거 배지 */}
-          <div className="social-proof-badge">
+          <motion.div
+            className="social-proof-badge"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.4 }}
+          >
             <span className="pulse-dot"></span>
             <span>{playCount.toLocaleString()}+ decisions made today</span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* 긴급성 배너 */}
-        <div className="urgency-banner">
+        <motion.div className="urgency-banner" variants={itemVariants}>
           ⏱️ Decide in under 30 seconds — no more endless debates!
-        </div>
+        </motion.div>
 
         {/* 게임 선택 섹션 */}
-        <div className="game-choice-wrapper">
+        <motion.div className="game-choice-wrapper" variants={itemVariants}>
           <h2>How should we decide tonight?</h2>
-          <div className="game-choice-panels">
-
-            <Link to="/tournament-setup" className="choice-panel tournament-panel">
+          <motion.div
+            className="game-choice-panels"
+            variants={containerVariants}
+          >
+            <SpotlightCard to="/tournament-setup" className="tournament-panel">
               <div className="panel-icon"></div>
               <h3>Food Battle Royale!</h3>
               <p>Have a few candidates in mind? Let them battle it out to find the winner.</p>
@@ -92,9 +189,9 @@ const HomeScreen: React.FC = () => {
                 <span className="btn-arrow">→</span>
               </div>
               <span className="panel-badge">🔥 Most Popular</span>
-            </Link>
+            </SpotlightCard>
 
-            <Link to="/food-tarot" className="choice-panel tarot-panel">
+            <SpotlightCard to="/food-tarot" className="tarot-panel">
               <div className="panel-icon"></div>
               <h3>Leave it to Destiny!</h3>
               <p>Need some inspiration? Let the mystical cards find the fated menu for you.</p>
@@ -103,32 +200,37 @@ const HomeScreen: React.FC = () => {
                 <span className="btn-arrow">→</span>
               </div>
               <span className="panel-badge">✨ Fun & Quick</span>
-            </Link>
-
-          </div>
-        </div>
+            </SpotlightCard>
+          </motion.div>
+        </motion.div>
 
         {/* 오늘의 인기 음식 미리보기 */}
-        <div className="popular-foods-preview">
+        <motion.div className="popular-foods-preview" variants={itemVariants}>
           <h3>🍽️ Trending Today</h3>
           <div className="food-preview-grid">
-            {popularFoods.map((food) => (
-              <Link
+            {popularFoods.map((food, index) => (
+              <motion.div
                 key={food.id}
-                to={`/result/${encodeURIComponent(food.name)}`}
-                className="food-preview-item"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 + index * 0.1 }}
               >
-                <img src={food.imageUrl} alt={food.name} loading="lazy" />
-                <span>{food.name}</span>
-              </Link>
+                <Link
+                  to={`/result/${encodeURIComponent(food.name)}`}
+                  className="food-preview-item"
+                >
+                  <img src={food.imageUrl} alt={food.name} loading="lazy" />
+                  <span>{food.name}</span>
+                </Link>
+              </motion.div>
             ))}
           </div>
           <Link to="/explore-foods" className="explore-link">
             Explore all 100 dishes →
           </Link>
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -1,0 +1,424 @@
+/* ======= TOURNAMENT SETUP STYLES ======= */
+
+/* 페이지 컨테이너 */
+.setup-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+    padding: 2rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 플로팅 파티클 (HomeScreen에서 재사용) */
+.setup-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.setup-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, rgba(255, 200, 87, 0.5) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatParticle 20s infinite ease-in-out;
+}
+
+@keyframes floatParticle {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translateY(-50px) translateX(20px);
+        opacity: 0.6;
+    }
+}
+
+.setup-particle:nth-child(1) {
+    left: 10%;
+    top: 20%;
+    animation-delay: 0s;
+}
+
+.setup-particle:nth-child(2) {
+    left: 30%;
+    top: 60%;
+    animation-delay: 3s;
+}
+
+.setup-particle:nth-child(3) {
+    left: 70%;
+    top: 30%;
+    animation-delay: 6s;
+}
+
+.setup-particle:nth-child(4) {
+    left: 85%;
+    top: 70%;
+    animation-delay: 9s;
+}
+
+/* 콘텐츠 래퍼 */
+.setup-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* 헤더 */
+.setup-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.setup-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #FFC857 0%, #f59e0b 50%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.setup-subtitle {
+    color: #b3aed1;
+    font-size: 1.1rem;
+}
+
+.how-to-play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    border-radius: 50px;
+    color: #a78bfa;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.how-to-play-btn:hover {
+    background: rgba(139, 92, 246, 0.3);
+    transform: translateY(-2px);
+}
+
+/* 글래스 카드 */
+.setup-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.setup-card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #FFC857;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 사이즈 선택 카드 */
+.size-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.size-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.size-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+}
+
+.size-card.active {
+    border-color: #FFC857;
+    background: rgba(255, 200, 87, 0.1);
+    box-shadow: 0 0 30px rgba(255, 200, 87, 0.3);
+}
+
+.size-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.size-card-number {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.size-card-label {
+    font-size: 0.85rem;
+    color: #b3aed1;
+    margin-top: 0.25rem;
+}
+
+.size-card-matches {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+}
+
+/* 필터 칩 */
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    color: #b3aed1;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-chip:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+.filter-chip.active {
+    background: rgba(245, 158, 11, 0.2);
+    border-color: #f59e0b;
+    color: #FFC857;
+    box-shadow: 0 0 15px rgba(255, 200, 87, 0.3);
+}
+
+/* Cuisine 그리드 */
+.cuisine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 0.75rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.cuisine-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cuisine-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: scale(1.05);
+}
+
+.cuisine-card.active {
+    border-color: #a78bfa;
+    background: rgba(139, 92, 246, 0.15);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+.cuisine-icon {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.cuisine-label {
+    font-size: 0.7rem;
+    color: #b3aed1;
+    text-align: center;
+}
+
+/* 카운터 & 시작 버튼 */
+.start-section {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.food-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(91, 231, 169, 0.1);
+    border: 1px solid rgba(91, 231, 169, 0.3);
+    border-radius: 50px;
+    color: #5BE7A9;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.food-counter-number {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.start-button {
+    width: 100%;
+    padding: 1.25rem 2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    background: linear-gradient(135deg, #FFC857 0%, #f59e0b 100%);
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.start-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(255, 200, 87, 0.4);
+}
+
+.start-button:disabled {
+    background: #4a5568;
+    color: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.start-button.ready {
+    animation: pulseReady 2s infinite;
+}
+
+@keyframes pulseReady {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(255, 200, 87, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(255, 200, 87, 0.7);
+    }
+}
+
+/* 프로모 카드 */
+.promo-card {
+    display: block;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.promo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.promo-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.promo-content {
+    padding: 1.25rem;
+}
+
+.promo-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.promo-text {
+    font-size: 0.9rem;
+    color: #b3aed1;
+    margin-bottom: 0.75rem;
+}
+
+.promo-link {
+    color: #f59e0b;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 640px) {
+    .setup-title {
+        font-size: 1.75rem;
+    }
+
+    .size-selector {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .size-card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: left;
+    }
+
+    .size-card-icon {
+        font-size: 2rem;
+        margin-bottom: 0;
+    }
+
+    .size-card-info {
+        flex: 1;
+    }
+
+    .cuisine-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .start-button {
+        font-size: 1.1rem;
+        padding: 1rem;
+    }
+}

@@ -1,22 +1,47 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FilterOptions } from '../../types';
 import { ALL_FOODS, CUISINE_OPTIONS, DIETARY_OPTIONS } from '../../constants/foods';
-import Button from '../../components/Button';
 import HowToPlayModal from '../../components/HowToPlayModal';
 import AdSense from '../../components/AdSense';
-import './HomeScreen.css';
+import './TournamentSetupScreen.css';
+
+// 사이즈 옵션 정의
+const SIZE_OPTIONS = [
+  { size: 8, icon: '⚡', label: 'Quick Battle', matches: 7 },
+  { size: 16, icon: '🏆', label: 'Classic', matches: 15 },
+  { size: 32, icon: '👑', label: 'Epic Marathon', matches: 31 },
+];
+
+// 애니메이션 variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 }
+  }
+};
 
 const TournamentSetupScreen: React.FC = () => {
-  useEffect(() => {
-    // 👇 이 페이지가 보일 때, 'home-background' 클래스를 제거하기만 합니다.
-    document.body.classList.remove('home-background');
-  }, []);
   const navigate = useNavigate();
   const [tournamentSize, setTournamentSize] = useState<number>(16);
   const [filters, setFilters] = useState<FilterOptions>({ dietary: [], cuisine: [] });
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.classList.remove('home-background');
+  }, []);
 
   const filteredFoods = useMemo(() => {
     let foods = ALL_FOODS;
@@ -41,7 +66,7 @@ const TournamentSetupScreen: React.FC = () => {
       }
       navigate(`/tournament?${params.toString()}`);
     } else {
-      alert(`Not enough food options for a ${tournamentSize}-item tournament with the selected filters. Please select fewer items or change filters. Found ${filteredFoods.length} items.`);
+      alert(`Not enough food options for a ${tournamentSize}-item tournament. Found ${filteredFoods.length} items.`);
     }
   };
 
@@ -55,107 +80,163 @@ const TournamentSetupScreen: React.FC = () => {
     });
   };
 
+  const isReady = filteredFoods.length >= tournamentSize;
+
   return (
-    <div className="text-center p-4 md:p-8">
+    <div className="setup-container">
       <Helmet>
         <title>Start a Food Battle Royale - The Dinner Decider</title>
-        <meta name="description" content="Set up your dinner tournament. Choose your tournament size, filter by dietary needs or cuisine, and let the battle begin!" />
+        <meta name="description" content="Set up your dinner tournament. Choose your tournament size, filter by dietary needs or cuisine!" />
         <link rel="canonical" href="https://thedinnerdecider.au/tournament-setup" />
       </Helmet>
 
-
-      <div className="relative mb-8 md:mb-12 max-w-2xl mx-auto"> {/* max-w-2xl mx-auto 추가 */}
-        <h1 className="text-4xl md:text-6xl font-bold text-slate-800">The Dinner Decider</h1>
-        <p className="mt-4 text-lg text-slate-600">Can't decide what to eat? Let's turn it into a game!</p>
-
-        {/* 'How to Play' 버튼 (수정된 부분) */}
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="absolute bottom-0 right-4 mb-0 md:mb-0 px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full font-semibold hover:bg-blue-200 transition-colors duration-200 translate-y-7
-            "
-        >
-          How to Play
-        </button>
+      {/* 플로팅 파티클 */}
+      <div className="setup-particles">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="setup-particle" />
+        ))}
       </div>
 
-      <div className="mt-8 max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-lg">
-        <h2 className="text-2xl font-semibold text-slate-700 mb-4">1. Choose Tournament Size</h2>
-        <div className="flex justify-center gap-4">
-          {[8, 16, 32].map(size => (
-            <Button key={size} onClick={() => setTournamentSize(size)} variant={tournamentSize === size ? 'primary' : 'secondary'}>
-              {size} Items
-            </Button>
-          ))}
-        </div>
+      <motion.div
+        className="setup-content"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* 헤더 */}
+        <motion.div className="setup-header" variants={itemVariants}>
+          <h1 className="setup-title">Food Battle Royale</h1>
+          <p className="setup-subtitle">Set up your epic dinner tournament!</p>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="how-to-play-btn"
+          >
+            ❓ How to Play
+          </button>
+        </motion.div>
 
-        <h2 className="text-2xl font-semibold text-slate-700 mt-8 mb-4">2. Filter Your Options</h2>
-        <div>
-          <h3 className="text-lg font-medium text-slate-600">Dietary Needs</h3>
-          <div className="flex flex-wrap justify-center gap-2 mt-2">
-            {DIETARY_OPTIONS.map(opt => (
-              <Button key={opt.value} onClick={() => toggleFilter('dietary', opt.value)} variant={filters.dietary.includes(opt.value) ? 'primary' : 'secondary'}>
-                {opt.label}
-              </Button>
-            ))}
-          </div>
-        </div>
-        <div className="mt-4">
-          <h3 className="text-lg font-medium text-slate-600">Cuisine Type</h3>
-          <div className="flex flex-wrap justify-center gap-4 mt-2">
-            {CUISINE_OPTIONS.map(opt => (
-              <div key={opt.value} className="relative group flex flex-col items-center">
-                <Button
-                  onClick={() => toggleFilter('cuisine', opt.value)}
-                  variant={filters.cuisine.includes(opt.value) ? 'primary' : 'secondary'}
-                  className="text-2xl w-16 h-16 flex items-center justify-center"
-                  aria-label={opt.label}
-                >
-                  {opt.icon}
-                </Button>
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-max px-2 py-1 text-sm text-white bg-slate-700 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                  {opt.label}
+        {/* 사이즈 선택 */}
+        <motion.div className="setup-card" variants={itemVariants}>
+          <h2 className="setup-card-title">
+            <span>1️⃣</span> Tournament Size
+          </h2>
+          <div className="size-selector">
+            {SIZE_OPTIONS.map(option => (
+              <motion.div
+                key={option.size}
+                className={`size-card ${tournamentSize === option.size ? 'active' : ''}`}
+                onClick={() => setTournamentSize(option.size)}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="size-card-icon">{option.icon}</div>
+                <div className="size-card-info">
+                  <div className="size-card-number">{option.size} Items</div>
+                  <div className="size-card-label">{option.label}</div>
+                  <div className="size-card-matches">{option.matches} matches</div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div className="mt-8">
-          <p className="text-slate-500 mb-4">Found {filteredFoods.length} delicious options!</p>
-          <Button onClick={handleStartTournament} variant="primary" className="w-full text-xl py-4">
-            Start Tournament
-          </Button>
-          {isModalOpen && <HowToPlayModal onClose={() => setIsModalOpen(false)} />}
-        </div>
-      </div>
+        {/* Dietary 필터 */}
+        <motion.div className="setup-card" variants={itemVariants}>
+          <h2 className="setup-card-title">
+            <span>2️⃣</span> Dietary Preference
+          </h2>
+          <div className="filter-chips">
+            {DIETARY_OPTIONS.map(opt => (
+              <motion.button
+                key={opt.value}
+                className={`filter-chip ${filters.dietary.includes(opt.value) ? 'active' : ''}`}
+                onClick={() => toggleFilter('dietary', opt.value)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {opt.label}
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
 
-      <div className="mt-8 max-w-2xl mx-auto">
-        <a href="/blog/index.html" className="block relative rounded-xl shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1 overflow-hidden h-48 group">
-          {/* Background Image */}
+        {/* Cuisine 필터 */}
+        <motion.div className="setup-card" variants={itemVariants}>
+          <h2 className="setup-card-title">
+            <span>3️⃣</span> Cuisine Type
+          </h2>
+          <div className="cuisine-grid">
+            {CUISINE_OPTIONS.map(opt => (
+              <motion.button
+                key={opt.value}
+                className={`cuisine-card ${filters.cuisine.includes(opt.value) ? 'active' : ''}`}
+                onClick={() => toggleFilter('cuisine', opt.value)}
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                title={opt.label}
+              >
+                <span className="cuisine-icon">{opt.icon}</span>
+                <span className="cuisine-label">{opt.label}</span>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* 시작 섹션 */}
+        <motion.div className="setup-card" variants={itemVariants}>
+          <div className="start-section">
+            <motion.div
+              className="food-counter"
+              key={filteredFoods.length}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+            >
+              🍽️ Found <span className="food-counter-number">{filteredFoods.length}</span> delicious options!
+            </motion.div>
+
+            <motion.button
+              className={`start-button ${isReady ? 'ready' : ''}`}
+              onClick={handleStartTournament}
+              disabled={!isReady}
+              whileHover={isReady ? { scale: 1.02 } : undefined}
+              whileTap={isReady ? { scale: 0.98 } : undefined}
+            >
+              {isReady ? '🔥 Start Tournament!' : `Need ${tournamentSize - filteredFoods.length} more options`}
+            </motion.button>
+          </div>
+        </motion.div>
+
+        {/* 프로모 카드 */}
+        <motion.a
+          href="/blog/index.html"
+          className="promo-card"
+          variants={itemVariants}
+          whileHover={{ y: -4 }}
+        >
           <img
             src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=700&q=80"
-            alt="A delicious looking meal"
-            className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
+            alt="Delicious meal"
+            className="promo-image"
+            loading="lazy"
           />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30"></div>
-
-          {/* Text Content */}
-          <div className="absolute inset-0 p-6 flex flex-col justify-end text-left">
-            <h3 className="text-2xl font-bold text-white mb-2">Stuck in a Food Rut?</h3>
-            <p className="text-white/90 mb-4">Discover fun facts, tips, and recipes about your favorite foods.</p>
-            <span className="font-bold text-orange-400 group-hover:text-orange-300 transition-colors">
-              Get Inspired →
-            </span>
+          <div className="promo-content">
+            <h3 className="promo-title">🍳 Stuck in a Food Rut?</h3>
+            <p className="promo-text">Discover fun facts, tips, and recipes about your favorite foods.</p>
+            <span className="promo-link">Get Inspired →</span>
           </div>
-        </a>
-      </div>
+        </motion.a>
 
-      {/* AdSense 광고 */}
-      <div className="mt-8 max-w-2xl mx-auto">
-        <AdSense className="rounded-xl overflow-hidden" />
-      </div>
+        {/* AdSense */}
+        <motion.div variants={itemVariants} style={{ marginTop: '1.5rem' }}>
+          <AdSense className="rounded-xl overflow-hidden" />
+        </motion.div>
+      </motion.div>
 
+      {/* Modal */}
+      <AnimatePresence>
+        {isModalOpen && <HowToPlayModal onClose={() => setIsModalOpen(false)} />}
+      </AnimatePresence>
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import Confetti from 'react-confetti';
 import { ALL_FOODS } from '../../constants/foods';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
@@ -7,6 +9,7 @@ import AdSense from '../../components/AdSense';
 import { contentfulClient } from '../services/contentfulClient';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Helmet } from 'react-helmet-async';
+
 
 // CLS 해결을 위한 스켈레톤 컴포넌트
 const SkeletonBlock: React.FC<{ height: string; className?: string }> = ({ height, className = '' }) => (
@@ -28,12 +31,35 @@ const getRelatedFoods = (currentFood: typeof ALL_FOODS[0] | null, count: number 
 };
 
 const ResultScreen: React.FC = () => {
+  const [showConfetti, setShowConfetti] = useState(true);
+  const [windowDimensions, setWindowDimensions] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 1200,
+    height: typeof window !== 'undefined' ? window.innerHeight : 800
+  });
+
   useEffect(() => {
     document.body.classList.remove('home-background');
 
     // 플레이 카운트 증가 (소셜 증거용)
     const currentCount = parseInt(localStorage.getItem('totalPlayCount') || '1247');
     localStorage.setItem('totalPlayCount', (currentCount + 1).toString());
+
+    // 윈도우 리사이즈 핸들러
+    const handleResize = () => {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+    window.addEventListener('resize', handleResize);
+
+    // 5초 후 컨페티 중지
+    const confettiTimer = setTimeout(() => setShowConfetti(false), 5000);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(confettiTimer);
+    };
   }, []);
 
   const { foodName } = useParams<{ foodName: string }>();
@@ -189,7 +215,19 @@ const ResultScreen: React.FC = () => {
 
 
   return (
-    <div className="text-center p-4 md:p-8 flex flex-col items-center pt-16 sm:pt-24 pb-16">
+    <div className="text-center p-4 md:p-8 flex flex-col items-center pt-16 sm:pt-24 pb-16 min-h-screen relative overflow-hidden">
+      {/* 🎉 Confetti Celebration */}
+      {showConfetti && (
+        <Confetti
+          width={windowDimensions.width}
+          height={windowDimensions.height}
+          recycle={false}
+          numberOfPieces={300}
+          gravity={0.3}
+          colors={['#f59e0b', '#FFC857', '#a78bfa', '#5BE7A9', '#ff6b6b']}
+        />
+      )}
+
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
@@ -197,9 +235,37 @@ const ResultScreen: React.FC = () => {
         {winner && <link rel="preload" fetchPriority="high" as="image" href={imageUrlToRender} />}
       </Helmet>
 
-      <h2 className="text-2xl md:text-3xl font-bold text-slate-600">Tonight's winner is...</h2>
-      <h1 className="text-4xl md:text-7xl font-extrabold text-amber-500 my-4">{winner.name}!</h1>
-      <p className="text-lg text-slate-500">Good choice, mate!</p>
+      {/* 🏆 Animated Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-600">Tonight's winner is...</h2>
+      </motion.div>
+
+      <motion.h1
+        className="text-4xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 my-4"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          type: 'spring',
+          stiffness: 300,
+          damping: 15,
+          delay: 0.3
+        }}
+      >
+        👑 {winner.name}! 🎉
+      </motion.h1>
+
+      <motion.p
+        className="text-lg text-slate-500"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+      >
+        Good choice, mate!
+      </motion.p>
 
       {/* [삭제] socialProofCount 렌더링 div 블록 삭제 */}
 

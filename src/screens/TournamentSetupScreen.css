@@ -151,6 +151,7 @@
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     padding: 1.5rem 1rem;
+    min-height: 100px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -206,6 +207,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.6rem 1.2rem;
+    min-height: 44px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 50px;
@@ -306,6 +308,7 @@
 .start-button {
     width: 100%;
     padding: 1.25rem 2rem;
+    min-height: 56px;
     font-family: 'Cinzel', serif;
     font-size: 1.25rem;
     font-weight: 700;

@@ -36,7 +36,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       sitemap({
-        hostname: 'https://thedinnerdecider.au',
+        hostname: 'https://www.thedinnerdecider.au',
         dynamicRoutes: [
           ...staticRoutes,
           ...tarotResultRoutes,

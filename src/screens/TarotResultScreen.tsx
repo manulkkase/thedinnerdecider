@@ -269,7 +269,7 @@ const ResultPage: React.FC = () => {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <link rel="canonical" href={`https://thedinnerdecider.au/food-tarot/result/${c1}/${c2}/${c3}`} />
+        <link rel="canonical" href={`https://www.thedinnerdecider.au/food-tarot/result/${c1}/${c2}/${c3}`} />
         {/* [개선 6] 이미지 프리로드 (기존 코드 유지) */}
         {imageUrlToRender && (
           <link rel="preload" as="image" href={imageUrlToRender} fetchPriority="high" />

@@ -87,7 +87,7 @@ const TournamentSetupScreen: React.FC = () => {
       <Helmet>
         <title>Start a Food Battle Royale - The Dinner Decider</title>
         <meta name="description" content="Set up your dinner tournament. Choose your tournament size, filter by dietary needs or cuisine!" />
-        <link rel="canonical" href="https://thedinnerdecider.au/tournament-setup" />
+        <link rel="canonical" href="https://www.thedinnerdecider.au/tournament-setup" />
       </Helmet>
 
       {/* 플로팅 파티클 */}

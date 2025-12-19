@@ -231,7 +231,7 @@ const ResultScreen: React.FC = () => {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <link rel="canonical" href={`https://thedinnerdecider.au/result/${foodName}`} />
+        <link rel="canonical" href={`https://www.thedinnerdecider.au/result/${foodName}`} />
         {winner && <link rel="preload" fetchPriority="high" as="image" href={imageUrlToRender} />}
       </Helmet>
 

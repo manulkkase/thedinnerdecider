@@ -9,7 +9,7 @@ const Contact: React.FC = () => {
       <Helmet>
         <title>Contact Us - The Dinner Decider</title>
         <meta name="description" content="Have a question, feedback, or a partnership inquiry? Get in touch with The Dinner Decider team." />
-        <link rel="canonical" href="https://thedinnerdecider.au/contact" />
+        <link rel="canonical" href="https://www.thedinnerdecider.au/contact" />
       </Helmet>
       <h1 className="text-3xl font-bold mb-4 text-slate-800">Contact Us</h1>
       <div className="space-y-4">

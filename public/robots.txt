@@ -6,4 +6,4 @@ Disallow: /tournament
 Disallow: /food-tarot/game
 
 # Sitemap location
-Sitemap: https://thedinnerdecider.au/sitemap.xml
+Sitemap: https://www.thedinnerdecider.au/sitemap.xml

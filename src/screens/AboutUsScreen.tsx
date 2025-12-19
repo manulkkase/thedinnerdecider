@@ -11,7 +11,7 @@ const AboutUsScreen: React.FC = () => {
       <Helmet>
         <title>About Us - The Dinner Decider</title>
         <meta name="description" content="Learn the story behind The Dinner Decider and our mission to end dinner indecision everywhere." />
-        <link rel="canonical" href="https://thedinnerdecider.au/about" />
+        <link rel="canonical" href="https://www.thedinnerdecider.au/about" />
       </Helmet>
       <div className="max-w-3xl mx-auto">
 

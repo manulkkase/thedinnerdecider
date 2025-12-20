@@ -139,6 +139,22 @@
     gap: 0.5rem;
 }
 
+/* Step number badge */
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #FFC857 0%, #f59e0b 100%);
+    color: #1a1a2e;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
 /* 사이즈 선택 카드 */
 .size-selector {
     display: grid;

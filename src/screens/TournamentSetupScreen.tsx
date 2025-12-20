@@ -118,7 +118,7 @@ const TournamentSetupScreen: React.FC = () => {
         {/* 사이즈 선택 */}
         <motion.div className="setup-card" variants={itemVariants}>
           <h2 className="setup-card-title">
-            <span>1️⃣</span> Tournament Size
+            <span className="step-number">1</span> Tournament Size
           </h2>
           <div className="size-selector">
             {SIZE_OPTIONS.map(option => (
@@ -143,7 +143,7 @@ const TournamentSetupScreen: React.FC = () => {
         {/* Dietary 필터 */}
         <motion.div className="setup-card" variants={itemVariants}>
           <h2 className="setup-card-title">
-            <span>2️⃣</span> Dietary Preference
+            <span className="step-number">2</span> Dietary Preference
           </h2>
           <div className="filter-chips">
             {DIETARY_OPTIONS.map(opt => (
@@ -163,7 +163,7 @@ const TournamentSetupScreen: React.FC = () => {
         {/* Cuisine 필터 */}
         <motion.div className="setup-card" variants={itemVariants}>
           <h2 className="setup-card-title">
-            <span>3️⃣</span> Cuisine Type
+            <span className="step-number">3</span> Cuisine Type
           </h2>
           <div className="cuisine-grid">
             {CUISINE_OPTIONS.map(opt => (

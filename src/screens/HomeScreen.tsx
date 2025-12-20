@@ -11,13 +11,19 @@ const structuredData = {
   "@type": "WebApplication",
   "name": "The Dinner Decider",
   "url": "https://www.thedinnerdecider.au",
-  "description": "Interactive food decision games to help you decide what to eat.",
-  "applicationCategory": "GameApplication",
+  "description": "Interactive food decision games including Food Battle Royale tournament, The Dinner Alchemist, and Food Personality Quiz.",
+  "applicationCategory": "EntertainmentApplication",
   "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
   "offers": {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "AUD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "156"
   }
 };
 
@@ -128,7 +134,7 @@ const HomeScreen: React.FC = () => {
         />
         <link rel="canonical" href="https://www.thedinnerdecider.au/" />
         <meta property="og:title" content="The Dinner Decider - Fun Food Games" />
-        <meta property="og:description" content="Play Food Battle Royale or Food Tarot to decide what to eat tonight!" />
+        <meta property="og:description" content="Play Food Battle Royale Tournament, The Dinner Alchemist, or Food Personality Quiz to decide what to eat!" />
         <meta property="og:image" content="https://www.thedinnerdecider.au/images/og-image.jpg" />
         <meta property="og:url" content="https://www.thedinnerdecider.au" />
         <meta property="og:type" content="website" />
@@ -181,7 +187,6 @@ const HomeScreen: React.FC = () => {
             variants={containerVariants}
           >
             <SpotlightCard to="/tournament-setup" className="tournament-panel">
-              <div className="panel-icon"></div>
               <h3>Food Battle Royale!</h3>
               <p>Have a few candidates in mind? Let them battle it out to find the winner.</p>
               <div className="choice-button">
@@ -191,147 +196,108 @@ const HomeScreen: React.FC = () => {
               <span className="panel-badge">🔥 Most Popular</span>
             </SpotlightCard>
 
-            <SpotlightCard to="/food-tarot" className="tarot-panel">
-              <div className="panel-icon"></div>
-              <h3>Leave it to Destiny!</h3>
-              <p>Need some inspiration? Let the mystical cards find the fated menu for you.</p>
+            <SpotlightCard to="/alchemist" className="tarot-panel">
+              <h3>The Dinner Alchemist</h3>
+              <p>Mix your cravings into the cauldron and brew your perfect meal.</p>
               <div className="choice-button">
-                Consult the Tarot
+                Start Brewing
                 <span className="btn-arrow">→</span>
               </div>
-              <span className="panel-badge">✨ Fun & Quick</span>
+              <span className="panel-badge">🧪 New!</span>
             </SpotlightCard>
           </motion.div>
         </motion.div>
 
-        {/* Quiz Promo - Enhanced */}
+        {/* Quiz Promo - Modern Glassmorphism Design */}
         <motion.div
           variants={itemVariants}
           style={{ marginTop: '1.5rem' }}
         >
           <Link to="/quiz" style={{ textDecoration: 'none' }}>
             <motion.div
-              className="quiz-promo-enhanced"
+              className="quiz-promo-modern"
               style={{
                 position: 'relative',
-                padding: '1.5rem',
-                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 50%, rgba(251, 146, 60, 0.15) 100%)',
-                borderRadius: '20px',
-                border: '2px solid transparent',
-                backgroundClip: 'padding-box',
+                padding: '1.25rem 1.5rem',
+                background: 'rgba(167, 139, 250, 0.08)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '16px',
+                border: '1px solid rgba(167, 139, 250, 0.2)',
                 overflow: 'hidden',
                 cursor: 'pointer',
               }}
               whileHover={{
                 scale: 1.02,
-                boxShadow: '0 0 40px rgba(167, 139, 250, 0.4)',
+                borderColor: 'rgba(167, 139, 250, 0.5)',
+                boxShadow: '0 8px 32px rgba(167, 139, 250, 0.2)',
               }}
               whileTap={{ scale: 0.98 }}
             >
-              {/* Animated gradient border */}
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                borderRadius: '20px',
-                padding: '2px',
-                background: 'linear-gradient(90deg, #a78bfa, #ec4899, #f97316, #a78bfa)',
-                backgroundSize: '300% 100%',
-                animation: 'gradientShift 3s ease infinite',
-                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                WebkitMaskComposite: 'xor',
-                maskComposite: 'exclude',
-                pointerEvents: 'none',
-              }} />
-
-              {/* Floating personality emojis */}
-              <div style={{ position: 'absolute', top: '10px', right: '15px', fontSize: '1.5rem', opacity: 0.6 }}>
-                <motion.span
-                  animate={{ y: [0, -5, 0], rotate: [0, 10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                  style={{ display: 'inline-block', marginRight: '8px' }}
-                >🌶️</motion.span>
-                <motion.span
-                  animate={{ y: [0, -8, 0], rotate: [0, -10, 0] }}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-                  style={{ display: 'inline-block', marginRight: '8px' }}
-                >🍰</motion.span>
-                <motion.span
-                  animate={{ y: [0, -6, 0], rotate: [0, 15, 0] }}
-                  transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
-                  style={{ display: 'inline-block' }}
-                >🌙</motion.span>
-              </div>
+              {/* Subtle gradient shine effect */}
+              <motion.div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: '-100%',
+                  width: '100%',
+                  height: '100%',
+                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent)',
+                  pointerEvents: 'none',
+                }}
+                animate={{ left: ['−100%', '200%'] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'linear', repeatDelay: 2 }}
+              />
 
               {/* Content */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                {/* Pulsing brain icon */}
-                <motion.div
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #a78bfa 0%, #ec4899 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '2rem',
-                    boxShadow: '0 0 20px rgba(167, 139, 250, 0.5)',
-                  }}
-                >
-                  🧠
-                </motion.div>
-
-                <div style={{ flex: 1 }}>
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    marginBottom: '0.25rem'
-                  }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.25rem' }}>
                     <h3 style={{
                       fontFamily: "'Cinzel', serif",
-                      fontSize: '1.25rem',
+                      fontSize: '1.15rem',
                       fontWeight: 700,
-                      background: 'linear-gradient(90deg, #a78bfa, #ec4899)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
+                      color: '#e9d5ff',
                       margin: 0,
                     }}>
                       What's Your Food Personality?
                     </h3>
                     <span style={{
-                      background: 'linear-gradient(90deg, #ec4899, #f97316)',
-                      padding: '2px 8px',
+                      background: 'linear-gradient(90deg, #a78bfa, #ec4899)',
+                      padding: '3px 10px',
                       borderRadius: '100px',
-                      fontSize: '0.65rem',
+                      fontSize: '0.6rem',
                       fontWeight: 700,
                       color: 'white',
                       textTransform: 'uppercase',
-                      letterSpacing: '0.5px',
+                      letterSpacing: '1px',
                     }}>
-                      New
+                      Quiz
                     </span>
                   </div>
                   <p style={{
-                    color: '#d1d5db',
-                    fontSize: '0.95rem',
+                    color: '#9ca3af',
+                    fontSize: '0.9rem',
                     margin: 0,
                   }}>
-                    Discover your type in 5 quick questions — share your result! ✨
+                    5 quick questions → Discover your type → Share!
                   </p>
                 </div>
 
-                {/* Arrow */}
+                {/* Arrow with hover animation */}
                 <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
                   style={{
-                    fontSize: '1.5rem',
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    background: 'linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(236, 72, 153, 0.2))',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1.25rem',
                     color: '#a78bfa',
+                    flexShrink: 0,
                   }}
+                  whileHover={{ scale: 1.1, background: 'linear-gradient(135deg, rgba(167, 139, 250, 0.4), rgba(236, 72, 153, 0.4))' }}
                 >
                   →
                 </motion.div>

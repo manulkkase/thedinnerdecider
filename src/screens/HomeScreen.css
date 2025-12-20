@@ -180,8 +180,12 @@
 
 /* ❗수정: 선택 패널 스타일 (게임 UI 테마) */
 .choice-panel {
-  flex: 1;
+  flex: 1 1 400px;
+  /* Equal flex basis */
   min-width: 300px;
+  max-width: 500px;
+  /* Same max width for both */
+  min-height: 280px;
   padding: 2rem;
   border: 2px solid transparent;
   border-radius: 12px;
@@ -194,6 +198,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  /* Center content vertically */
 }
 
 /* ❗추가: 아이콘 영역 스타일 */
@@ -221,14 +227,17 @@
   box-shadow: 0 0 30px rgba(245, 158, 11, 0.7);
 }
 
-/* 🌙 타로 패널 */
+/* 🧪 Alchemist Panel */
 .tarot-panel {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/leavittodestinybg_new.webp');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/alchemist_bg.webp');
   border-image: linear-gradient(to top, #a78bfa, #7c3aed) 1;
 }
 
 .tarot-panel .panel-icon {
-  background-image: url('/images/leavittodestiny_new.webp');
+  background-image: url('/images/alchemist_icon.webp');
+  background-color: #1a1625;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
 }
 
 .tarot-panel:hover {

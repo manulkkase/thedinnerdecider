@@ -1,0 +1,583 @@
+/* Alchemist Screen Styles */
+
+.alchemist-container {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0c0a14 0%, #1a1625 50%, #0c0a14 100%);
+    padding: 2rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating Particles */
+.alchemist-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.alchemist-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: float-particle 20s infinite ease-in-out;
+}
+
+.alchemist-particle-1 {
+    left: 10%;
+    top: 20%;
+    background: rgba(139, 92, 246, 0.4);
+    animation-delay: 0s;
+}
+
+.alchemist-particle-2 {
+    left: 80%;
+    top: 30%;
+    background: rgba(236, 72, 153, 0.4);
+    animation-delay: 5s;
+}
+
+.alchemist-particle-3 {
+    left: 30%;
+    top: 70%;
+    background: rgba(255, 200, 87, 0.4);
+    animation-delay: 10s;
+}
+
+.alchemist-particle-4 {
+    left: 70%;
+    top: 80%;
+    background: rgba(34, 197, 94, 0.4);
+    animation-delay: 15s;
+}
+
+@keyframes float-particle {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translateY(-100px) translateX(30px);
+        opacity: 0.6;
+    }
+}
+
+/* Content */
+.alchemist-content {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.alchemist-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.alchemist-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 50%, #f97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 30px rgba(167, 139, 250, 0.3);
+}
+
+.alchemist-subtitle {
+    color: #b3aed1;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Essence Grid */
+.essence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.essence-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1rem 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.essence-card:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 20px var(--essence-color, rgba(255, 255, 255, 0.2));
+}
+
+.essence-card.selected {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 25px var(--essence-color, rgba(255, 255, 255, 0.3));
+}
+
+.essence-card:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.essence-emoji {
+    font-size: 2rem;
+}
+
+.essence-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.essence-desc {
+    font-size: 0.7rem;
+    color: #9ca3af;
+    text-align: center;
+}
+
+.essence-check {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: white;
+    font-weight: bold;
+}
+
+/* Cauldron */
+.cauldron {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 1.5rem;
+    background: radial-gradient(ellipse at center, #2d2640 0%, #1a1625 70%);
+    border: 3px solid #4c1d95;
+    border-radius: 50% 50% 45% 45%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.cauldron.has-items {
+    border-color: #7c3aed;
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.4);
+}
+
+.cauldron.brewing {
+    border-color: #a78bfa;
+    box-shadow: 0 0 50px rgba(167, 139, 250, 0.6), inset 0 0 30px rgba(167, 139, 250, 0.2);
+}
+
+.cauldron::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 20px;
+    background: linear-gradient(to bottom, #3b2758, transparent);
+    border-radius: 0 0 50% 50%;
+}
+
+.cauldron-inner {
+    text-align: center;
+}
+
+.cauldron-essences {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    min-height: 40px;
+}
+
+.cauldron-essence {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+.cauldron-count {
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+/* Brewing Animation - Vortex Effect */
+.cauldron-brewing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.vortex-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+}
+
+/* Rotating Rings */
+.vortex-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    animation: vortex-spin 2s linear infinite;
+}
+
+.vortex-ring-1 {
+    width: 160px;
+    height: 160px;
+    margin: -80px 0 0 -80px;
+    border-top-color: rgba(167, 139, 250, 0.8);
+    border-right-color: rgba(167, 139, 250, 0.4);
+    animation-duration: 1.5s;
+}
+
+.vortex-ring-2 {
+    width: 120px;
+    height: 120px;
+    margin: -60px 0 0 -60px;
+    border-top-color: rgba(236, 72, 153, 0.8);
+    border-left-color: rgba(236, 72, 153, 0.4);
+    animation-duration: 1.2s;
+    animation-direction: reverse;
+}
+
+.vortex-ring-3 {
+    width: 80px;
+    height: 80px;
+    margin: -40px 0 0 -40px;
+    border-top-color: rgba(249, 115, 22, 0.8);
+    border-right-color: rgba(249, 115, 22, 0.4);
+    animation-duration: 0.9s;
+}
+
+@keyframes vortex-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Swirling Essences */
+.vortex-essence {
+    position: absolute;
+    font-size: 1.5rem;
+    filter: drop-shadow(0 0 15px var(--essence-color));
+    animation: swirl-in 2.5s ease-in-out forwards;
+}
+
+.vortex-essence-1 {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0s;
+}
+
+.vortex-essence-2 {
+    bottom: 20%;
+    left: 0;
+    animation-delay: 0.2s;
+}
+
+.vortex-essence-3 {
+    bottom: 20%;
+    right: 0;
+    animation-delay: 0.4s;
+}
+
+@keyframes swirl-in {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) rotate(0deg) translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) rotate(360deg) translateY(0) scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, 50%) rotate(720deg) scale(0);
+    }
+}
+
+/* Center Glow */
+.vortex-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    background: radial-gradient(circle, rgba(255, 200, 87, 0.9) 0%, rgba(167, 139, 250, 0.5) 50%, transparent 70%);
+    border-radius: 50%;
+    animation: center-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes center-pulse {
+
+    0%,
+    100% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+.brewing-text {
+    font-size: 0.9rem;
+    color: #a78bfa;
+    font-style: italic;
+    animation: pulse-text 1s infinite;
+    text-align: center;
+    margin-top: 60px;
+}
+
+@keyframes pulse-text {
+
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Instruction */
+.alchemist-instruction {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Brew Button */
+.brew-button {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(167, 139, 250, 0.4);
+}
+
+.brew-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(167, 139, 250, 0.6);
+}
+
+.brew-button:disabled {
+    background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+    color: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Reset Button */
+.reset-button {
+    display: block;
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #9ca3af;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e5e7eb;
+}
+
+/* Result */
+.alchemist-result {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(167, 139, 250, 0.3);
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.result-reveal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.result-label {
+    font-size: 0.9rem;
+    color: #a78bfa;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.result-food-name {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FFC857;
+    margin: 0;
+}
+
+.result-image-container {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 4/3;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.result-food-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.result-essences {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.result-essence-tag {
+    padding: 0.35rem 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: #e5e7eb;
+}
+
+.result-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.result-action-btn {
+    padding: 1rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.result-action-btn.primary {
+    background: linear-gradient(135deg, #FFC857 0%, #f59e0b 100%);
+    color: #1a1a2e;
+    border: none;
+}
+
+.result-action-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 200, 87, 0.4);
+}
+
+.result-action-btn.secondary {
+    background: transparent;
+    border: 2px solid rgba(167, 139, 250, 0.5);
+    color: #a78bfa;
+}
+
+.result-action-btn.secondary:hover {
+    background: rgba(167, 139, 250, 0.1);
+}
+
+/* Back Link */
+.alchemist-back {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.back-link {
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #e5e7eb;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .alchemist-title {
+        font-size: 2rem;
+    }
+
+    .essence-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cauldron {
+        width: 160px;
+        height: 160px;
+    }
+
+    .result-food-name {
+        font-size: 1.5rem;
+    }
+}

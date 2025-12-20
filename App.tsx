@@ -16,9 +16,7 @@ const ResultScreen = React.lazy(() => import('./src/screens/ResultScreen'));
 const PrivacyPolicy = React.lazy(() => import('./src/screens/PrivacyPolicy'));
 const TermsOfService = React.lazy(() => import('./src/screens/TermsOfService'));
 const Contact = React.lazy(() => import('./src/screens/Contact'));
-const TarotHomeScreen = React.lazy(() => import('./src/screens/TarotHomeScreen'));
-const TarotGameScreen = React.lazy(() => import('./src/screens/TarotGameScreen'));
-const TarotResultScreen = React.lazy(() => import('./src/screens/TarotResultScreen'));
+const AlchemistScreen = React.lazy(() => import('./src/screens/AlchemistScreen'));
 const ExploreFoodsScreen = React.lazy(() => import('./src/screens/ExploreFoodsScreen'));
 const AboutUsScreen = React.lazy(() => import('./src/screens/AboutUsScreen'));
 const QuizScreen = React.lazy(() => import('./src/screens/QuizScreen'));
@@ -38,9 +36,7 @@ const App: React.FC = () => {
             <Route path="/tournament-setup" element={<TournamentSetupScreen />} />
             <Route path="/tournament" element={<TournamentScreen />} />
             <Route path="/result/:foodName" element={<ResultScreen />} />
-            <Route path="/food-tarot" element={<TarotHomeScreen />} />
-            <Route path="/food-tarot/game" element={<TarotGameScreen />} />
-            <Route path="/food-tarot/result/:c1/:c2/:c3" element={<TarotResultScreen />} />
+            <Route path="/alchemist" element={<AlchemistScreen />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/contact" element={<Contact />} />

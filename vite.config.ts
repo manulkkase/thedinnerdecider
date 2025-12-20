@@ -3,6 +3,7 @@ import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import sitemap from 'vite-plugin-sitemap';
 import { ALL_FOODS } from './constants/foods'; // 👈 경로가 여기로 수정되었습니다.
+import { ALL_PERSONALITY_IDS } from './constants/quizData';
 
 // foods.ts에 있는 100개의 음식 이름으로 /result/... 경로를 자동으로 생성합니다.
 const tournamentResultRoutes = ALL_FOODS.map(food => `/result/${encodeURIComponent(food.name)}`);
@@ -19,6 +20,9 @@ const tarotResultRoutes = [
   '/food-tarot/result/star/pot/spice', '/food-tarot/result/star/pot/herb', '/food-tarot/result/star/pot/sugar',
   '/food-tarot/result/star/knife/spice', '/food-tarot/result/star/knife/herb', '/food-tarot/result/star/knife/sugar'
 ];
+
+// Quiz personality result routes (8 types)
+const quizResultRoutes = ALL_PERSONALITY_IDS.map(id => `/quiz/result/${id}`);
 const staticRoutes = [
   '/',
   '/tournament-setup',
@@ -27,7 +31,8 @@ const staticRoutes = [
   '/explore-foods',
   '/privacy',
   '/terms',
-  '/contact'
+  '/contact',
+  '/quiz'  // Quiz landing page
 ];
 
 export default defineConfig(({ mode }) => {
@@ -40,7 +45,8 @@ export default defineConfig(({ mode }) => {
         dynamicRoutes: [
           ...staticRoutes,
           ...tarotResultRoutes,
-          ...tournamentResultRoutes
+          ...tournamentResultRoutes,
+          ...quizResultRoutes
         ]
       })
     ],
@@ -60,7 +66,6 @@ export default defineConfig(({ mode }) => {
             // Separate vendor chunks for better caching
             'vendor-react': ['react', 'react-dom', 'react-router-dom'],
             'vendor-motion': ['framer-motion'],
-            'vendor-contentful': ['@contentful/rich-text-react-renderer'],
             'vendor-helmet': ['react-helmet-async'],
           }
         }

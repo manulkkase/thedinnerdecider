@@ -207,26 +207,6 @@ const TournamentSetupScreen: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* 프로모 카드 */}
-        <motion.a
-          href="/blog/index.html"
-          className="promo-card"
-          variants={itemVariants}
-          whileHover={{ y: -4 }}
-        >
-          <img
-            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=700&q=80"
-            alt="Delicious meal"
-            className="promo-image"
-            loading="lazy"
-          />
-          <div className="promo-content">
-            <h3 className="promo-title">🍳 Stuck in a Food Rut?</h3>
-            <p className="promo-text">Discover fun facts, tips, and recipes about your favorite foods.</p>
-            <span className="promo-link">Get Inspired →</span>
-          </div>
-        </motion.a>
-
         {/* AdSense */}
         <motion.div variants={itemVariants} style={{ marginTop: '1.5rem' }}>
           <AdSense className="rounded-xl overflow-hidden" />

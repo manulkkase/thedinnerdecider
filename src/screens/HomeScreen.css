@@ -551,3 +551,33 @@
     min-height: 44px;
   }
 }
+
+/* Quiz Promo Card Animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Mobile responsive for quiz card */
+@media (max-width: 640px) {
+  .quiz-promo-enhanced {
+    padding: 1.25rem !important;
+  }
+
+  .quiz-promo-enhanced h3 {
+    font-size: 1rem !important;
+  }
+
+  .quiz-promo-enhanced p {
+    font-size: 0.85rem !important;
+  }
+}

@@ -204,6 +204,142 @@ const HomeScreen: React.FC = () => {
           </motion.div>
         </motion.div>
 
+        {/* Quiz Promo - Enhanced */}
+        <motion.div
+          variants={itemVariants}
+          style={{ marginTop: '1.5rem' }}
+        >
+          <Link to="/quiz" style={{ textDecoration: 'none' }}>
+            <motion.div
+              className="quiz-promo-enhanced"
+              style={{
+                position: 'relative',
+                padding: '1.5rem',
+                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 50%, rgba(251, 146, 60, 0.15) 100%)',
+                borderRadius: '20px',
+                border: '2px solid transparent',
+                backgroundClip: 'padding-box',
+                overflow: 'hidden',
+                cursor: 'pointer',
+              }}
+              whileHover={{
+                scale: 1.02,
+                boxShadow: '0 0 40px rgba(167, 139, 250, 0.4)',
+              }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {/* Animated gradient border */}
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                borderRadius: '20px',
+                padding: '2px',
+                background: 'linear-gradient(90deg, #a78bfa, #ec4899, #f97316, #a78bfa)',
+                backgroundSize: '300% 100%',
+                animation: 'gradientShift 3s ease infinite',
+                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                WebkitMaskComposite: 'xor',
+                maskComposite: 'exclude',
+                pointerEvents: 'none',
+              }} />
+
+              {/* Floating personality emojis */}
+              <div style={{ position: 'absolute', top: '10px', right: '15px', fontSize: '1.5rem', opacity: 0.6 }}>
+                <motion.span
+                  animate={{ y: [0, -5, 0], rotate: [0, 10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{ display: 'inline-block', marginRight: '8px' }}
+                >🌶️</motion.span>
+                <motion.span
+                  animate={{ y: [0, -8, 0], rotate: [0, -10, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+                  style={{ display: 'inline-block', marginRight: '8px' }}
+                >🍰</motion.span>
+                <motion.span
+                  animate={{ y: [0, -6, 0], rotate: [0, 15, 0] }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
+                  style={{ display: 'inline-block' }}
+                >🌙</motion.span>
+              </div>
+
+              {/* Content */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                {/* Pulsing brain icon */}
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{
+                    width: '60px',
+                    height: '60px',
+                    borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #a78bfa 0%, #ec4899 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '2rem',
+                    boxShadow: '0 0 20px rgba(167, 139, 250, 0.5)',
+                  }}
+                >
+                  🧠
+                </motion.div>
+
+                <div style={{ flex: 1 }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    marginBottom: '0.25rem'
+                  }}>
+                    <h3 style={{
+                      fontFamily: "'Cinzel', serif",
+                      fontSize: '1.25rem',
+                      fontWeight: 700,
+                      background: 'linear-gradient(90deg, #a78bfa, #ec4899)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      margin: 0,
+                    }}>
+                      What's Your Food Personality?
+                    </h3>
+                    <span style={{
+                      background: 'linear-gradient(90deg, #ec4899, #f97316)',
+                      padding: '2px 8px',
+                      borderRadius: '100px',
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
+                      color: 'white',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.5px',
+                    }}>
+                      New
+                    </span>
+                  </div>
+                  <p style={{
+                    color: '#d1d5db',
+                    fontSize: '0.95rem',
+                    margin: 0,
+                  }}>
+                    Discover your type in 5 quick questions — share your result! ✨
+                  </p>
+                </div>
+
+                {/* Arrow */}
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{
+                    fontSize: '1.5rem',
+                    color: '#a78bfa',
+                  }}
+                >
+                  →
+                </motion.div>
+              </div>
+            </motion.div>
+          </Link>
+        </motion.div>
+
         {/* 오늘의 인기 음식 미리보기 */}
         <motion.div className="popular-foods-preview" variants={itemVariants}>
           <h3>🍽️ Trending Today</h3>

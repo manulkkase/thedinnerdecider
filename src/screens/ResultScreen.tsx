@@ -137,6 +137,38 @@ const ResultScreen: React.FC = () => {
         <meta name="description" content={pageDescription} />
         <link rel="canonical" href={`https://www.thedinnerdecider.au/result/${foodName}`} />
         <link rel="preload" fetchPriority="high" as="image" href={winner.imageUrl} />
+
+        {/* Open Graph tags for social sharing */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:image" content={`https://www.thedinnerdecider.au${winner.imageUrl}`} />
+        <meta property="og:url" content={`https://www.thedinnerdecider.au/result/${foodName}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="The Dinner Decider" />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={`https://www.thedinnerdecider.au${winner.imageUrl}`} />
+
+        {/* Recipe JSON-LD structured data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Recipe",
+            "name": winner.name,
+            "description": winner.funFact || pageDescription,
+            "image": `https://www.thedinnerdecider.au${winner.imageUrl}`,
+            "author": {
+              "@type": "Organization",
+              "name": "The Dinner Decider"
+            },
+            "recipeCategory": winner.tags?.[0] || "Main Course",
+            "recipeCuisine": winner.tags?.find(t => ['italian', 'mexican', 'japanese', 'indian', 'chinese', 'thai', 'korean', 'vietnamese', 'french', 'greek', 'american', 'australian', 'mediterranean'].includes(t)) || "International",
+            "keywords": winner.tags?.join(", ") || winner.name
+          })}
+        </script>
       </Helmet>
 
       {/* 🏆 Animated Header */}

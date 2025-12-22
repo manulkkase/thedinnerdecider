@@ -22,7 +22,7 @@ const ExploreFoodsScreen: React.FC = () => {
     <div className="bg-white min-h-screen">
       <Helmet>
         <title>Explore All Dishes - The Dinner Decider</title>
-        <meta name="description" content="Browse, filter, and discover all 100 delicious food options available in The Dinner Decider game." />
+        <meta name="description" content={`Browse, filter, and discover all ${ALL_FOODS.length} delicious food options available in The Dinner Decider game.`} />
         <link rel="canonical" href="https://www.thedinnerdecider.au/explore-foods" />
       </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -30,7 +30,7 @@ const ExploreFoodsScreen: React.FC = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight">Explore All Dishes</h1>
           <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
-            Browse our full library of 100 delicious options. Use the filters to find exactly what you're craving.
+            Browse our full library of {ALL_FOODS.length} delicious options. Use the filters to find exactly what you're craving.
           </p>
         </div>
 

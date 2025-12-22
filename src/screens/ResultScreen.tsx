@@ -325,7 +325,7 @@ const ResultScreen: React.FC = () => {
             to="/explore-foods"
             className="mt-4 inline-block text-sm text-amber-600 hover:text-amber-700 font-medium"
           >
-            Explore all 100 dishes →
+            Explore all {ALL_FOODS.length} dishes →
           </Link>
         </motion.div>
       )}

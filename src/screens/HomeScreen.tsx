@@ -328,7 +328,7 @@ const HomeScreen: React.FC = () => {
             ))}
           </div>
           <Link to="/explore-foods" className="explore-link">
-            Explore all 100 dishes →
+            Explore all {ALL_FOODS.length} dishes →
           </Link>
         </motion.div>
 

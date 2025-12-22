@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FilterOptions } from '../../types';
-import { ALL_FOODS, CUISINE_OPTIONS, DIETARY_OPTIONS } from '../../constants/foods';
+import { ALL_FOODS_COMBINED, CUISINE_OPTIONS, DIETARY_OPTIONS, MOOD_OPTIONS } from '../../constants/foods';
 import HowToPlayModal from '../../components/HowToPlayModal';
 import AdSense from '../../components/AdSense';
 import './TournamentSetupScreen.css';
@@ -37,6 +37,7 @@ const TournamentSetupScreen: React.FC = () => {
   const navigate = useNavigate();
   const [tournamentSize, setTournamentSize] = useState<number>(16);
   const [filters, setFilters] = useState<FilterOptions>({ dietary: [], cuisine: [] });
+  const [moodFilter, setMoodFilter] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -44,7 +45,11 @@ const TournamentSetupScreen: React.FC = () => {
   }, []);
 
   const filteredFoods = useMemo(() => {
-    let foods = ALL_FOODS;
+    let foods = ALL_FOODS_COMBINED;
+    // Mood filter (single select)
+    if (moodFilter) {
+      foods = foods.filter(food => food.mood?.includes(moodFilter as any));
+    }
     if (filters.dietary.length > 0) {
       foods = foods.filter(food => filters.dietary.every(tag => food.tags.includes(tag)));
     }
@@ -52,7 +57,7 @@ const TournamentSetupScreen: React.FC = () => {
       foods = foods.filter(food => filters.cuisine.some(tag => food.tags.includes(tag)));
     }
     return foods;
-  }, [filters]);
+  }, [filters, moodFilter]);
 
   const handleStartTournament = () => {
     if (filteredFoods.length >= tournamentSize) {
@@ -113,6 +118,28 @@ const TournamentSetupScreen: React.FC = () => {
           >
             ❓ How to Play
           </button>
+        </motion.div>
+
+        {/* Mood 선택 (Optional) */}
+        <motion.div className="setup-card" variants={itemVariants}>
+          <h2 className="setup-card-title">
+            <span className="step-number">✨</span> What's Your Mood?
+            <span style={{ fontSize: '0.75rem', color: '#9ca3af', marginLeft: '0.5rem' }}>(Optional)</span>
+          </h2>
+          <div className="mood-selector">
+            {MOOD_OPTIONS.map(opt => (
+              <motion.button
+                key={opt.value}
+                className={`mood-card ${moodFilter === opt.value ? 'active' : ''}`}
+                onClick={() => setMoodFilter(moodFilter === opt.value ? null : opt.value)}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="mood-icon">{opt.icon}</span>
+                <span className="mood-label">{opt.label}</span>
+              </motion.button>
+            ))}
+          </div>
         </motion.div>
 
         {/* 사이즈 선택 */}

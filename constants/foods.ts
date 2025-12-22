@@ -41,7 +41,7 @@ export const CUISINE_OPTIONS = [
 export const ALL_FOODS: FoodItem[] = [
   // Italian
   {
-    id: 1, name: 'Margherita Pizza', imageUrl: '/images/Margherita Pizza.webp', tags: ['italian', 'vegetarian'], mood: ['comfort', 'light', 'late-night'],
+    id: 1, name: 'Margherita Pizza', imageUrl: '/images/Margherita Pizza.webp', tags: ['italian', 'vegetarian'], mood: ['comfort', 'late-night'],
     funFact: 'Named after Queen Margherita of Savoy in 1889, its colors represent the Italian flag.',
     checklist: ['A thin, crispy yet chewy crust', 'Fresh, high-quality mozzarella', 'Vibrant, sweet San Marzano tomato sauce'],
     pairings: [{ type: 'Drink Pairing', suggestion: 'A light lager or a glass of Chianti.', icon: '🍺' }, { type: 'Side Pairing', suggestion: 'A simple arugula salad with a lemon vinaigrette.', icon: '🥗' }],
@@ -62,28 +62,28 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "👨‍🍳", "title": "Let It Rest", "description": "For the perfect slice that doesn't fall apart, let the lasagna rest for at least 10-15 minutes after taking it out of the oven." }]
   },
   {
-    id: 4, name: 'Mushroom Risotto', imageUrl: '/images/Mushroom Risotto.webp', tags: ['italian', 'vegetarian', 'gluten-free'], mood: ['comfort', 'light'],
+    id: 4, name: 'Mushroom Risotto', imageUrl: '/images/Mushroom Risotto.webp', tags: ['italian', 'vegetarian', 'gluten-free'], mood: ['comfort'],
     funFact: 'Authentic risotto is stirred constantly to release the starch from the rice, creating its signature creamy texture without much cream.',
     checklist: ['Creamy texture with rice cooked perfectly al dente', 'Deep, earthy flavor from quality mushrooms', 'Finished with real Parmigiano-Reggiano cheese'],
     pairings: [{ type: 'Drink Pairing', suggestion: 'An earthy Pinot Noir or a crisp Sauvignon Blanc.', icon: '🥂' }],
     eatLikeLocal: [{ "icon": "🥄", "title": "Stir, Stir, Stir", "description": "The key to a creamy risotto is constant stirring, which helps the rice release its starches." }]
   },
   {
-    id: 5, name: 'Spinach & Ricotta Ravioli', imageUrl: '/images/Spinach & Ricotta Ravioli.webp', tags: ['italian', 'vegetarian'], mood: ['light'],
+    id: 5, name: 'Spinach & Ricotta Ravioli', imageUrl: '/images/Spinach & Ricotta Ravioli.webp', tags: ['italian', 'vegetarian'], mood: ['comfort'],
     funFact: 'The word "ravioli" comes from the old Italian word "riavvolgere," which means "to wrap".',
     checklist: ['Pasta is tender but not mushy', 'A creamy, well-seasoned spinach and ricotta filling', 'Served in a simple sauce that complements the filling'],
     pairings: [{ type: 'Topping', suggestion: 'A sprinkle of freshly grated Parmesan cheese.', icon: '🧀' }],
     eatLikeLocal: [{ "icon": "🌿", "title": "Simple is Best", "description": "Enjoy with a simple sauce like sage butter or a light tomato sauce to let the filling shine." }]
   },
   {
-    id: 6, name: 'Fettuccine Alfredo', imageUrl: '/images/Fettuccine Alfredo.webp', tags: ['italian', 'vegetarian'], mood: ['comfort', 'light'],
+    id: 6, name: 'Fettuccine Alfredo', imageUrl: '/images/Fettuccine Alfredo.webp', tags: ['italian', 'vegetarian'], mood: ['comfort'],
     funFact: 'The original Alfredo was invented in Rome and contained only three ingredients: fettuccine, butter, and Parmesan cheese.',
     checklist: ['A rich and creamy sauce that coats every noodle', 'High-quality Parmesan cheese is the star flavor', 'A hint of nutmeg and black pepper'],
     pairings: [{ type: 'Addition', suggestion: 'Add grilled chicken or shrimp for a more substantial meal.', icon: '🍗' }],
     eatLikeLocal: [{ "icon": "✨", "title": "The 'Mantecare' Secret", "description": "The creaminess comes from emulsifying butter, Parmesan, and hot pasta water in a technique called 'mantecare'." }]
   },
   {
-    id: 7, name: 'Gnocchi with Pesto', imageUrl: '/images/Gnocchi with Pesto.webp', tags: ['italian', 'vegetarian'], mood: ['comfort', 'light'],
+    id: 7, name: 'Gnocchi with Pesto', imageUrl: '/images/Gnocchi with Pesto.webp', tags: ['italian', 'vegetarian'], mood: ['comfort'],
     funFact: 'Gnocchi are a type of small dumpling, and their name is thought to come from the Italian word "nocchio," meaning a knot in wood.',
     checklist: ['Soft, pillowy potato gnocchi that are light, not dense', 'A vibrant, fresh basil pesto sauce', 'Toasted pine nuts and Parmesan for garnish'],
     pairings: [{ type: 'Side Pairing', suggestion: 'Cherry tomatoes and fresh mozzarella balls.', icon: '🍅' }],
@@ -92,49 +92,49 @@ export const ALL_FOODS: FoodItem[] = [
 
   // Mexican
   {
-    id: 8, name: 'Tacos al Pastor', imageUrl: '/images/Tacos al Pastor.webp', tags: ['mexican'], mood: ['spicy', 'late-night', 'trendy'],
+    id: 8, name: 'Tacos al Pastor', imageUrl: '/images/Tacos al Pastor.webp', tags: ['mexican'], mood: ['comfort', 'late-night'],
     funFact: 'This dish was created by Lebanese immigrants in Mexico, who adapted their traditional shawarma spit-grill to make tacos.',
     checklist: ['Marinated pork shaved directly from the spit (trompo)', 'Small corn tortillas, doubled up', 'Topped with fresh pineapple, onion, and cilantro'],
     pairings: [{ type: 'Drink Pairing', suggestion: 'An ice-cold Mexican beer (like Pacifico) or a refreshing agua de horchata.', icon: '🍺' }],
     eatLikeLocal: [{ "icon": "🍍", "title": "Look for the Pineapple", "description": "A proper al pastor taco must have a small slice of roasted pineapple, which the taquero skillfully slices off the top of the vertical spit." }]
   },
   {
-    id: 9, name: 'Burrito Bowl', imageUrl: '/images/Burrito Bowl.webp', tags: ['mexican', 'gluten-free'], mood: ['spicy', 'light', 'late-night'],
+    id: 9, name: 'Burrito Bowl', imageUrl: '/images/Burrito Bowl.webp', tags: ['mexican', 'gluten-free'], mood: ['comfort'],
     funFact: 'The burrito, meaning "little donkey" in Spanish, was invented in the early 20th century in Northern Mexico.',
     checklist: ['A balanced ratio of rice, beans, protein, and toppings', 'Fresh, vibrant salsa', 'Perfectly cooked and seasoned protein'],
     pairings: [{ type: 'Topping', suggestion: 'Add a scoop of fresh guacamole.', icon: '🥑' }],
     eatLikeLocal: [{ "icon": "🥣", "title": "Mix It Up", "description": "Don't eat the ingredients in sections. Mix everything together to get a perfect blend of flavors in every bite." }]
   },
   {
-    id: 10, name: 'Cheese Quesadillas', imageUrl: '/images/Cheese Quesadillas.webp', tags: ['mexican', 'vegetarian'], mood: ['spicy', 'light'],
+    id: 10, name: 'Cheese Quesadillas', imageUrl: '/images/Cheese Quesadillas.webp', tags: ['mexican', 'vegetarian'], mood: ['comfort', 'late-night'],
     funFact: 'The name "quesadilla" is a combination of the Spanish words "queso" (cheese) and "tortilla".',
     checklist: ['A golden-brown, crispy tortilla', 'Generously filled with gooey, melted cheese', 'Served with salsa and sour cream on the side'],
     pairings: [{ type: 'Drink Pairing', suggestion: 'A refreshing Mexican beer or a fizzy soda.', icon: '🍺' }],
     eatLikeLocal: [{ "icon": "🧀", "title": "Add a Filling", "description": "In Mexico, quesadillas often contain other ingredients besides cheese, like mushrooms, potatoes, or squash blossoms." }]
   },
   {
-    id: 11, name: 'Chicken Enchiladas', imageUrl: '/images/Chicken Enchiladas.webp', tags: ['mexican'], mood: ['spicy'],
+    id: 11, name: 'Chicken Enchiladas', imageUrl: '/images/Chicken Enchiladas.webp', tags: ['mexican'], mood: ['comfort', 'spicy'],
     funFact: 'The practice of rolling tortillas around other food dates back to at least Mayan times.',
     checklist: ['Soft corn tortillas that hold together', 'A flavorful, rich chili sauce covering the tortillas', 'Topped with melted cheese'],
     pairings: [{ type: 'Side Pairing', suggestion: 'Serve with a side of Mexican rice and refried beans.', icon: '🍚' }],
     eatLikeLocal: [{ "icon": "🌶️", "title": "Sauce is Everything", "description": "The quality of the enchilada is all in the sauce. A good, flavorful chili sauce is key." }]
   },
   {
-    id: 12, name: 'Guacamole with Chips', imageUrl: '/images/Guacamole with Chips.webp', tags: ['mexican', 'vegan', 'vegetarian', 'gluten-free'], mood: ['spicy', 'light'],
+    id: 12, name: 'Guacamole with Chips', imageUrl: '/images/Guacamole with Chips.webp', tags: ['mexican', 'vegan', 'vegetarian', 'gluten-free'], mood: ['light'],
     funFact: 'Guacamole dates back to the Aztec Empire in the 1500s. The name comes from an Aztec dialect word for "avocado sauce".',
     checklist: ['Made with fresh, ripe avocados', 'A chunky texture, not a smooth puree', 'A good balance of lime, onion, and cilantro'],
     pairings: [{ type: 'Drink Pairing', suggestion: 'Pairs perfectly with a margarita.', icon: '🍹' }],
     eatLikeLocal: [{ "icon": "🥑", "title": "Keep it Simple", "description": "Authentic guacamole often focuses on the basics: avocado, onion, cilantro, chili, lime, and salt." }]
   },
   {
-    id: 13, name: 'Nachos Supreme', imageUrl: '/images/Nachos Supreme.webp', tags: ['mexican', 'vegetarian'], mood: ['spicy', 'light', 'late-night'],
+    id: 13, name: 'Nachos Supreme', imageUrl: '/images/Nachos Supreme.webp', tags: ['mexican', 'vegetarian'], mood: ['comfort', 'late-night'],
     funFact: 'Nachos were invented in 1943 in Piedras Negras, Mexico, by a restaurateur named Ignacio "Nacho" Anaya.',
     checklist: ['House-made tortilla chips that stay crispy', 'Generous, evenly-spread toppings', 'Fresh salsa and real guacamole, not from a tube'],
     pairings: [{ type: 'Drink Pairing', suggestion: 'A crisp Corona or a zesty margarita is its fated partner.', icon: '🍹' }, { type: 'Side Pairing', suggestion: 'Add a side of spicy jalapeños for an extra kick.', icon: '🌶️' }],
     eatLikeLocal: [{ "icon": " 👨‍🍳 ", "title": "Layer Properly", "description": "For the best experience, ensure toppings are layered evenly so every chip has a bit of everything." }]
   },
   {
-    id: 14, name: 'Fish Tacos', imageUrl: '/images/Fish Tacos.webp', tags: ['mexican'], mood: ['spicy', 'late-night', 'trendy'],
+    id: 14, name: 'Fish Tacos', imageUrl: '/images/Fish Tacos.webp', tags: ['mexican'], mood: ['light', 'trendy'],
     funFact: 'Baja-style fish tacos, featuring battered and fried fish, originated in Baja California, Mexico.',
     checklist: ['Crispy, battered fish or freshly grilled fish', 'A creamy, tangy white sauce', 'The crunch of fresh cabbage slaw'],
     pairings: [{ type: 'Topping', suggestion: 'A squeeze of fresh lime is essential.', icon: '🍋' }],
@@ -157,35 +157,35 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🍜", "title": "Slurp Loudly", "description": "Slurping your noodles is not rude in Japan; it's a sign that you're enjoying your meal and it also helps to cool the hot noodles." }]
   },
   {
-    id: 17, name: 'Vegetable Tempura', imageUrl: '/images/Vegetable Tempura.webp', tags: ['japanese', 'vegetarian', 'vegan'], mood: ['light', 'trendy'],
+    id: 17, name: 'Vegetable Tempura', imageUrl: '/images/Vegetable Tempura.webp', tags: ['japanese', 'vegetarian', 'vegan'], mood: ['light'],
     funFact: 'The tempura frying technique was introduced to Japan by Portuguese missionaries in the 16th century.',
     checklist: ['A light and airy batter that is incredibly crispy', 'Vegetables are cooked but still have a slight bite', 'Served with a tentsuyu dipping sauce'],
     pairings: [{ type: 'Drink Pairing', suggestion: 'A cold Japanese beer or a cup of green tea.', icon: '🍵' }],
     eatLikeLocal: [{ "icon": "🔥", "title": "Eat it Hot", "description": "Tempura is best enjoyed immediately after frying to appreciate its light, crispy texture." }]
   },
   {
-    id: 18, name: 'Chicken Teriyaki Don', imageUrl: '/images/Chicken Teriyaki Don.webp', tags: ['japanese'], mood: ['trendy'],
+    id: 18, name: 'Chicken Teriyaki Don', imageUrl: '/images/Chicken Teriyaki Don.webp', tags: ['japanese'], mood: ['comfort'],
     funFact: 'The word "teriyaki" combines "teri" (to shine or glaze) and "yaki" (to grill or broil).',
     checklist: ['A glossy, sweet and savory teriyaki glaze', 'Perfectly cooked rice underneath', 'Often served with a side of steamed vegetables'],
     pairings: [{ type: 'Topping', suggestion: 'Sprinkle with sesame seeds and sliced spring onions.', icon: '✨' }, { type: 'Side Dish', suggestion: 'A simple bowl of miso soup is a perfect companion.', icon: '🥣' }],
     eatLikeLocal: [{ "icon": "🍚", "title": "Mix with the Rice", "description": "Don't be afraid to mix the saucy chicken with the rice underneath to get the flavor in every bite." }]
   },
   {
-    id: 19, name: 'Miso Soup', imageUrl: '/images/Miso Soup.webp', tags: ['japanese', 'vegan', 'vegetarian', 'gluten-free'], mood: ['light', 'trendy'],
+    id: 19, name: 'Miso Soup', imageUrl: '/images/Miso Soup.webp', tags: ['japanese', 'vegan', 'vegetarian', 'gluten-free'], mood: ['light'],
     funFact: 'Around 75% of people in Japan consume miso soup at least once a day.',
     checklist: ['A flavorful dashi broth', 'Soft cubes of tofu', 'Rehydrated wakame seaweed'],
     pairings: [{ type: 'Accompaniment', suggestion: 'A staple part of almost any traditional Japanese meal.', icon: '🍱' }],
     eatLikeLocal: [{ "icon": "🥣", "title": "Drink from the Bowl", "description": "It's customary to drink miso soup directly from the bowl, using chopsticks to eat the solid ingredients like tofu and seaweed." }]
   },
   {
-    id: 20, name: 'Chicken Katsu Curry', imageUrl: '/images/Chicken Katsu Curry.webp', tags: ['japanese'], mood: ['comfort', 'trendy'],
+    id: 20, name: 'Chicken Katsu Curry', imageUrl: '/images/Chicken Katsu Curry.webp', tags: ['japanese'], mood: ['comfort'],
     funFact: 'Japanese curry is one of the most popular dishes in Japan, often considered a national dish alongside ramen and sushi.',
     checklist: ['A crispy, golden-brown panko crust', 'Tender chicken that is not dry', 'A thick, savory, and slightly sweet Japanese curry sauce'],
     pairings: [{ type: 'Topping', suggestion: 'Add some fukujinzuke (pickled radish) for a sweet crunch.', icon: '🥕' }],
     eatLikeLocal: [{ "icon": "🍛", "title": "Mix as You Go", "description": "Instead of pouring all the curry over the rice at once, many people prefer to mix a little at a time to keep the katsu crispy." }]
   },
   {
-    id: 21, name: 'Agedashi Tofu', imageUrl: '/images/Agedashi Tofu.webp', tags: ['japanese', 'vegetarian', 'vegan'], mood: ['light', 'trendy'],
+    id: 21, name: 'Agedashi Tofu', imageUrl: '/images/Agedashi Tofu.webp', tags: ['japanese', 'vegetarian', 'vegan'], mood: ['light'],
     funFact: '"Agedashi" means lightly deep-fried, referring to the cooking method for the tofu.',
     checklist: ['A crispy, golden coating on the tofu', 'A light, savory dashi-based broth', 'Topped with green onions or grated daikon'],
     pairings: [{ type: 'Experience', suggestion: 'Enjoy the contrast between the crispy outside and the soft, silky inside.', icon: '😋' }],
@@ -194,49 +194,49 @@ export const ALL_FOODS: FoodItem[] = [
 
   // Indian
   {
-    id: 22, name: 'Butter Chicken', imageUrl: '/images/Butter Chicken.webp', tags: ['indian', 'gluten-free'], mood: ['comfort', 'spicy', 'light'],
+    id: 22, name: 'Butter Chicken', imageUrl: '/images/Butter Chicken.webp', tags: ['indian', 'gluten-free'], mood: ['comfort'],
     funFact: 'Butter Chicken was invented by accident in the 1950s at the Moti Mahal restaurant in Delhi, India.',
     checklist: ['Tender, tandoor-cooked chicken pieces', 'A creamy, well-balanced tomato-based sauce', 'A hint of sweetness and aromatic spices'],
     pairings: [{ type: 'Bread Pairing', suggestion: 'Perfect for scooping up with warm Garlic Naan.', icon: '🍞' }, { type: 'Drink Pairing', suggestion: 'A sweet Mango Lassi to cool the palate.', icon: '🥭' }],
     eatLikeLocal: [{ "icon": "🍞", "title": "Use Naan as a Spoon", "description": "Tear off a piece of naan bread and use it to scoop up the creamy curry and tender chicken." }]
   },
   {
-    id: 23, name: 'Palak Paneer', imageUrl: '/images/Palak Paneer.webp', tags: ['indian', 'vegetarian', 'gluten-free'], mood: ['spicy', 'light'],
+    id: 23, name: 'Palak Paneer', imageUrl: '/images/Palak Paneer.webp', tags: ['indian', 'vegetarian', 'gluten-free'], mood: ['comfort'],
     funFact: '"Palak" means spinach and "Paneer" is a type of non-melting Indian cheese.',
     checklist: ['A vibrant green spinach gravy', 'Soft, non-rubbery cubes of paneer cheese', 'Aromatic spices like ginger, garlic, and garam masala'],
     pairings: [{ type: 'Bread Pairing', suggestion: 'Scoop it up with garlic naan or a simple roti.', icon: '🍞' }],
     eatLikeLocal: [{ "icon": "🧀", "title": "Best with Bread", "description": "Like many Indian curries, Palak Paneer is best enjoyed with a flatbread like naan or roti." }]
   },
   {
-    id: 24, name: 'Vegetable Samosas', imageUrl: '/images/Vegetable Samosas.webp', tags: ['indian', 'vegetarian', 'vegan'], mood: ['spicy', 'light'],
+    id: 24, name: 'Vegetable Samosas', imageUrl: '/images/Vegetable Samosas.webp', tags: ['indian', 'vegetarian', 'vegan'], mood: ['comfort'],
     funFact: 'Samosas are believed to have originated in the Middle East and were introduced to India by traders.',
     checklist: ['A crispy, flaky pastry that isn\'t greasy', 'A well-spiced filling of potatoes and peas', 'Served with a tangy tamarind or mint chutney'],
     pairings: [{ type: 'Drink Pairing', suggestion: 'Perfect with a hot cup of masala chai.', icon: '☕' }],
     eatLikeLocal: [{ "icon": "🌶️", "title": "Dip, Don't Drown", "description": "Dip a corner of the samosa into the chutney (like mint or tamarind) for a burst of flavor." }]
   },
   {
-    id: 25, name: 'Chicken Biryani', imageUrl: '/images/Chicken Biryani.webp', tags: ['indian', 'gluten-free'], mood: ['comfort', 'spicy', 'light'],
+    id: 25, name: 'Chicken Biryani', imageUrl: '/images/Chicken Biryani.webp', tags: ['indian', 'gluten-free'], mood: ['comfort', 'spicy'],
     funFact: 'Biryani is a complex rice dish that was developed in the kitchens of the Mughal Empire.',
     checklist: ['Long-grain, fragrant basmati rice', 'Tender, marinated chicken pieces', 'Layers of flavor from saffron, mint, and fried onions'],
     pairings: [{ type: 'Side Pairing', suggestion: 'Serve with a cooling raita (yogurt dip) to balance the spice.', icon: '🥣' }],
     eatLikeLocal: [{ "icon": "🍚", "title": "Mix from the Bottom", "description": "A good biryani is layered. Mix from the bottom of the pot to get a combination of the rice, meat, and fragrant spices." }]
   },
   {
-    id: 26, name: 'Garlic Naan Bread', imageUrl: '/images/Garlic Naan Bread.webp', tags: ['indian', 'vegetarian'], mood: ['spicy', 'light'],
+    id: 26, name: 'Garlic Naan Bread', imageUrl: '/images/Garlic Naan Bread.webp', tags: ['indian', 'vegetarian'], mood: ['comfort'],
     funFact: 'Naan is traditionally cooked by slapping the dough onto the sides of a very hot clay oven called a tandoor.',
     checklist: ['Soft and chewy with a slightly crispy bottom', 'A generous amount of garlic and fresh cilantro', 'Brushed with ghee or butter'],
     pairings: [{ type: 'Purpose', suggestion: 'The perfect tool for mopping up delicious curry sauces.', icon: '👌' }],
     eatLikeLocal: [{ "icon": "🍞", "title": "A Vessel for Flavor", "description": "Use it to scoop up curries, or simply enjoy it on its own." }]
   },
   {
-    id: 27, name: 'Chana Masala', imageUrl: '/images/Chana Masala.webp', tags: ['indian', 'vegetarian', 'vegan', 'gluten-free'], mood: ['spicy', 'light'],
+    id: 27, name: 'Chana Masala', imageUrl: '/images/Chana Masala.webp', tags: ['indian', 'vegetarian', 'vegan', 'gluten-free'], mood: ['comfort', 'spicy'],
     funFact: '"Chana" is the Hindi word for chickpeas, the star ingredient of this popular curry.',
     checklist: ['Tender chickpeas in a spicy, tangy onion-tomato gravy', 'A complex flavor from spices like cumin, coriander, and turmeric', 'Finished with a sprinkle of fresh cilantro'],
     pairings: [{ type: 'Accompaniment', suggestion: 'Serve with fluffy bhature or basmati rice.', icon: '🍚' }],
     eatLikeLocal: [{ "icon": "🍋", "title": "A Squeeze of Lemon", "description": "A fresh squeeze of lemon or lime at the end brightens up all the flavors." }]
   },
   {
-    id: 28, name: 'Lamb Rogan Josh', imageUrl: '/images/Lamb Rogan Josh.webp', tags: ['indian', 'gluten-free'], mood: ['comfort', 'spicy', 'light'],
+    id: 28, name: 'Lamb Rogan Josh', imageUrl: '/images/Lamb Rogan Josh.webp', tags: ['indian', 'gluten-free'], mood: ['comfort', 'spicy'],
     funFact: 'This dish is of Persian origin and gets its signature red color from dried Kashmiri chillies.',
     checklist: ['Fall-apart tender lamb pieces', 'A deep, aromatic red sauce from Kashmiri chillies', 'A complex flavor profile of ginger, fennel, and cardamom'],
     pairings: [{ type: 'Side Dish', suggestion: 'Serve with steamed basmati rice to soak up the gravy.', icon: '🍚' }, { type: 'Accompaniment', suggestion: 'A side of cool raita (yoghurt dip) balances the spice.', icon: '🥣' }],
@@ -252,28 +252,28 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🍔", "title": "The Burger 'Smile'", "description": "Hold the burger with your thumbs and pinkies at the bottom and other fingers on top to keep the fillings from sliding out." }]
   },
   {
-    id: 30, name: 'Mac & Cheese', imageUrl: '/images/Mac & Cheese.webp', tags: ['american', 'vegetarian'], mood: ['light'],
+    id: 30, name: 'Mac & Cheese', imageUrl: '/images/Mac & Cheese.webp', tags: ['american', 'vegetarian'], mood: ['comfort'],
     funFact: 'Thomas Jefferson is credited with popularizing macaroni and cheese in the United States after discovering it in France.',
     checklist: ['A creamy, cheesy sauce that coats every piece of pasta', 'Perfectly cooked pasta that isn\'t mushy', 'A golden-brown baked top, often with breadcrumbs'],
     pairings: [{ type: 'Addition', suggestion: 'Add bacon or pulled pork for an extra savory kick.', icon: '🥓' }],
     eatLikeLocal: [{ "icon": "🧀", "title": "The Topping Matters", "description": "A crispy breadcrumb topping adds a much-needed textural contrast to the creamy pasta." }]
   },
   {
-    id: 31, name: 'BBQ Ribs', imageUrl: '/images/BBQ Ribs.webp', tags: ['american', 'gluten-free'], mood: ['comfort', 'light'],
+    id: 31, name: 'BBQ Ribs', imageUrl: '/images/BBQ Ribs.webp', tags: ['american', 'gluten-free'], mood: ['comfort'],
     funFact: 'There are four main styles of regional barbecue in the US: Memphis, North Carolina, Kansas City, and Texas.',
     checklist: ['Meat that is tender and pulls easily from the bone', 'A smoky flavor that permeates the meat', 'A tangy, slightly sweet BBQ sauce that isn\'t overpowering'],
     pairings: [{ type: 'Side Pairing', suggestion: 'Classic companions are coleslaw and cornbread.', icon: '🌽' }, { type: 'Drink Pairing', suggestion: 'A cold, crisp lager or a bold Zinfandel wine.', icon: '🍺' }],
     eatLikeLocal: [{ "icon": "🖐️", "title": "Use Your Hands", "description": "There's no polite way to eat good ribs. Don't be afraid to get your hands dirty." }]
   },
   {
-    id: 32, name: 'Buffalo Wings', imageUrl: '/images/Buffalo Wings.webp', tags: ['american'], mood: ['comfort', 'spicy', 'late-night'],
+    id: 32, name: 'Buffalo Wings', imageUrl: '/images/Buffalo Wings.webp', tags: ['american'], mood: ['spicy', 'late-night'],
     funFact: 'Buffalo wings were invented in 1964 at the Anchor Bar in Buffalo, New York.',
     checklist: ['Crispy skin, even when coated in sauce', 'A tangy and spicy cayenne pepper-based sauce', 'Served with blue cheese dressing and celery sticks'],
     pairings: [{ type: 'Drink Pairing', suggestion: 'A cold, light beer is the perfect match.', icon: '🍺' }],
     eatLikeLocal: [{ "icon": "🌶️", "title": "Dip, Don't Smear", "description": "Use the blue cheese or ranch dip to cool the heat between bites." }]
   },
   {
-    id: 33, name: 'New York Hot Dog', imageUrl: '/images/New York Hot Dog.webp', tags: ['american'], mood: ['spicy', 'late-night'],
+    id: 33, name: 'New York Hot Dog', imageUrl: '/images/New York Hot Dog.webp', tags: ['american'], mood: ['comfort', 'late-night'],
     funFact: 'The iconic New York "dirty water dog" is boiled in seasoned water, which vendors rarely change, adding more flavor over time.',
     checklist: ['A snappy, all-beef frankfurter', 'A soft, steamed bun', 'Classic toppings like sauerkraut and spicy brown mustard'],
     pairings: [{ type: 'Side Pairing', suggestion: 'Often enjoyed with a side of crunchy potato chips.', icon: '🥔' }, { type: 'Experience', suggestion: 'Best eaten from a street cart on a busy city corner!', icon: '🏙️' }],
@@ -287,7 +287,7 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🖐️", "title": "Hands On", "description": "Like BBQ ribs, fried chicken is often enjoyed using your hands." }]
   },
   {
-    id: 35, name: 'Philly Cheesesteak', imageUrl: '/images/Philly Cheesesteak.webp', tags: ['american'], mood: ['comfort'],
+    id: 35, name: 'Philly Cheesesteak', imageUrl: '/images/Philly Cheesesteak.webp', tags: ['american'], mood: ['comfort', 'late-night'],
     funFact: 'The Philly Cheesesteak was invented in the 1930s by Pat and Harry Olivieri, who ran a hot dog stand in Philadelphia.',
     checklist: ['Thinly sliced ribeye steak', 'A long, crusty roll (like an Amoroso roll)', 'Melted cheese, either Cheez Whiz, provolone, or American'],
     pairings: [{ type: 'Topping', suggestion: 'Order it "wit" or "wit-out" grilled onions.', icon: '🧅' }],
@@ -303,7 +303,7 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🍚", "title": "With Steamed Rice", "description": "The simple steamed rice balances the strong flavors of the sweet and sour sauce." }]
   },
   {
-    id: 37, name: 'Kung Pao Chicken', imageUrl: '/images/Kung Pao Chicken.webp', tags: ['chinese'], mood: ['spicy'],
+    id: 37, name: 'Kung Pao Chicken', imageUrl: '/images/Kung Pao Chicken.webp', tags: ['chinese'], mood: ['spicy', 'comfort'],
     funFact: 'The dish is named after Ding Baozhen, a late Qing Dynasty official whose title was "Gongbao" (Kung Pao).',
     checklist: ['A noticeable "ma-la" (numbing and spicy) flavor from Sichuan peppercorns', 'Tender chicken and crunchy peanuts', 'A savory sauce with a hint of sweetness and vinegar'],
     pairings: [{ type: 'Side Pairing', suggestion: 'Best served with steamed rice.', icon: '🍚' }, { type: 'Drink Pairing', suggestion: 'A light, crisp lager complements the spice.', icon: '🍺' }],
@@ -331,14 +331,14 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🍚", "title": "A Meal on its Own", "description": "This is a complete dish, not just a side. It's meant to be enjoyed as the main event." }]
   },
   {
-    id: 41, name: 'Peking Duck', imageUrl: '/images/Peking Duck.webp', tags: ['chinese'], mood: ['comfort'],
+    id: 41, name: 'Peking Duck', imageUrl: '/images/Peking Duck.webp', tags: ['chinese'], mood: ['comfort', 'trendy'],
     funFact: 'The preparation of Peking Duck dates back to the imperial era of China and involves pumping air between the skin and meat.',
     checklist: ['Incredibly crispy, mahogany-colored skin', 'Served with thin pancakes, hoisin sauce, and slivered scallions/cucumber', 'The skin is the most prized part'],
     pairings: [{ type: 'Experience', suggestion: 'Assembling your own pancake is part of the fun.', icon: '🦆' }],
     eatLikeLocal: [{ "icon": "🦆", "title": "The Assembly Line", "description": "Take a pancake, add a piece of crispy duck skin, some meat, spring onion, cucumber, and a dab of hoisin sauce, then roll it up." }]
   },
   {
-    id: 42, name: 'Mapo Tofu', imageUrl: '/images/Mapo Tofu.webp', tags: ['chinese', 'vegetarian'], mood: ['spicy', 'light'],
+    id: 42, name: 'Mapo Tofu', imageUrl: '/images/Mapo Tofu.webp', tags: ['chinese', 'vegetarian'], mood: ['spicy', 'comfort'],
     funFact: 'The name "Mapo Tofu" roughly translates to pockmarked old woman\'s tofu, named after its creator.',
     checklist: ['Soft, silken tofu in a fiery red sauce', 'The signature "ma-la" (numbing and spicy) sensation', 'Often contains minced pork or beef'],
     pairings: [{ type: 'Side Pairing', suggestion: 'Must be served with plenty of steamed white rice to balance the heat.', icon: '🍚' }],
@@ -347,14 +347,14 @@ export const ALL_FOODS: FoodItem[] = [
 
   // Thai
   {
-    id: 43, name: 'Pad Thai', imageUrl: '/images/Pad Thai.webp', tags: ['thai'], mood: ['spicy'],
+    id: 43, name: 'Pad Thai', imageUrl: '/images/Pad Thai.webp', tags: ['thai'], mood: ['comfort', 'trendy'],
     funFact: 'Pad Thai was popularized in the 1930s by the Thai government as part of a campaign to promote nationalism.',
     checklist: ['A perfect balance of sweet, sour, and salty flavors', 'Chewy rice noodles that aren\'t mushy', 'Served with fresh bean sprouts, lime, and crushed peanuts on the side'],
     pairings: [{ type: 'Drink Pairing', suggestion: 'A sweet and creamy Thai iced tea is the classic choice.', icon: '🥤' }, { type: 'Topping', suggestion: 'A generous squeeze of fresh lime brightens all the flavors.', icon: '🍋' }],
     eatLikeLocal: [{ "icon": "🍋", "title": "Squeeze the Lime", "description": "Before you mix everything, squeeze the lime wedge over the entire dish. It's essential for balancing the flavors." }]
   },
   {
-    id: 44, name: 'Thai Green Curry', imageUrl: '/images/Thai Green Curry.webp', tags: ['thai', 'gluten-free', 'vegetarian'], mood: ['comfort', 'spicy', 'light'],
+    id: 44, name: 'Thai Green Curry', imageUrl: '/images/Thai Green Curry.webp', tags: ['thai', 'gluten-free', 'vegetarian'], mood: ['spicy', 'comfort'],
     funFact: 'The color of Thai green curry comes from fresh green chillies, which are actually spicier than red chillies.',
     checklist: ['Aromatic fragrance from fresh herbs and green chillies', 'Creamy but not heavy coconut milk base', 'A pleasant, building heat that doesn\'t overwhelm'],
     pairings: [{ type: 'Side Pairing', suggestion: 'Jasmine rice is essential to soak up the delicious sauce.', icon: '🍚' }],
@@ -368,14 +368,14 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🌶️", "title": "Don't Eat the Herbs", "description": "The large pieces of lemongrass, galangal, and kaffir lime leaves are for flavor and are not meant to be eaten." }]
   },
   {
-    id: 46, name: 'Massaman Curry', imageUrl: '/images/Massaman Curry.webp', tags: ['thai', 'gluten-free'], mood: ['comfort', 'spicy', 'light'],
+    id: 46, name: 'Massaman Curry', imageUrl: '/images/Massaman Curry.webp', tags: ['thai', 'gluten-free'], mood: ['comfort'],
     funFact: 'Massaman curry has Persian influences, which is why it includes dry spices like cinnamon and cardamom not common in other Thai curries.',
     checklist: ['A rich, mild, and slightly sweet curry', 'Tender chunks of beef or chicken and soft potatoes', 'A nutty flavor from peanuts and fragrant spices like cinnamon and cardamom'],
     pairings: [{ type: 'Side Pairing', suggestion: 'Perfectly complements steamed jasmine rice.', icon: '🍚' }, { type: 'Topping', suggestion: 'Top with extra roasted peanuts for more crunch.', icon: '🥜' }],
     eatLikeLocal: [{ "icon": "🌶️", "title": "A Fusion of Flavors", "description": "Enjoy the unique blend of Thai and Indian spices, a legacy of ancient trade routes." }]
   },
   {
-    id: 47, name: 'Mango Sticky Rice', imageUrl: '/images/Mango Sticky Rice.webp', tags: ['thai', 'vegetarian', 'vegan', 'gluten-free'], mood: ['spicy', 'light'],
+    id: 47, name: 'Mango Sticky Rice', imageUrl: '/images/Mango Sticky Rice.webp', tags: ['thai', 'vegetarian', 'vegan', 'gluten-free'], mood: ['light', 'trendy'],
     funFact: 'This popular Thai dessert is traditionally eaten during the peak mango season in the summer (April and May).',
     checklist: ['Perfectly ripe, sweet mango', 'Warm, soft, and chewy sticky rice', 'A creamy, slightly salty coconut sauce drizzled on top'],
     pairings: [{ type: 'Topping', suggestion: 'A sprinkle of crispy toasted mung beans adds great texture.', icon: '✨' }, { type: 'Drink Pairing', suggestion: 'Enjoy with a cup of pandan or lemongrass tea.', icon: '🍵' }],
@@ -398,7 +398,7 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🥣", "title": "The 'Swoosh' ", "description": "Use the pita bread to make a swoosh through the hummus, scooping it up." }]
   },
   {
-    id: 50, name: 'Chicken Shawarma', imageUrl: '/images/Chicken Shawarma.webp', tags: ['mediterranean'], mood: ['light', 'late-night'],
+    id: 50, name: 'Chicken Shawarma', imageUrl: '/images/Chicken Shawarma.webp', tags: ['mediterranean'], mood: ['late-night'],
     funFact: 'Shawarma is a method of cooking meat on a vertical rotisserie, similar to tacos al pastor and the Greek gyro.',
     checklist: ['Tender, juicy, and flavorful meat carved from a vertical spit', 'Wrapped in a warm flatbread', 'Served with garlic sauce (toum) and pickles'],
     pairings: [{ type: 'Experience', suggestion: 'The garlic sauce is a non-negotiable, essential part of the experience!', icon: '🧄' }],
@@ -407,14 +407,14 @@ export const ALL_FOODS: FoodItem[] = [
 
   // Vietnamese
   {
-    id: 51, name: 'Beef Pho', imageUrl: '/images/Beef Pho.webp', tags: ['vietnamese', 'gluten-free'], mood: ['comfort', 'spicy', 'light', 'trendy'],
+    id: 51, name: 'Beef Pho', imageUrl: '/images/Beef Pho.webp', tags: ['vietnamese', 'gluten-free'], mood: ['comfort', 'trendy'],
     funFact: 'Pho is considered Vietnam\'s national dish, and its origins are debated but likely date to the early 20th century.',
     checklist: ['A clear, deeply aromatic broth (not cloudy)', 'A generous plate of fresh herbs like basil, mint, and cilantro on the side', 'Tender slices of beef and soft rice noodles'],
     pairings: [{ type: 'Condiment', suggestion: 'Customize your bowl with hoisin sauce and sriracha.', icon: '🌶️' }, { type: 'Drink Pairing', suggestion: 'Vietnamese iced coffee provides a perfect contrast.', icon: '☕' }],
     eatLikeLocal: [{ "icon": "🍜", "title": "Slurp Your Noodles", "description": "Don't be shy! In Vietnam, slurping is a sign that you're enjoying your meal and it also helps to cool down the hot noodles." }]
   },
   {
-    id: 52, name: 'Banh Mi', imageUrl: '/images/Banh Mi.webp', tags: ['vietnamese'], mood: ['spicy', 'trendy'],
+    id: 52, name: 'Banh Mi', imageUrl: '/images/Banh Mi.webp', tags: ['vietnamese'], mood: ['trendy', 'light'],
     funFact: 'Banh Mi is a perfect example of French-Vietnamese fusion, combining a French baguette with Vietnamese ingredients.',
     checklist: ['A crispy, airy baguette that doesn\'t cut your mouth', 'A balanced mix of savory meat, pickled vegetables, and fresh cilantro', 'A rich paté spread and a swipe of mayonnaise'],
     pairings: [{ type: 'Drink Pairing', suggestion: 'Pairs well with a cold beer or a sweet iced tea.', icon: '🍺' }],
@@ -428,7 +428,7 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🥜", "title": "It's All in the Dip", "description": "The peanut dipping sauce is just as important as the roll itself. Be generous!" }]
   },
   {
-    id: 54, name: 'Bun Cha', imageUrl: '/images/Bun Cha.webp', tags: ['vietnamese'], mood: ['spicy', 'trendy'],
+    id: 54, name: 'Bun Cha', imageUrl: '/images/Bun Cha.webp', tags: ['vietnamese'], mood: ['light', 'trendy'],
     funFact: 'This Hanoi specialty gained international fame after former U.S. President Barack Obama enjoyed it with chef Anthony Bourdain.',
     checklist: ['Grilled pork patties and pork belly in a sweet and savory broth', 'A basket of fresh herbs and lettuce', 'Served with rice vermicelli noodles for dipping'],
     pairings: [{ type: 'Experience', suggestion: 'Dip a bit of the noodles, meat, and herbs into the broth for the perfect bite.', icon: '🍜' }],
@@ -467,7 +467,7 @@ export const ALL_FOODS: FoodItem[] = [
 
   // British
   {
-    id: 59, name: 'Fish and Chips', imageUrl: '/images/Fish and Chips.webp', tags: ['british'], mood: ['comfort'],
+    id: 59, name: 'Fish and Chips', imageUrl: '/images/Fish and Chips.webp', tags: ['british'], mood: ['comfort', 'late-night'],
     funFact: 'Fish and chips were a crucial food source in the UK during both World Wars, as they were one of the few foods not subject to rationing.',
     checklist: ['A large piece of flaky white fish', 'A light and crispy batter', 'Thick-cut, fluffy chips (fries)'],
     pairings: [{ type: 'Condiment', suggestion: 'It is traditionally served with a sprinkle of salt and malt vinegar.', icon: '🧂' }],
@@ -576,7 +576,7 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🍋", "title": "Lemon and Oregano", "description": "A generous squeeze of lemon and a sprinkle of dried oregano are the classic finishing touches." }]
   },
   {
-    id: 73, name: 'Spanakopita', imageUrl: '/images/Spanakopita.webp', tags: ['greek', 'vegetarian'], mood: ['light'],
+    id: 73, name: 'Spanakopita', imageUrl: '/images/Spanakopita.webp', tags: ['greek', 'vegetarian'], mood: ['comfort'],
     funFact: 'Spanakopita is a savory spinach and feta pie made with layers of crispy filo pastry.',
     checklist: ['Layers of flaky, buttery filo pastry', 'A savory filling of spinach and feta cheese', 'Baked until golden brown and crispy'],
     pairings: [{ type: 'Occasion', suggestion: 'Can be served as an appetizer, a light lunch, or a main course.', icon: '😋' }],
@@ -592,7 +592,7 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🥬", "title": "Use the Lettuce Wraps (Ssam)", "description": "Place a piece of grilled meat on a lettuce leaf, add a dab of ssamjang (dipping sauce), some garlic or kimchi, and eat it all in one perfect bite." }]
   },
   {
-    id: 75, name: 'Bibimbap', imageUrl: '/images/Bibimbap.webp', tags: ['korean', 'vegetarian'], mood: ['light', 'trendy'],
+    id: 75, name: 'Bibimbap', imageUrl: '/images/Bibimbap.webp', tags: ['korean', 'vegetarian'], mood: ['comfort', 'trendy'],
     funFact: 'The word "bibimbap" literally means "mixed rice" in Korean.',
     checklist: ['A colorful array of fresh and seasoned vegetables (namul)', 'A sizzling hot stone bowl (for dolsot bibimbap)', 'Gochujang (chili paste) served on the side to adjust spice level'],
     pairings: [{ type: 'Topping', suggestion: 'A sunny-side-up egg on top is a must!', icon: '🍳' }],
@@ -629,7 +629,7 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🥘", "title": "Don't Stir!", "description": "Once the rice is added, it shouldn't be stirred. This allows the prized crispy bottom layer (socarrat) to form." }]
   },
   {
-    id: 80, name: 'Patatas Bravas', imageUrl: '/images/patatas bravas.webp', tags: ['spanish', 'vegetarian'], mood: ['light'],
+    id: 80, name: 'Patatas Bravas', imageUrl: '/images/patatas bravas.webp', tags: ['spanish', 'vegetarian'], mood: ['comfort', 'late-night'],
     funFact: '"Bravas" means "fierce" or "brave," referring to the spicy tomato-based sauce served over the fried potatoes.',
     checklist: ['Crispy, fried potatoes', 'A spicy tomato-based "bravas" sauce', 'Often served with a side of aioli (garlic mayonnaise)'],
     pairings: [{ type: 'Occasion', suggestion: 'A classic and essential Spanish tapas dish.', icon: '🇪🇸' }],
@@ -673,7 +673,7 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🥗", "title": "Rinse the Quinoa", "description": "Always rinse quinoa before cooking to remove its natural bitter coating (saponin)." }]
   },
   {
-    id: 86, name: 'Eggplant Parmigiana', imageUrl: '/images/Eggplant Parmigiana.webp', tags: ['vegetarian', 'italian'], mood: ['comfort', 'light'],
+    id: 86, name: 'Eggplant Parmigiana', imageUrl: '/images/Eggplant Parmigiana.webp', tags: ['vegetarian', 'italian'], mood: ['comfort'],
     funFact: 'Despite its name, the dish did not originate in Parma, Italy. It\'s most associated with Southern Italian regions like Sicily and Naples.',
     checklist: ['Slices of eggplant, often breaded and fried', 'Layered with tomato sauce, mozzarella, and Parmesan cheese', 'Baked until bubbly and golden'],
     pairings: [{ type: 'Side Pairing', suggestion: 'A simple green salad is all you need.', icon: '🥗' }],
@@ -745,7 +745,7 @@ export const ALL_FOODS: FoodItem[] = [
     eatLikeLocal: [{ "icon": "🐟", "title": "It's All About the Fish", "description": "The quality of a poke bowl starts with fresh, high-quality, sashimi-grade fish." }]
   },
   {
-    id: 96, name: 'Shakshuka', imageUrl: '/images/Shakshuka.webp', tags: ['mediterranean', 'vegetarian', 'gluten-free'], mood: ['light', 'trendy'],
+    id: 96, name: 'Shakshuka', imageUrl: '/images/Shakshuka.webp', tags: ['mediterranean', 'vegetarian', 'gluten-free'], mood: ['comfort', 'trendy', 'spicy'],
     funFact: 'The name "Shakshuka" is a North African term that means "a haphazard mixture" or "all mixed up." ',
     checklist: ['Eggs poached to perfection with runny yolks', 'A rich, spiced tomato and pepper sauce', 'Served hot in a cast-iron pan'],
     pairings: [{ type: 'Must-Have', suggestion: 'Crusty bread or pita is essential for dipping.', icon: '🥖' }, { type: 'Topping', suggestion: 'Crumble feta cheese and fresh cilantro on top.', icon: '🌿' }],

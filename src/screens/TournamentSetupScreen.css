@@ -1,15 +1,15 @@
-/* ======= TOURNAMENT SETUP STYLES ======= */
+/* ======= TOURNAMENT SETUP STYLES - LIGHT THEME ======= */
 
 /* 페이지 컨테이너 */
 .setup-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+    background: linear-gradient(180deg, var(--bg-cream) 0%, #FFF5EE 50%, var(--bg-cream) 100%);
     padding: 2rem 1rem;
     position: relative;
     overflow: hidden;
 }
 
-/* 플로팅 파티클 (HomeScreen에서 재사용) */
+/* 플로팅 파티클 */
 .setup-particles {
     position: absolute;
     top: 0;
@@ -22,9 +22,9 @@
 
 .setup-particle {
     position: absolute;
-    width: 6px;
-    height: 6px;
-    background: radial-gradient(circle, rgba(255, 200, 87, 0.5) 0%, transparent 70%);
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, transparent 70%);
     border-radius: 50%;
     animation: floatParticle 20s infinite ease-in-out;
 }
@@ -34,12 +34,12 @@
     0%,
     100% {
         transform: translateY(0) translateX(0);
-        opacity: 0.3;
+        opacity: 0.4;
     }
 
     50% {
         transform: translateY(-50px) translateX(20px);
-        opacity: 0.6;
+        opacity: 0.7;
     }
 }
 
@@ -53,6 +53,7 @@
     left: 30%;
     top: 60%;
     animation-delay: 3s;
+    background: radial-gradient(circle, rgba(78, 205, 196, 0.3) 0%, transparent 70%);
 }
 
 .setup-particle:nth-child(3) {
@@ -65,6 +66,7 @@
     left: 85%;
     top: 70%;
     animation-delay: 9s;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, transparent 70%);
 }
 
 /* 콘텐츠 래퍼 */
@@ -85,7 +87,7 @@
     font-family: 'Cinzel', serif;
     font-size: 2.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #FFC857 0%, #f59e0b 50%, #a78bfa 100%);
+    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 50%, #4ECDC4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -93,7 +95,7 @@
 }
 
 .setup-subtitle {
-    color: #b3aed1;
+    color: var(--text-muted);
     font-size: 1.1rem;
 }
 
@@ -103,36 +105,38 @@
     gap: 0.5rem;
     margin-top: 1rem;
     padding: 0.5rem 1rem;
-    background: rgba(139, 92, 246, 0.2);
-    border: 1px solid rgba(139, 92, 246, 0.4);
+    background: var(--bg-white);
+    border: 1px solid rgba(78, 205, 196, 0.3);
     border-radius: 50px;
-    color: #a78bfa;
+    color: var(--accent-mint-dark);
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: var(--shadow-soft);
 }
 
 .how-to-play-btn:hover {
-    background: rgba(139, 92, 246, 0.3);
+    border-color: var(--accent-mint);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
 }
 
-/* 글래스 카드 */
+/* 글래스 카드 → 화이트 카드 */
 .setup-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
+    background: var(--bg-white);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-card);
     padding: 2rem;
     margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-soft);
 }
 
 .setup-card-title {
     font-family: 'Cinzel', serif;
     font-size: 1.25rem;
     font-weight: 600;
-    color: #FFC857;
+    color: var(--accent-orange);
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
@@ -146,8 +150,8 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    background: linear-gradient(135deg, #FFC857 0%, #f59e0b 100%);
-    color: #1a1a2e;
+    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
+    color: white;
     font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
     font-weight: 700;
@@ -163,8 +167,8 @@
 }
 
 .size-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-cream);
+    border: 2px solid transparent;
     border-radius: 16px;
     padding: 1.5rem 1rem;
     min-height: 100px;
@@ -176,14 +180,15 @@
 }
 
 .size-card:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-white);
     transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
 }
 
 .size-card.active {
-    border-color: #FFC857;
-    background: rgba(255, 200, 87, 0.1);
-    box-shadow: 0 0 30px rgba(255, 200, 87, 0.3);
+    border-color: var(--accent-orange);
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(245, 158, 11, 0.05));
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.15);
 }
 
 .size-card-icon {
@@ -195,18 +200,18 @@
     font-family: 'Cinzel', serif;
     font-size: 1.5rem;
     font-weight: 700;
-    color: white;
+    color: var(--text-dark);
 }
 
 .size-card-label {
     font-size: 0.85rem;
-    color: #b3aed1;
+    color: var(--text-muted);
     margin-top: 0.25rem;
 }
 
 .size-card-matches {
     font-size: 0.75rem;
-    color: #6b7280;
+    color: var(--text-light);
     margin-top: 0.5rem;
 }
 
@@ -224,25 +229,26 @@
     gap: 0.5rem;
     padding: 0.6rem 1.2rem;
     min-height: 44px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--bg-cream);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 50px;
-    color: #b3aed1;
+    color: var(--text-muted);
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .filter-chip:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-white);
     transform: scale(1.05);
+    box-shadow: var(--shadow-soft);
 }
 
 .filter-chip.active {
-    background: rgba(245, 158, 11, 0.2);
-    border-color: #f59e0b;
-    color: #FFC857;
-    box-shadow: 0 0 15px rgba(255, 200, 87, 0.3);
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(245, 158, 11, 0.1));
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.15);
 }
 
 /* Cuisine 그리드 */
@@ -261,8 +267,8 @@
     justify-content: center;
     padding: 0.75rem 0.5rem;
     min-height: 80px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 2px solid rgba(255, 255, 255, 0.08);
+    background: var(--bg-cream);
+    border: 2px solid transparent;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -270,14 +276,15 @@
 }
 
 .cuisine-card:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-white);
     transform: scale(1.05);
+    box-shadow: var(--shadow-soft);
 }
 
 .cuisine-card.active {
-    border-color: #a78bfa;
-    background: rgba(139, 92, 246, 0.15);
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    border-color: var(--accent-mint);
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(16, 185, 129, 0.1));
+    box-shadow: 0 4px 20px rgba(78, 205, 196, 0.2);
 }
 
 .cuisine-icon {
@@ -288,7 +295,7 @@
 
 .cuisine-label {
     font-size: 0.65rem;
-    color: #b3aed1;
+    color: var(--text-muted);
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -307,10 +314,10 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: rgba(91, 231, 169, 0.1);
-    border: 1px solid rgba(91, 231, 169, 0.3);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+    border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: 50px;
-    color: #5BE7A9;
+    color: #059669;
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
@@ -328,24 +335,25 @@
     font-family: 'Cinzel', serif;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #1a1a2e;
-    background: linear-gradient(135deg, #FFC857 0%, #f59e0b 100%);
+    color: white;
+    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
     border: none;
-    border-radius: 16px;
+    border-radius: var(--radius-button);
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
 }
 
 .start-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 40px rgba(255, 200, 87, 0.4);
+    box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);
 }
 
 .start-button:disabled {
-    background: #4a5568;
-    color: #9ca3af;
+    background: #E5E7EB;
+    color: #9CA3AF;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
@@ -359,28 +367,29 @@
 
     0%,
     100% {
-        box-shadow: 0 0 20px rgba(255, 200, 87, 0.4);
+        box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
     }
 
     50% {
-        box-shadow: 0 0 40px rgba(255, 200, 87, 0.7);
+        box-shadow: 0 8px 40px rgba(255, 107, 53, 0.5);
     }
 }
 
 /* 프로모 카드 */
 .promo-card {
     display: block;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-white);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 16px;
     overflow: hidden;
     text-decoration: none;
     transition: all 0.3s ease;
+    box-shadow: var(--shadow-soft);
 }
 
 .promo-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-medium);
 }
 
 .promo-image {
@@ -396,18 +405,18 @@
 .promo-title {
     font-size: 1.1rem;
     font-weight: 600;
-    color: white;
+    color: var(--text-dark);
     margin-bottom: 0.5rem;
 }
 
 .promo-text {
     font-size: 0.9rem;
-    color: #b3aed1;
+    color: var(--text-muted);
     margin-bottom: 0.75rem;
 }
 
 .promo-link {
-    color: #f59e0b;
+    color: var(--accent-orange);
     font-weight: 600;
     font-size: 0.9rem;
 }
@@ -464,8 +473,8 @@
     align-items: center;
     gap: 0.5rem;
     padding: 1rem 1.25rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-cream);
+    border: 1px solid transparent;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -473,14 +482,15 @@
 }
 
 .mood-card:hover {
-    background: rgba(255, 200, 87, 0.1);
-    border-color: rgba(255, 200, 87, 0.3);
+    background: var(--bg-white);
+    border-color: rgba(255, 107, 53, 0.2);
+    box-shadow: var(--shadow-soft);
 }
 
 .mood-card.active {
-    background: linear-gradient(135deg, rgba(255, 200, 87, 0.2), rgba(251, 146, 60, 0.2));
-    border-color: #FFC857;
-    box-shadow: 0 0 20px rgba(255, 200, 87, 0.3);
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(245, 158, 11, 0.1));
+    border-color: var(--accent-orange);
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.15);
 }
 
 .mood-icon {
@@ -489,11 +499,11 @@
 
 .mood-label {
     font-size: 0.8rem;
-    color: #d1d5db;
+    color: var(--text-muted);
     font-weight: 500;
     text-align: center;
 }
 
 .mood-card.active .mood-label {
-    color: #FFC857;
+    color: var(--accent-orange);
 }

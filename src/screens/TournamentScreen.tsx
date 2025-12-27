@@ -84,6 +84,14 @@ const TournamentScreen: React.FC = () => {
 
   useEffect(() => {
     document.body.classList.remove('home-background');
+
+    // 🎮 게임 집중 모드: auto-ads 숨기기
+    document.body.classList.add('no-ads');
+
+    return () => {
+      // 페이지 떠날 때 다시 광고 활성화
+      document.body.classList.remove('no-ads');
+    };
   }, []);
 
   const tournamentSize = parseInt(searchParams.get('size') || '16');

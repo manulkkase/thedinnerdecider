@@ -1,19 +1,19 @@
-/* ======= MODERN UI EFFECTS ======= */
+/* ======= LIGHT THEME - MODERN UI EFFECTS ======= */
 
 /* 그라디언트 텍스트 */
 .gradient-text {
-  background: linear-gradient(135deg, #FFC857 0%, #f59e0b 50%, #a78bfa 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 50%, #4ECDC4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .subtitle {
-  color: #b3aed1;
+  color: var(--text-muted);
   font-size: 1.1rem;
 }
 
-/* 플로팅 파티클 배경 */
+/* 플로팅 파티클 배경 (라이트 버전) */
 .floating-particles {
   position: fixed;
   top: 0;
@@ -27,9 +27,9 @@
 
 .particle {
   position: absolute;
-  width: 8px;
-  height: 8px;
-  background: radial-gradient(circle, rgba(255, 200, 87, 0.6) 0%, transparent 70%);
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, transparent 70%);
   border-radius: 50%;
   animation: float 15s infinite ease-in-out;
 }
@@ -46,6 +46,7 @@
   top: 60%;
   animation-delay: 2s;
   animation-duration: 22s;
+  background: radial-gradient(circle, rgba(78, 205, 196, 0.3) 0%, transparent 70%);
 }
 
 .particle-3 {
@@ -60,6 +61,7 @@
   top: 70%;
   animation-delay: 1s;
   animation-duration: 20s;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, transparent 70%);
 }
 
 .particle-5 {
@@ -74,6 +76,7 @@
   top: 80%;
   animation-delay: 5s;
   animation-duration: 19s;
+  background: radial-gradient(circle, rgba(78, 205, 196, 0.3) 0%, transparent 70%);
 }
 
 @keyframes float {
@@ -81,22 +84,22 @@
   0%,
   100% {
     transform: translateY(0) translateX(0) scale(1);
-    opacity: 0.3;
+    opacity: 0.4;
   }
 
   25% {
     transform: translateY(-30px) translateX(10px) scale(1.2);
-    opacity: 0.6;
+    opacity: 0.7;
   }
 
   50% {
     transform: translateY(-15px) translateX(-15px) scale(0.9);
-    opacity: 0.4;
+    opacity: 0.5;
   }
 
   75% {
     transform: translateY(-40px) translateX(5px) scale(1.1);
-    opacity: 0.5;
+    opacity: 0.6;
   }
 }
 
@@ -107,7 +110,7 @@
   border-radius: inherit;
   pointer-events: none;
   background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 107, 53, 0.1) 0%,
       transparent 70%);
   opacity: var(--spotlight-opacity, 0);
   transition: opacity 0.3s ease;
@@ -116,14 +119,8 @@
 /* ======= BASE STYLES ======= */
 
 .home-container {
-  /* 새로운 트렌디한 배경 이미지 */
-  background-image: url('/images/bg_new.webp');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-
-  /* 기존 속성 */
+  /* 밝은 크림 배경 */
+  background: linear-gradient(180deg, var(--bg-cream) 0%, #FFF5EE 50%, var(--bg-cream) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -136,31 +133,21 @@
   z-index: 1;
 }
 
-/* 4. 새로 추가한 .home-content-wrapper에 max-width와 margin을 적용합니다. */
 .home-content-wrapper {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
 }
-
-.home-content-wrapper {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
 
 .header h1 {
   font-family: 'Cinzel', serif;
   font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
-  /* 그라디언트 텍스트 클래스가 적용됨 */
 }
 
-
 .header p {
-  color: #b3aed1;
+  color: var(--text-muted);
   font-size: 1.1rem;
 }
 
@@ -168,7 +155,7 @@
   font-family: 'Cinzel', serif;
   font-size: 1.75rem;
   margin-bottom: 2.5rem;
-  color: #FFC857;
+  color: var(--accent-orange);
 }
 
 .game-choice-panels {
@@ -178,73 +165,76 @@
   flex-wrap: wrap;
 }
 
-/* ❗수정: 선택 패널 스타일 (게임 UI 테마) */
+/* 선택 패널 스타일 (라이트 테마) */
 .choice-panel {
   flex: 1 1 400px;
-  /* Equal flex basis */
   min-width: 300px;
   max-width: 500px;
-  /* Same max width for both */
-  min-height: 280px;
+  min-height: 320px;
   padding: 2rem;
-  border: 2px solid transparent;
-  border-radius: 12px;
+  border: none;
+  border-radius: var(--radius-card);
   text-decoration: none;
   color: inherit;
-  background-size: cover;
-  background-position: center;
+  background: var(--bg-white);
+  box-shadow: var(--shadow-soft);
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Center content vertically */
+  position: relative;
+  overflow: visible;
 }
 
-/* ❗추가: 아이콘 영역 스타일 */
+.choice-panel:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* 아이콘 영역 스타일 */
 .panel-icon {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   margin-bottom: 1.5rem;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
 }
 
 /* 🔥 토너먼트 패널 */
 .tournament-panel {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/foodbattleroyalebg_new.webp');
-  border-image: linear-gradient(to top, #f59e0b, #d97706) 1;
+  background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+  border: 2px solid rgba(255, 107, 53, 0.2);
 }
 
 .tournament-panel .panel-icon {
   background-image: url('/images/foodbattleroyale_new.webp');
+  background-color: #FFF7ED;
 }
 
 .tournament-panel:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 0 30px rgba(245, 158, 11, 0.7);
+  border-color: var(--accent-orange);
+  box-shadow: 0 12px 40px rgba(255, 107, 53, 0.2);
 }
 
 /* 🧪 Alchemist Panel */
 .tarot-panel {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/alchemist_bg.webp');
-  border-image: linear-gradient(to top, #a78bfa, #7c3aed) 1;
+  background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%);
+  border: 2px solid rgba(78, 205, 196, 0.2);
 }
 
 .tarot-panel .panel-icon {
   background-image: url('/images/alchemist_icon.webp');
-  background-color: #1a1625;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
+  background-color: #F0FDFA;
 }
 
 .tarot-panel:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 0 30px rgba(167, 139, 250, 0.7);
+  border-color: var(--accent-mint);
+  box-shadow: 0 12px 40px rgba(78, 205, 196, 0.2);
 }
-
 
 .choice-panel h3 {
   font-size: 1.5rem;
@@ -253,55 +243,56 @@
 }
 
 .tournament-panel h3 {
-  color: #f59e0b;
+  color: var(--accent-orange);
 }
 
 .tarot-panel h3 {
-  color: #a78bfa;
+  color: var(--accent-mint-dark);
 }
 
 .choice-panel p {
   margin-bottom: 1.5rem;
-  color: #b3aed1;
+  color: var(--text-muted);
   min-height: 40px;
 }
 
 .choice-button {
-  padding: 0.75rem 1.5rem;
-  min-height: 48px;
+  padding: 0.875rem 2rem;
+  min-height: 52px;
   border-radius: 50px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
   border: none;
   transition: all 0.2s;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  font-size: 1rem;
 }
 
-/* ❗수정: 버튼 빛 효과 추가 */
+/* 토너먼트 버튼 */
 .tournament-panel .choice-button {
-  background-color: #f59e0b;
+  background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
   color: white;
-  box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
 }
 
 .tournament-panel .choice-button:hover {
-  background-color: #d97706;
-  box-shadow: 0 0 25px rgba(245, 158, 11, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
 }
 
+/* Alchemist 버튼 */
 .tarot-panel .choice-button {
-  background-color: #8b5cf6;
+  background: linear-gradient(135deg, #4ECDC4 0%, #3DB9B0 100%);
   color: white;
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
+  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
 }
 
 .tarot-panel .choice-button:hover {
-  background-color: #7c3aed;
-  box-shadow: 0 0 25px rgba(139, 92, 246, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
 }
 
 /* ==================== NEW UI ELEMENTS ==================== */
@@ -313,18 +304,18 @@
   gap: 0.5rem;
   margin-top: 1.5rem;
   padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--bg-white);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 50px;
   font-size: 0.9rem;
-  color: #b3aed1;
-  backdrop-filter: blur(10px);
+  color: var(--text-muted);
+  box-shadow: var(--shadow-soft);
 }
 
 .pulse-dot {
   width: 8px;
   height: 8px;
-  background-color: #5BE7A9;
+  background-color: #10B981;
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
@@ -346,12 +337,12 @@
 /* 긴급성 배너 */
 .urgency-banner {
   margin: 2rem 0;
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(90deg, rgba(245, 158, 11, 0.2), rgba(139, 92, 246, 0.2));
-  border: 1px solid rgba(255, 200, 87, 0.3);
-  border-radius: 12px;
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(90deg, rgba(255, 107, 53, 0.1), rgba(78, 205, 196, 0.1));
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  border-radius: 16px;
   font-size: 1rem;
-  color: #FFC857;
+  color: var(--accent-orange);
   text-align: center;
   animation: fadeInUp 0.5s ease-out;
 }
@@ -373,19 +364,18 @@
   position: absolute;
   top: -10px;
   right: -10px;
-  padding: 0.35rem 0.75rem;
-  background: linear-gradient(135deg, #FFC857, #f59e0b);
-  color: #1a1a2e;
+  padding: 0.4rem 0.85rem;
+  background: linear-gradient(135deg, #FF6B35, #F59E0B);
+  color: white;
   font-size: 0.75rem;
   font-weight: 700;
   border-radius: 20px;
-  box-shadow: 0 2px 10px rgba(255, 200, 87, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
 .tarot-panel .panel-badge {
-  background: linear-gradient(135deg, #a78bfa, #8b5cf6);
-  box-shadow: 0 2px 10px rgba(139, 92, 246, 0.4);
-  color: white;
+  background: linear-gradient(135deg, #4ECDC4, #3DB9B0);
+  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
 }
 
 /* 버튼 화살표 */
@@ -399,42 +389,20 @@
   transform: translateX(5px);
 }
 
-/* 패널을 relative로 설정 (배지 포지셔닝용) */
-.choice-panel {
-  flex: 1;
-  min-width: 300px;
-  padding: 2rem;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  text-decoration: none;
-  color: inherit;
-  background-size: cover;
-  background-position: center;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  /* 배지 포지셔닝용 추가 */
-  overflow: visible;
-  /* 배지가 밖으로 나올 수 있도록 */
-}
-
 /* 인기 음식 미리보기 섹션 */
 .popular-foods-preview {
   margin-top: 3rem;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
+  background: var(--bg-white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
 }
 
 .popular-foods-preview h3 {
   margin-bottom: 1rem;
   font-size: 1.1rem;
-  color: #b3aed1;
+  color: var(--text-muted);
 }
 
 .food-preview-grid {
@@ -449,9 +417,9 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 12px;
+  padding: 0.75rem;
+  background: var(--bg-cream);
+  border-radius: 16px;
   text-decoration: none;
   transition: all 0.3s ease;
   max-width: 100px;
@@ -459,20 +427,20 @@
 
 .food-preview-item:hover {
   transform: translateY(-5px);
-  background: rgba(255, 200, 87, 0.1);
-  box-shadow: 0 5px 20px rgba(255, 200, 87, 0.2);
+  background: var(--bg-white);
+  box-shadow: var(--shadow-medium);
 }
 
 .food-preview-item img {
   width: 80px;
   height: 80px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .food-preview-item span {
   font-size: 0.75rem;
-  color: #e0e0e0;
+  color: var(--text-dark);
   text-align: center;
   line-height: 1.2;
 }
@@ -480,15 +448,15 @@
 .explore-link {
   display: inline-block;
   margin-top: 1rem;
-  color: #FFC857;
+  color: var(--accent-orange);
   text-decoration: none;
   font-size: 0.9rem;
+  font-weight: 500;
   transition: all 0.2s ease;
 }
 
 .explore-link:hover {
-  color: #f59e0b;
-  text-decoration: underline;
+  color: var(--accent-orange-dark);
 }
 
 /* 모바일 반응형 */

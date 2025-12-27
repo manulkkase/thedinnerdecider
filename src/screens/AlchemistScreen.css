@@ -1,8 +1,8 @@
-/* Alchemist Screen Styles */
+/* ======= ALCHEMIST SCREEN STYLES - LIGHT THEME ======= */
 
 .alchemist-container {
     min-height: 100vh;
-    background: linear-gradient(180deg, #0c0a14 0%, #1a1625 50%, #0c0a14 100%);
+    background: linear-gradient(180deg, #F0FDFA 0%, #CCFBF1 50%, #F0FDFA 100%);
     padding: 2rem 1rem;
     position: relative;
     overflow: hidden;
@@ -21,8 +21,8 @@
 
 .alchemist-particle {
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     animation: float-particle 20s infinite ease-in-out;
 }
@@ -30,28 +30,28 @@
 .alchemist-particle-1 {
     left: 10%;
     top: 20%;
-    background: rgba(139, 92, 246, 0.4);
+    background: rgba(78, 205, 196, 0.4);
     animation-delay: 0s;
 }
 
 .alchemist-particle-2 {
     left: 80%;
     top: 30%;
-    background: rgba(236, 72, 153, 0.4);
+    background: rgba(236, 72, 153, 0.3);
     animation-delay: 5s;
 }
 
 .alchemist-particle-3 {
     left: 30%;
     top: 70%;
-    background: rgba(255, 200, 87, 0.4);
+    background: rgba(255, 107, 53, 0.3);
     animation-delay: 10s;
 }
 
 .alchemist-particle-4 {
     left: 70%;
     top: 80%;
-    background: rgba(34, 197, 94, 0.4);
+    background: rgba(16, 185, 129, 0.4);
     animation-delay: 15s;
 }
 
@@ -60,12 +60,12 @@
     0%,
     100% {
         transform: translateY(0) translateX(0);
-        opacity: 0.3;
+        opacity: 0.4;
     }
 
     50% {
         transform: translateY(-100px) translateX(30px);
-        opacity: 0.6;
+        opacity: 0.7;
     }
 }
 
@@ -87,16 +87,15 @@
     font-family: 'Cinzel', serif;
     font-size: 2.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 50%, #f97316 100%);
+    background: linear-gradient(135deg, #4ECDC4 0%, #10B981 50%, #FF6B35 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 0.5rem;
-    text-shadow: 0 0 30px rgba(167, 139, 250, 0.3);
 }
 
 .alchemist-subtitle {
-    color: #b3aed1;
+    color: var(--text-muted);
     font-size: 1rem;
     line-height: 1.5;
 }
@@ -111,8 +110,8 @@
 
 .essence-card {
     position: relative;
-    background: rgba(255, 255, 255, 0.03);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-white);
+    border: 2px solid rgba(0, 0, 0, 0.06);
     border-radius: 16px;
     padding: 1rem 0.5rem;
     cursor: pointer;
@@ -121,16 +120,19 @@
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
+    box-shadow: var(--shadow-soft);
 }
 
 .essence-card:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 20px var(--essence-color, rgba(255, 255, 255, 0.2));
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--accent-mint);
 }
 
 .essence-card.selected {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 25px var(--essence-color, rgba(255, 255, 255, 0.3));
+    border-color: var(--accent-mint);
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(16, 185, 129, 0.1));
+    box-shadow: 0 8px 30px rgba(78, 205, 196, 0.2);
 }
 
 .essence-card:disabled {
@@ -146,12 +148,12 @@
     font-family: 'Cinzel', serif;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--text-dark);
 }
 
 .essence-desc {
     font-size: 0.7rem;
-    color: #9ca3af;
+    color: var(--text-muted);
     text-align: center;
 }
 
@@ -161,7 +163,7 @@
     right: -8px;
     width: 24px;
     height: 24px;
-    background: linear-gradient(135deg, #22c55e, #16a34a);
+    background: linear-gradient(135deg, #10B981, #059669);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -176,24 +178,25 @@
     width: 200px;
     height: 200px;
     margin: 0 auto 1.5rem;
-    background: radial-gradient(ellipse at center, #2d2640 0%, #1a1625 70%);
-    border: 3px solid #4c1d95;
+    background: linear-gradient(180deg, var(--bg-white) 0%, #F0FDFA 100%);
+    border: 3px solid rgba(78, 205, 196, 0.3);
     border-radius: 50% 50% 45% 45%;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    box-shadow: var(--shadow-soft);
 }
 
 .cauldron.has-items {
-    border-color: #7c3aed;
-    box-shadow: 0 0 30px rgba(124, 58, 237, 0.4);
+    border-color: var(--accent-mint);
+    box-shadow: 0 8px 40px rgba(78, 205, 196, 0.3);
 }
 
 .cauldron.brewing {
-    border-color: #a78bfa;
-    box-shadow: 0 0 50px rgba(167, 139, 250, 0.6), inset 0 0 30px rgba(167, 139, 250, 0.2);
+    border-color: var(--accent-mint);
+    box-shadow: 0 8px 60px rgba(78, 205, 196, 0.4), inset 0 0 30px rgba(78, 205, 196, 0.1);
 }
 
 .cauldron::before {
@@ -204,7 +207,7 @@
     transform: translateX(-50%);
     width: 60%;
     height: 20px;
-    background: linear-gradient(to bottom, #3b2758, transparent);
+    background: linear-gradient(to bottom, rgba(78, 205, 196, 0.2), transparent);
     border-radius: 0 0 50% 50%;
 }
 
@@ -227,7 +230,7 @@
 
 .cauldron-count {
     font-size: 0.85rem;
-    color: #9ca3af;
+    color: var(--text-muted);
 }
 
 /* Brewing Animation - Vortex Effect */
@@ -262,8 +265,8 @@
     width: 160px;
     height: 160px;
     margin: -80px 0 0 -80px;
-    border-top-color: rgba(167, 139, 250, 0.8);
-    border-right-color: rgba(167, 139, 250, 0.4);
+    border-top-color: rgba(78, 205, 196, 0.8);
+    border-right-color: rgba(78, 205, 196, 0.4);
     animation-duration: 1.5s;
 }
 
@@ -271,8 +274,8 @@
     width: 120px;
     height: 120px;
     margin: -60px 0 0 -60px;
-    border-top-color: rgba(236, 72, 153, 0.8);
-    border-left-color: rgba(236, 72, 153, 0.4);
+    border-top-color: rgba(16, 185, 129, 0.8);
+    border-left-color: rgba(16, 185, 129, 0.4);
     animation-duration: 1.2s;
     animation-direction: reverse;
 }
@@ -281,8 +284,8 @@
     width: 80px;
     height: 80px;
     margin: -40px 0 0 -40px;
-    border-top-color: rgba(249, 115, 22, 0.8);
-    border-right-color: rgba(249, 115, 22, 0.4);
+    border-top-color: rgba(255, 107, 53, 0.8);
+    border-right-color: rgba(255, 107, 53, 0.4);
     animation-duration: 0.9s;
 }
 
@@ -348,7 +351,7 @@
     width: 40px;
     height: 40px;
     margin: -20px 0 0 -20px;
-    background: radial-gradient(circle, rgba(255, 200, 87, 0.9) 0%, rgba(167, 139, 250, 0.5) 50%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.7) 0%, rgba(78, 205, 196, 0.4) 50%, transparent 70%);
     border-radius: 50%;
     animation: center-pulse 0.8s ease-in-out infinite;
 }
@@ -369,7 +372,7 @@
 
 .brewing-text {
     font-size: 0.9rem;
-    color: #a78bfa;
+    color: var(--accent-mint-dark);
     font-style: italic;
     animation: pulse-text 1s infinite;
     text-align: center;
@@ -391,7 +394,7 @@
 /* Instruction */
 .alchemist-instruction {
     text-align: center;
-    color: #9ca3af;
+    color: var(--text-muted);
     font-size: 0.9rem;
     margin-bottom: 1rem;
 }
@@ -403,23 +406,23 @@
     font-family: 'Cinzel', serif;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #1a1a2e;
-    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+    color: white;
+    background: linear-gradient(135deg, #4ECDC4 0%, #10B981 100%);
     border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 20px rgba(167, 139, 250, 0.4);
+    box-shadow: 0 5px 20px rgba(78, 205, 196, 0.3);
 }
 
 .brew-button:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(167, 139, 250, 0.6);
+    box-shadow: 0 8px 30px rgba(78, 205, 196, 0.4);
 }
 
 .brew-button:disabled {
-    background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
-    color: #9ca3af;
+    background: linear-gradient(135deg, #D1D5DB 0%, #9CA3AF 100%);
+    color: #6B7280;
     cursor: not-allowed;
     box-shadow: none;
 }
@@ -430,27 +433,29 @@
     width: 100%;
     margin-top: 0.75rem;
     padding: 0.75rem;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--bg-white);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 12px;
-    color: #9ca3af;
+    color: var(--text-muted);
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: var(--shadow-soft);
 }
 
 .reset-button:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: #e5e7eb;
+    background: var(--bg-cream);
+    color: var(--text-dark);
 }
 
 /* Result */
 .alchemist-result {
-    background: rgba(255, 255, 255, 0.03);
-    border: 2px solid rgba(167, 139, 250, 0.3);
-    border-radius: 24px;
+    background: var(--bg-white);
+    border: 2px solid rgba(78, 205, 196, 0.2);
+    border-radius: var(--radius-card);
     padding: 2rem;
     text-align: center;
+    box-shadow: var(--shadow-medium);
 }
 
 .result-reveal {
@@ -462,7 +467,7 @@
 
 .result-label {
     font-size: 0.9rem;
-    color: #a78bfa;
+    color: var(--accent-mint-dark);
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -471,7 +476,7 @@
     font-family: 'Cinzel', serif;
     font-size: 2rem;
     font-weight: 700;
-    color: #FFC857;
+    color: var(--accent-orange);
     margin: 0;
 }
 
@@ -481,7 +486,7 @@
     aspect-ratio: 4/3;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-medium);
 }
 
 .result-food-image {
@@ -499,10 +504,11 @@
 
 .result-essence-tag {
     padding: 0.35rem 0.75rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(16, 185, 129, 0.1));
+    border: 1px solid rgba(78, 205, 196, 0.2);
     border-radius: 100px;
     font-size: 0.8rem;
-    color: #e5e7eb;
+    color: var(--text-dark);
 }
 
 .result-actions {
@@ -515,7 +521,7 @@
 
 .result-action-btn {
     padding: 1rem;
-    border-radius: 12px;
+    border-radius: var(--radius-button);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -525,24 +531,26 @@
 }
 
 .result-action-btn.primary {
-    background: linear-gradient(135deg, #FFC857 0%, #f59e0b 100%);
-    color: #1a1a2e;
+    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
+    color: white;
     border: none;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
 }
 
 .result-action-btn.primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(255, 200, 87, 0.4);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
 }
 
 .result-action-btn.secondary {
-    background: transparent;
-    border: 2px solid rgba(167, 139, 250, 0.5);
-    color: #a78bfa;
+    background: var(--bg-white);
+    border: 2px solid rgba(78, 205, 196, 0.3);
+    color: var(--accent-mint-dark);
 }
 
 .result-action-btn.secondary:hover {
-    background: rgba(167, 139, 250, 0.1);
+    border-color: var(--accent-mint);
+    background: rgba(78, 205, 196, 0.05);
 }
 
 /* Back Link */
@@ -552,14 +560,14 @@
 }
 
 .back-link {
-    color: #9ca3af;
+    color: var(--text-muted);
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.2s ease;
 }
 
 .back-link:hover {
-    color: #e5e7eb;
+    color: var(--accent-mint-dark);
 }
 
 /* Mobile Responsive */

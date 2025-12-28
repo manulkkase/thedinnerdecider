@@ -69,7 +69,7 @@
 .battle-card-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.6) 30%, transparent 60%);
+    background: linear-gradient(to top, var(--bg-cream) 0%, rgba(var(--bg-cream), 0.6) 30%, transparent 60%);
 }
 
 .battle-card-content {
@@ -113,7 +113,7 @@
 .winner-badge {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #FF6B35, #F59E0B);
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
     color: white;
     font-size: 1.5rem;
     font-weight: 800;
@@ -187,7 +187,7 @@
     font-family: 'Cinzel', serif;
     font-size: 3rem;
     font-weight: 900;
-    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
+    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -214,7 +214,7 @@
 .round-splash-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--bg-cream);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,7 +230,7 @@
     font-family: 'Cinzel', serif;
     font-size: 4rem;
     font-weight: 900;
-    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
+    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -280,7 +280,7 @@
 
 .progress-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #FF6B35, #F59E0B);
+    background: linear-gradient(90deg, var(--accent-orange), var(--accent-gold));
     border-radius: 4px;
     transition: width 0.5s ease;
     box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
@@ -308,7 +308,7 @@
 }
 
 .round-indicator.completed {
-    background: #10B981;
+    background: var(--accent-mint-dark);
 }
 
 /* ======= 모바일 반응형 ======= */

@@ -42,13 +42,13 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
+    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 100%);
     color: white;
     font-family: 'Cinzel', serif;
     font-size: 1rem;
     font-weight: 800;
     border-radius: 50px;
-    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 8px 24px rgba(224, 123, 60, 0.25);
     animation: badge-glow 2s ease-in-out infinite;
     z-index: 10;
 }
@@ -61,11 +61,11 @@
 
     0%,
     100% {
-        box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+        box-shadow: 0 8px 24px rgba(224, 123, 60, 0.25);
     }
 
     50% {
-        box-shadow: 0 8px 50px rgba(255, 107, 53, 0.7);
+        box-shadow: 0 8px 32px rgba(224, 123, 60, 0.35);
     }
 }
 
@@ -80,13 +80,13 @@
 
 /* ======= GLASSMORPHISM CARD ======= */
 .result-glass-card {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--bg-card);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--border-color);
     border-radius: 28px;
     padding: 2rem;
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-medium);
     text-align: center;
 }
 
@@ -94,7 +94,7 @@
     font-family: 'Cinzel', serif;
     font-size: 2.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 50%, #4ECDC4 100%);
+    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 50%, var(--accent-mint) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -119,8 +119,8 @@
 
 .result-tag {
     padding: 0.4rem 1rem;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(245, 158, 11, 0.1));
-    border: 1px solid rgba(255, 107, 53, 0.2);
+    background: linear-gradient(135deg, rgba(224, 123, 60, 0.08), rgba(212, 145, 90, 0.08));
+    border: 1px solid rgba(224, 123, 60, 0.15);
     border-radius: 50px;
     font-size: 0.85rem;
     color: var(--accent-orange);
@@ -141,7 +141,7 @@
     justify-content: center;
     gap: 0.5rem;
     padding: 1rem 2rem;
-    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
+    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 100%);
     color: white;
     font-weight: 600;
     font-size: 1rem;
@@ -149,12 +149,12 @@
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 4px 16px rgba(224, 123, 60, 0.2);
 }
 
 .result-cta-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 8px 24px rgba(224, 123, 60, 0.25);
 }
 
 .result-cta-secondary {
@@ -215,7 +215,7 @@
 
 .result-tab.active {
     color: var(--accent-orange);
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(245, 158, 11, 0.05));
+    background: linear-gradient(135deg, rgba(224, 123, 60, 0.05), rgba(212, 145, 90, 0.05));
     border-bottom: 2px solid var(--accent-orange);
     margin-bottom: -1px;
 }
@@ -233,8 +233,8 @@
 }
 
 .fun-fact-card {
-    background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(16, 185, 129, 0.1));
-    border: 1px solid rgba(78, 205, 196, 0.2);
+    background: linear-gradient(135deg, rgba(77, 182, 172, 0.08), rgba(61, 154, 145, 0.08));
+    border: 1px solid rgba(77, 182, 172, 0.15);
     border-radius: 16px;
     padding: 1.25rem;
 }
@@ -370,7 +370,7 @@
 }
 
 .pairings-card {
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(245, 158, 11, 0.05));
+    background: linear-gradient(135deg, rgba(224, 123, 60, 0.05), rgba(212, 145, 90, 0.05));
     border-radius: 16px;
     padding: 1.25rem;
 }

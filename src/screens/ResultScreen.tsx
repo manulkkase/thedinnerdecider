@@ -124,7 +124,7 @@ const ResultScreen: React.FC = () => {
             recycle={false}
             numberOfPieces={300}
             gravity={0.3}
-            colors={['#FF6B35', '#F59E0B', '#4ECDC4', '#10B981', '#ff6b6b']}
+            colors={['#E07B3C', '#D4915A', '#4DB6AC', '#3D9A91', '#F4A574']}
           />
         </div>
       )}

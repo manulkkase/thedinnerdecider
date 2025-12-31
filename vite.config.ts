@@ -5,8 +5,21 @@ import sitemap from 'vite-plugin-sitemap';
 import { ALL_FOODS } from './constants/foods'; // 👈 경로가 여기로 수정되었습니다.
 import { ALL_PERSONALITY_IDS } from './constants/quizData';
 
+// Generate URL-friendly slugs
+function generateSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/['']/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
 // foods.ts에 있는 100개의 음식 이름으로 /result/... 경로를 자동으로 생성합니다.
 const tournamentResultRoutes = ALL_FOODS.map(food => `/result/${encodeURIComponent(food.name)}`);
+
+// Food detail SEO pages (/food/korean-bbq format)
+const foodDetailRoutes = ALL_FOODS.map(food => `/food/${generateSlug(food.name)}`);
 
 // Quiz personality result routes (8 types)
 const quizResultRoutes = ALL_PERSONALITY_IDS.map(id => `/quiz/result/${id}`);
@@ -33,6 +46,7 @@ export default defineConfig(({ mode }) => {
         dynamicRoutes: [
           ...staticRoutes,
           ...tournamentResultRoutes,
+          ...foodDetailRoutes,
           ...quizResultRoutes
         ]
       })

@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ALL_FOODS, CUISINE_OPTIONS } from '../../constants/foods';
+import { generateSlug } from '../utils/foodUtils';
 import AdSense from '../../components/AdSense';
 import { Helmet } from 'react-helmet-async';
 
@@ -65,7 +66,7 @@ const ExploreFoodsScreen: React.FC = () => {
 
             return (
               <Link
-                to={`/result/${encodeURIComponent(food.name)}`}
+                to={`/food/${generateSlug(food.name)}`}
                 key={food.id}
                 className="group block bg-white rounded-lg overflow-hidden border border-slate-200 hover:shadow-xl hover:border-amber-500 transition-all duration-300"
               >

@@ -1,28 +1,28 @@
-/* Food Detail Page - Premium Redesign */
+/* Food Detail Page - Warm Bakery Theme */
 
 /* ============================================
    Variables & Base Styles
    ============================================ */
 .food-detail-page {
-    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+    --primary-gradient: var(--gradient-warm);
     --glass-bg: rgba(255, 255, 255, 0.85);
-    --glass-border: rgba(255, 255, 255, 0.3);
-    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.15);
+    --glass-border: rgba(198, 124, 78, 0.1);
+    --shadow-soft: 0 8px 32px rgba(61, 35, 20, 0.08);
+    --shadow-hover: 0 12px 48px rgba(198, 124, 78, 0.15);
     --radius-lg: 24px;
     --radius-md: 16px;
     --radius-sm: 12px;
 
-    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #ffffff 100%);
+    background: var(--gradient-cream);
     min-height: 100vh;
     padding-bottom: 3rem;
 }
 
 @media (prefers-color-scheme: dark) {
     .food-detail-page {
-        --glass-bg: rgba(30, 30, 40, 0.9);
-        --glass-border: rgba(255, 255, 255, 0.1);
-        background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
+        --glass-bg: rgba(44, 35, 28, 0.9);
+        --glass-border: rgba(198, 124, 78, 0.15);
+        background: linear-gradient(180deg, #1C1612 0%, #2A231C 50%, #1C1612 100%);
     }
 }
 
@@ -44,7 +44,7 @@
 }
 
 .breadcrumb a {
-    color: #6366f1;
+    color: var(--accent-primary, #C67C4E);
     text-decoration: none;
     font-weight: 500;
 }
@@ -129,7 +129,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 4px 12px rgba(198, 124, 78, 0.3);
 }
 
 .food-moods {
@@ -298,7 +298,7 @@
    Pairings Section - Bento Grid
    ============================================ */
 .pairings-section h2::before {
-    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    background: linear-gradient(135deg, var(--accent-primary-light, #D4A373) 0%, var(--accent-primary, #C67C4E) 100%);
 }
 
 .pairings-grid {
@@ -312,20 +312,20 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 1.25rem;
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
+    background: linear-gradient(135deg, rgba(212, 163, 115, 0.08) 0%, rgba(198, 124, 78, 0.08) 100%);
     border-radius: var(--radius-md);
-    border: 1px solid rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(212, 163, 115, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pairing-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+    box-shadow: 0 8px 24px rgba(212, 163, 115, 0.15);
 }
 
 .pairing-icon {
     font-size: 2rem;
-    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    background: linear-gradient(135deg, var(--accent-primary-light, #D4A373) 0%, var(--accent-primary, #C67C4E) 100%);
     width: 56px;
     height: 56px;
     display: flex;
@@ -338,7 +338,7 @@
 .pairing-card strong {
     display: block;
     margin-bottom: 0.25rem;
-    color: #6366f1;
+    color: var(--accent-primary, #C67C4E);
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -406,17 +406,17 @@
 }
 
 /* ============================================
-   Primary CTA Section - Find This Food
+   Primary CTA Section - Find This Food (Map)
    ============================================ */
 .primary-cta-section {
-    background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+    background: linear-gradient(135deg, #3E2723 0%, #4E342E 100%);
     text-align: center;
     padding: 2.5rem 2rem;
     border: none;
 }
 
 .primary-cta-section h2 {
-    color: white;
+    color: #FDF8F3;
     font-size: 1.5rem;
     justify-content: center;
     margin-bottom: 1.25rem;
@@ -429,20 +429,22 @@
 .cta-button.primary.large {
     padding: 1.25rem 3rem;
     font-size: 1.1rem;
+    background: linear-gradient(135deg, #C67C4E 0%, #D4A373 100%);
+    color: #FDF8F3;
 }
 
 /* ============================================
-   Discovery CTA Section - Explore More
+   Discovery CTA Section - Explore More (Aztec)
    ============================================ */
 .discovery-cta-section {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+    background: linear-gradient(135deg, #4A5D23 0%, #5D7028 100%);
     text-align: center;
     padding: 2.5rem 2rem;
-    border: 2px solid rgba(99, 102, 241, 0.15);
+    border: none;
 }
 
 .discovery-cta-section h2 {
-    color: var(--text-primary, #1a1a2e);
+    color: #FDF8F3;
     font-size: 1.4rem;
     justify-content: center;
     margin-bottom: 0.5rem;
@@ -453,7 +455,7 @@
 }
 
 .discovery-subtitle {
-    color: var(--text-secondary, #666);
+    color: #E8DFD3;
     font-size: 1rem;
     margin-bottom: 1.5rem;
 }
@@ -466,26 +468,26 @@
 }
 
 .cta-button.game-btn.tournament {
-    background: var(--primary-gradient);
-    color: white;
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+    background: linear-gradient(135deg, #C67C4E 0%, #D4A373 100%);
+    color: #FDF8F3;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
 .cta-button.game-btn.tournament:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 28px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
 }
 
 .cta-button.game-btn.quiz {
-    background: white;
-    color: #6366f1;
-    border: 2px solid #6366f1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    background: #FDF8F3;
+    color: #4A5D23;
+    border: 2px solid #FDF8F3;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .cta-button.game-btn.quiz:hover {
-    background: #6366f1;
-    color: white;
+    background: #E8DFD3;
+    color: #3D4A1C;
     transform: translateY(-3px) scale(1.02);
 }
 
@@ -508,7 +510,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+    background: radial-gradient(circle, rgba(198, 124, 78, 0.1) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -546,12 +548,12 @@
 .cta-button.primary {
     background: var(--primary-gradient);
     color: white;
-    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 8px 24px rgba(198, 124, 78, 0.4);
 }
 
 .cta-button.primary:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.5);
+    box-shadow: 0 12px 32px rgba(198, 124, 78, 0.5);
 }
 
 .cta-button.secondary {
@@ -647,19 +649,19 @@
 }
 
 .back-nav a {
-    color: #6366f1;
+    color: var(--accent-primary, #C67C4E);
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
-    border: 2px solid #6366f1;
+    border: 2px solid var(--accent-primary, #C67C4E);
     display: inline-block;
     transition: all 0.3s ease;
 }
 
 .back-nav a:hover {
-    background: #6366f1;
+    background: var(--accent-primary, #C67C4E);
     color: white;
 }
 
@@ -696,13 +698,13 @@
     text-decoration: none;
     border-radius: 50px;
     font-weight: 700;
-    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 8px 24px rgba(198, 124, 78, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .explore-link:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 12px 32px rgba(198, 124, 78, 0.4);
 }
 
 /* ============================================

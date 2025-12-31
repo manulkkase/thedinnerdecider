@@ -1,8 +1,8 @@
-/* ======= LIGHT THEME - MODERN UI EFFECTS ======= */
+/* ======= WARM BAKERY THEME - MODERN UI ======= */
 
 /* 그라디언트 텍스트 */
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 50%, var(--accent-mint) 100%);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-gold) 50%, var(--accent-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -29,7 +29,7 @@
   position: absolute;
   width: 10px;
   height: 10px;
-  background: radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(198, 124, 78, 0.3) 0%, transparent 70%);
   border-radius: 50%;
   animation: float 15s infinite ease-in-out;
 }
@@ -46,7 +46,7 @@
   top: 60%;
   animation-delay: 2s;
   animation-duration: 22s;
-  background: radial-gradient(circle, rgba(78, 205, 196, 0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212, 163, 115, 0.3) 0%, transparent 70%);
 }
 
 .particle-3 {
@@ -76,7 +76,7 @@
   top: 80%;
   animation-delay: 5s;
   animation-duration: 19s;
-  background: radial-gradient(circle, rgba(78, 205, 196, 0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212, 163, 115, 0.3) 0%, transparent 70%);
 }
 
 @keyframes float {
@@ -110,7 +110,7 @@
   border-radius: inherit;
   pointer-events: none;
   background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(255, 107, 53, 0.1) 0%,
+      rgba(198, 124, 78, 0.1) 0%,
       transparent 70%);
   opacity: var(--spotlight-opacity, 0);
   transition: opacity 0.3s ease;
@@ -119,8 +119,8 @@
 /* ======= BASE STYLES ======= */
 
 .home-container {
-  /* 밝은 크림 배경 */
-  background: linear-gradient(180deg, var(--bg-cream) 0%, #FFF5EE 50%, var(--bg-cream) 100%);
+  /* 따뜻한 크림 배경 */
+  background: var(--gradient-cream);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,7 +155,7 @@
   font-family: 'Cinzel', serif;
   font-size: 1.75rem;
   margin-bottom: 2.5rem;
-  color: var(--accent-orange);
+  color: var(--text-dark);
 }
 
 .game-choice-panels {
@@ -206,34 +206,34 @@
 
 /* 🔥 토너먼트 패널 */
 .tournament-panel {
-  background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
-  border: 2px solid rgba(255, 107, 53, 0.2);
+  background: linear-gradient(135deg, #FDF8F3 0%, #F5E6D3 100%);
+  border: 2px solid rgba(198, 124, 78, 0.2);
 }
 
 .tournament-panel .panel-icon {
   background-image: url('/images/foodbattleroyale_new.webp');
-  background-color: #FFF7ED;
+  background-color: #FDF8F3;
 }
 
 .tournament-panel:hover {
-  border-color: var(--accent-orange);
-  box-shadow: 0 12px 40px rgba(255, 107, 53, 0.2);
+  border-color: var(--accent-primary);
+  box-shadow: 0 12px 40px rgba(198, 124, 78, 0.2);
 }
 
 /* 🧪 Alchemist Panel */
 .tarot-panel {
-  background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%);
-  border: 2px solid rgba(78, 205, 196, 0.2);
+  background: linear-gradient(135deg, #FFFBF5 0%, #F5E6D3 100%);
+  border: 2px solid rgba(212, 163, 115, 0.2);
 }
 
 .tarot-panel .panel-icon {
   background-image: url('/images/alchemist_icon.webp');
-  background-color: #F0FDFA;
+  background-color: #FFFBF5;
 }
 
 .tarot-panel:hover {
-  border-color: var(--accent-mint);
-  box-shadow: 0 12px 40px rgba(78, 205, 196, 0.2);
+  border-color: var(--accent-gold);
+  box-shadow: 0 12px 40px rgba(212, 163, 115, 0.2);
 }
 
 .choice-panel h3 {
@@ -243,11 +243,11 @@
 }
 
 .tournament-panel h3 {
-  color: var(--accent-orange);
+  color: var(--accent-primary);
 }
 
 .tarot-panel h3 {
-  color: var(--accent-mint-dark);
+  color: var(--accent-gold);
 }
 
 .choice-panel p {
@@ -273,26 +273,26 @@
 
 /* 토너먼트 버튼 */
 .tournament-panel .choice-button {
-  background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 100%);
+  background: var(--gradient-warm);
   color: white;
-  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 15px rgba(198, 124, 78, 0.3);
 }
 
 .tournament-panel .choice-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+  box-shadow: 0 8px 25px rgba(198, 124, 78, 0.4);
 }
 
 /* Alchemist 버튼 */
 .tarot-panel .choice-button {
-  background: linear-gradient(135deg, var(--accent-mint) 0%, var(--accent-mint-dark) 100%);
+  background: linear-gradient(135deg, var(--accent-gold) 0%, #D4A373 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+  box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3);
 }
 
 .tarot-panel .choice-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+  box-shadow: 0 8px 25px rgba(212, 163, 115, 0.4);
 }
 
 /* ==================== NEW UI ELEMENTS ==================== */
@@ -315,7 +315,7 @@
 .pulse-dot {
   width: 8px;
   height: 8px;
-  background-color: var(--accent-mint-dark);
+  background-color: var(--accent-primary);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
@@ -338,11 +338,11 @@
 .urgency-banner {
   margin: 2rem 0;
   padding: 0.875rem 1.5rem;
-  background: linear-gradient(90deg, rgba(255, 107, 53, 0.1), rgba(78, 205, 196, 0.1));
-  border: 1px solid rgba(255, 107, 53, 0.2);
+  background: linear-gradient(90deg, rgba(198, 124, 78, 0.1), rgba(212, 163, 115, 0.1));
+  border: 1px solid rgba(198, 124, 78, 0.2);
   border-radius: 16px;
   font-size: 1rem;
-  color: var(--accent-orange);
+  color: var(--accent-primary);
   text-align: center;
   animation: fadeInUp 0.5s ease-out;
 }
@@ -365,17 +365,17 @@
   top: -10px;
   right: -10px;
   padding: 0.4rem 0.85rem;
-  background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
+  background: var(--gradient-warm);
   color: white;
   font-size: 0.75rem;
   font-weight: 700;
   border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 12px rgba(198, 124, 78, 0.3);
 }
 
 .tarot-panel .panel-badge {
-  background: linear-gradient(135deg, var(--accent-mint), var(--accent-mint-dark));
-  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+  background: linear-gradient(135deg, var(--accent-gold), #D4A373);
+  box-shadow: 0 4px 12px rgba(212, 163, 115, 0.3);
 }
 
 /* 버튼 화살표 */
@@ -448,7 +448,7 @@
 .explore-link {
   display: inline-block;
   margin-top: 1rem;
-  color: var(--accent-orange);
+  color: var(--accent-primary);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
@@ -456,7 +456,7 @@
 }
 
 .explore-link:hover {
-  color: var(--accent-orange-dark);
+  color: var(--accent-primary-dark);
 }
 
 /* 모바일 반응형 */

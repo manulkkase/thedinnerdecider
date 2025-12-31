@@ -1,9 +1,9 @@
-/* ======= TOURNAMENT SETUP STYLES - LIGHT THEME ======= */
+/* ======= TOURNAMENT SETUP STYLES - WARM THEME ======= */
 
 /* 페이지 컨테이너 */
 .setup-container {
     min-height: 100vh;
-    background: linear-gradient(180deg, var(--bg-cream) 0%, #FFF5EE 50%, var(--bg-cream) 100%);
+    background: var(--gradient-cream);
     padding: 2rem 1rem;
     position: relative;
     overflow: hidden;
@@ -24,7 +24,7 @@
     position: absolute;
     width: 8px;
     height: 8px;
-    background: radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(198, 124, 78, 0.3) 0%, transparent 70%);
     border-radius: 50%;
     animation: floatParticle 20s infinite ease-in-out;
 }
@@ -53,7 +53,7 @@
     left: 30%;
     top: 60%;
     animation-delay: 3s;
-    background: radial-gradient(circle, rgba(78, 205, 196, 0.3) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(212, 163, 115, 0.3) 0%, transparent 70%);
 }
 
 .setup-particle:nth-child(3) {
@@ -87,7 +87,7 @@
     font-family: 'Cinzel', serif;
     font-size: 2.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 50%, var(--accent-mint) 100%);
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-gold) 50%, var(--accent-primary-light) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -106,9 +106,9 @@
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     background: var(--bg-white);
-    border: 1px solid rgba(78, 205, 196, 0.3);
+    border: 1px solid rgba(198, 124, 78, 0.3);
     border-radius: 50px;
-    color: var(--accent-mint-dark);
+    color: var(--accent-primary);
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
@@ -117,7 +117,7 @@
 }
 
 .how-to-play-btn:hover {
-    border-color: var(--accent-mint);
+    border-color: var(--accent-primary);
     transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
 }
@@ -136,7 +136,7 @@
     font-family: 'Cinzel', serif;
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--accent-orange);
+    color: var(--accent-primary);
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
@@ -150,7 +150,7 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 100%);
+    background: var(--gradient-warm);
     color: white;
     font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
@@ -186,9 +186,9 @@
 }
 
 .size-card.active {
-    border-color: var(--accent-orange);
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(245, 158, 11, 0.05));
-    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.15);
+    border-color: var(--accent-primary);
+    background: linear-gradient(135deg, rgba(198, 124, 78, 0.05), rgba(212, 163, 115, 0.05));
+    box-shadow: 0 8px 30px rgba(198, 124, 78, 0.15);
 }
 
 .size-card-icon {
@@ -245,10 +245,10 @@
 }
 
 .filter-chip.active {
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(245, 158, 11, 0.1));
-    border-color: var(--accent-orange);
-    color: var(--accent-orange);
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.15);
+    background: linear-gradient(135deg, rgba(198, 124, 78, 0.1), rgba(212, 163, 115, 0.1));
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    box-shadow: 0 4px 15px rgba(198, 124, 78, 0.15);
 }
 
 /* Cuisine 그리드 */
@@ -282,9 +282,9 @@
 }
 
 .cuisine-card.active {
-    border-color: var(--accent-mint);
-    background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(16, 185, 129, 0.1));
-    box-shadow: 0 4px 20px rgba(78, 205, 196, 0.2);
+    border-color: var(--accent-gold);
+    background: linear-gradient(135deg, rgba(212, 163, 115, 0.1), rgba(198, 124, 78, 0.1));
+    box-shadow: 0 4px 20px rgba(212, 163, 115, 0.2);
 }
 
 .cuisine-icon {
@@ -314,10 +314,10 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, rgba(198, 124, 78, 0.1), rgba(212, 163, 115, 0.1));
+    border: 1px solid rgba(198, 124, 78, 0.3);
     border-radius: 50px;
-    color: #059669;
+    color: var(--accent-primary);
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
@@ -336,19 +336,19 @@
     font-size: 1.25rem;
     font-weight: 700;
     color: white;
-    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 100%);
+    background: var(--gradient-warm);
     border: none;
     border-radius: var(--radius-button);
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 4px 20px rgba(198, 124, 78, 0.3);
 }
 
 .start-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 10px 40px rgba(198, 124, 78, 0.4);
 }
 
 .start-button:disabled {
@@ -367,11 +367,11 @@
 
     0%,
     100% {
-        box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+        box-shadow: 0 4px 20px rgba(198, 124, 78, 0.3);
     }
 
     50% {
-        box-shadow: 0 8px 40px rgba(255, 107, 53, 0.5);
+        box-shadow: 0 8px 40px rgba(198, 124, 78, 0.5);
     }
 }
 
@@ -416,7 +416,7 @@
 }
 
 .promo-link {
-    color: var(--accent-orange);
+    color: var(--accent-primary);
     font-weight: 600;
     font-size: 0.9rem;
 }
@@ -483,14 +483,14 @@
 
 .mood-card:hover {
     background: var(--bg-white);
-    border-color: rgba(255, 107, 53, 0.2);
+    border-color: rgba(198, 124, 78, 0.2);
     box-shadow: var(--shadow-soft);
 }
 
 .mood-card.active {
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(245, 158, 11, 0.1));
-    border-color: var(--accent-orange);
-    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.15);
+    background: linear-gradient(135deg, rgba(198, 124, 78, 0.1), rgba(212, 163, 115, 0.1));
+    border-color: var(--accent-primary);
+    box-shadow: 0 4px 20px rgba(198, 124, 78, 0.15);
 }
 
 .mood-icon {
@@ -505,5 +505,5 @@
 }
 
 .mood-card.active .mood-label {
-    color: var(--accent-orange);
+    color: var(--accent-primary);
 }

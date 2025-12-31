@@ -232,6 +232,29 @@
     gap: 1.5rem;
 }
 
+/* AI-friendly Description Card (GEO 최적화) */
+.food-description-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.food-description-card h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+}
+
+.food-description-card p {
+    color: var(--text-body);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+
 .fun-fact-card {
     background: linear-gradient(135deg, rgba(77, 182, 172, 0.08), rgba(61, 154, 145, 0.08));
     border: 1px solid rgba(77, 182, 172, 0.15);

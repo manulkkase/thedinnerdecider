@@ -59,7 +59,7 @@ const ResultScreen: React.FC = () => {
   const relatedFoods = useMemo(() => getRelatedFoods(winner), [winner]);
 
   const pageTitle = winner ? `${winner.name} - The Dinner Decider` : 'Result - The Dinner Decider';
-  const pageDescription = winner ? `Tonight's winner is ${winner.name}! Discover the story, recipe, and more.` : 'Find out what you should eat tonight!';
+  const pageDescription = winner?.description || (winner ? `Tonight's winner is ${winner.name}! Discover the story, recipe, and more.` : 'Find out what you should eat tonight!');
 
   // @ts-ignore
   const gtag = window.gtag;
@@ -145,7 +145,7 @@ const ResultScreen: React.FC = () => {
             "@context": "https://schema.org",
             "@type": "Recipe",
             "name": winner.name,
-            "description": winner.funFact || pageDescription,
+            "description": winner.description || winner.funFact || pageDescription,
             "image": `https://www.thedinnerdecider.au${winner.imageUrl}`,
             "author": { "@type": "Organization", "name": "The Dinner Decider" },
             "recipeCategory": winner.tags?.[0] || "Main Course",
@@ -258,16 +258,24 @@ const ResultScreen: React.FC = () => {
               {/* STORY TAB */}
               {activeTab === 'story' && (
                 <div className="story-section">
+                  {/* AI-friendly Description */}
+                  {winner.description && (
+                    <div className="food-description-card">
+                      <h2>About {winner.name}</h2>
+                      <p>{winner.description}</p>
+                    </div>
+                  )}
+
                   {winner.funFact && (
                     <div className="fun-fact-card">
-                      <h4><span>💡</span> Did you know?</h4>
+                      <h4><span>💡</span> {winner.qaTitle || `What makes ${winner.name} special?`}</h4>
                       <p>{winner.funFact}</p>
                     </div>
                   )}
 
                   {winner.eatLikeLocal && winner.eatLikeLocal.length > 0 && (
                     <div className="local-tip-card">
-                      <h4><span>🍴</span> Eat Like a Local</h4>
+                      <h4><span>🍴</span> How do locals eat {winner.name}?</h4>
                       {winner.eatLikeLocal.map((step, index) => (
                         <div key={index} className="local-tip-item">
                           <span className="local-tip-icon">{step.icon}</span>
@@ -280,7 +288,7 @@ const ResultScreen: React.FC = () => {
                     </div>
                   )}
 
-                  {!winner.funFact && (!winner.eatLikeLocal || winner.eatLikeLocal.length === 0) && (
+                  {!winner.description && !winner.funFact && (!winner.eatLikeLocal || winner.eatLikeLocal.length === 0) && (
                     <p className="text-center text-slate-500 py-4">
                       No story available for this dish yet.
                     </p>

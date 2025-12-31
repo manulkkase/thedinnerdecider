@@ -12,12 +12,16 @@ export interface FoodItem {
     icon: string;
   }[];
   funFact?: string;
+  // GEO AI 최적화 필드
+  description?: string;  // 3줄 요약 설명 (AI 크롤러용)
+  qaTitle?: string;      // Q&A 형식 제목 (funFact용)
   eatLikeLocal?: {
     icon: string;
     title: string;
     description: string;
   }[];
 }
+
 
 export enum GameState {
   START,

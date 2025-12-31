@@ -1,0 +1,350 @@
+/* Food Detail Page Styles */
+
+.food-detail-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    color: var(--text-primary);
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.breadcrumb a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    color: var(--text-muted);
+}
+
+/* Hero Section */
+.food-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.food-hero-image {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.food-hero-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.food-hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.food-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.food-tag {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.food-moods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.food-mood {
+    background: rgba(255, 165, 0, 0.2);
+    color: var(--text-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Sections */
+.food-section {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.food-section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+/* About Section */
+.food-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+/* Fun Fact Section */
+.fact-section {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #ff8c00 100%);
+    color: white;
+}
+
+.fact-section h2 {
+    color: white;
+}
+
+.fun-fact {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-style: italic;
+}
+
+/* Checklist Section */
+.food-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.food-checklist li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1rem;
+}
+
+.food-checklist li:last-child {
+    border-bottom: none;
+}
+
+/* Pairings Section */
+.pairings-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.pairing-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+}
+
+.pairing-icon {
+    font-size: 1.5rem;
+}
+
+.pairing-card strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--accent-color);
+}
+
+.pairing-card p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Eat Like a Local */
+.local-tips {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.local-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+}
+
+.tip-icon {
+    font-size: 1.5rem;
+}
+
+.local-tip strong {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.local-tip p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* CTA Section */
+.cta-section {
+    text-align: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+}
+
+.cta-section h2 {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.cta-button {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button.primary {
+    background: var(--accent-color);
+    color: white;
+}
+
+.cta-button.secondary {
+    background: white;
+    color: #1a1a2e;
+}
+
+/* Related Foods */
+.related-foods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.related-food-card {
+    text-decoration: none;
+    color: var(--text-primary);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.related-food-card:hover {
+    transform: translateY(-4px);
+}
+
+.related-food-card img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+}
+
+.related-food-card span {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Back Navigation */
+.back-nav {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.back-nav a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-nav a:hover {
+    text-decoration: underline;
+}
+
+/* Not Found */
+.food-detail-not-found {
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.food-detail-not-found h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.food-detail-not-found p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.explore-link {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .food-hero {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .food-hero-image {
+        flex: 0 0 40%;
+    }
+
+    .food-hero-image img {
+        height: 250px;
+    }
+
+    .food-hero-content {
+        flex: 1;
+    }
+
+    .pairings-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

@@ -13,6 +13,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react"
 const TournamentSetupScreen = React.lazy(() => import('./src/screens/TournamentSetupScreen'));
 const TournamentScreen = React.lazy(() => import('./src/screens/TournamentScreen'));
 const ResultScreen = React.lazy(() => import('./src/screens/ResultScreen'));
+const FoodDetailPage = React.lazy(() => import('./src/screens/FoodDetailPage'));
 const PrivacyPolicy = React.lazy(() => import('./src/screens/PrivacyPolicy'));
 const TermsOfService = React.lazy(() => import('./src/screens/TermsOfService'));
 const Contact = React.lazy(() => import('./src/screens/Contact'));
@@ -36,6 +37,7 @@ const App: React.FC = () => {
             <Route path="/tournament-setup" element={<TournamentSetupScreen />} />
             <Route path="/tournament" element={<TournamentScreen />} />
             <Route path="/result/:foodName" element={<ResultScreen />} />
+            <Route path="/food/:slug" element={<FoodDetailPage />} />
             <Route path="/alchemist" element={<AlchemistScreen />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />

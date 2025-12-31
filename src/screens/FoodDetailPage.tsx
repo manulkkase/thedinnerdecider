@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ALL_FOODS } from '../../constants/foods';
 import { findFoodBySlug, generateSlug } from '../utils/foodUtils';
 import { Helmet } from 'react-helmet-async';
+import AdSense from '../../components/AdSense';
 import './FoodDetailPage.css';
 
 // 관련 음식 추천 함수 (같은 태그 기반)
@@ -148,6 +149,11 @@ const FoodDetailPage: React.FC = () => {
                     </motion.section>
                 )}
 
+                {/* AdSense Position A: 문맥 매칭 상단 (Fun Fact와 Checklist 사이) */}
+                <div className="my-6 max-w-[800px] mx-auto">
+                    <AdSense className="rounded-xl overflow-hidden" />
+                </div>
+
                 {/* What to Look For */}
                 {food.checklist && food.checklist.length > 0 && (
                     <motion.section
@@ -210,6 +216,11 @@ const FoodDetailPage: React.FC = () => {
                         </div>
                     </motion.section>
                 )}
+
+                {/* AdSense Position B: 문맥 매칭 하단 (Local Tips와 Map CTA 사이) */}
+                <div className="my-8 max-w-[800px] mx-auto">
+                    <AdSense className="rounded-xl overflow-hidden" />
+                </div>
 
                 {/* Primary CTA - Find This Food */}
                 <motion.section

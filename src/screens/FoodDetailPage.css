@@ -227,11 +227,17 @@
 /* ============================================
    Fun Fact Section - Gradient Card
    ============================================ */
+/* ============================================
+   Fun Fact Section - Warm Theme
+   ============================================ */
 .fact-section {
-    background: linear-gradient(135deg, #475569 0%, #64748b 100%);
-    border: none;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    /* 다크 그레이 배경은 유지하되 웜톤과 어울리게 조정하거나, 
+       사용자가 "난잡함"을 싫어하므로 이것도 흰색 카드 스타일로 통일하는 것이 안전함.
+       하지만 팩트 카드는 보통 강조되므로 웜 브라운 그라디언트로 변경하거나 
+       가장 깔끔한 흰색 카드로 변경합니다. 제안: 흰색 카드 + 웜 브라운 테두리 */
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
 }
 
 .fact-section::before {
@@ -240,23 +246,25 @@
     top: -30px;
     right: -20px;
     font-size: 10rem;
-    opacity: 0.15;
+    opacity: 0.1;
     pointer-events: none;
+    filter: grayscale(100%) sepia(50%) hue-rotate(320deg);
+    /* 웜톤 필터 */
 }
 
 .fact-section h2 {
-    color: white;
+    color: var(--text-dark);
     font-size: 1.2rem;
 }
 
 .fact-section h2::before {
-    background: rgba(255, 255, 255, 0.4);
+    background: var(--accent-primary);
 }
 
 .fun-fact {
     font-size: 1.1rem;
     line-height: 1.8;
-    color: white;
+    color: var(--text-body);
     font-weight: 500;
 }
 
@@ -264,7 +272,7 @@
    Checklist Section
    ============================================ */
 .checklist-section h2::before {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    background: var(--accent-primary);
 }
 
 .food-checklist {
@@ -280,25 +288,26 @@
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 1.25rem;
-    background: rgba(16, 185, 129, 0.08);
+    background: rgba(198, 124, 78, 0.05);
     border-radius: var(--radius-md);
     font-size: 1rem;
     font-weight: 500;
-    color: var(--text-primary, #1a1a2e);
-    border-left: 4px solid #10b981;
+    color: var(--text-dark);
+    border-left: 4px solid var(--accent-primary);
+    border-bottom: 1px solid rgba(198, 124, 78, 0.1);
     transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .food-checklist li:hover {
     transform: translateX(4px);
-    background: rgba(16, 185, 129, 0.12);
+    background: rgba(198, 124, 78, 0.1);
 }
 
 /* ============================================
    Pairings Section - Bento Grid
    ============================================ */
 .pairings-section h2::before {
-    background: linear-gradient(135deg, var(--accent-primary-light, #D4A373) 0%, var(--accent-primary, #C67C4E) 100%);
+    background: var(--accent-primary);
 }
 
 .pairings-grid {
@@ -355,7 +364,7 @@
    Eat Like a Local Section
    ============================================ */
 .local-section h2::before {
-    background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+    background: var(--accent-primary);
 }
 
 .local-tips {
@@ -369,19 +378,20 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 1.25rem;
-    background: linear-gradient(135deg, rgba(236, 72, 153, 0.06) 0%, rgba(244, 63, 94, 0.06) 100%);
+    background: rgba(198, 124, 78, 0.05);
     border-radius: var(--radius-md);
-    border: 1px solid rgba(236, 72, 153, 0.12);
+    border: 1px solid rgba(198, 124, 78, 0.12);
     transition: transform 0.2s ease;
 }
 
 .local-tip:hover {
     transform: translateX(4px);
+    background: rgba(198, 124, 78, 0.1);
 }
 
 .tip-icon {
     font-size: 1.75rem;
-    background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+    background: var(--gradient-warm);
     width: 50px;
     height: 50px;
     display: flex;
@@ -394,7 +404,7 @@
 .local-tip strong {
     display: block;
     margin-bottom: 0.35rem;
-    color: #ec4899;
+    color: var(--accent-primary);
     font-weight: 600;
 }
 
@@ -408,18 +418,22 @@
 /* ============================================
    Primary CTA Section - Find This Food (Map)
    ============================================ */
+/* ============================================
+   Primary CTA Section - Find This Food (Map)
+   ============================================ */
 .primary-cta-section {
-    background: linear-gradient(135deg, #3E2723 0%, #4E342E 100%);
+    background: var(--bg-white);
     text-align: center;
-    padding: 2.5rem 2rem;
-    border: none;
+    padding: 3rem 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-medium);
 }
 
 .primary-cta-section h2 {
-    color: #FDF8F3;
+    color: var(--text-dark);
     font-size: 1.5rem;
     justify-content: center;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
 }
 
 .primary-cta-section h2::before {
@@ -427,27 +441,38 @@
 }
 
 .cta-button.primary.large {
+    display: inline-block;
+    /* Ensure is respects text-align: center */
     padding: 1.25rem 3rem;
     font-size: 1.1rem;
-    background: linear-gradient(135deg, #C67C4E 0%, #D4A373 100%);
-    color: #FDF8F3;
+    background: var(--gradient-warm);
+    color: white;
+    box-shadow: 0 4px 15px rgba(198, 124, 78, 0.3);
+    margin: 0 auto;
+}
+
+.cta-button.primary.large:hover {
+    box-shadow: 0 8px 25px rgba(198, 124, 78, 0.4);
 }
 
 /* ============================================
    Discovery CTA Section - Explore More (Aztec)
    ============================================ */
+/* ============================================
+   Discovery CTA Section - Explore More (Game)
+   ============================================ */
 .discovery-cta-section {
-    background: linear-gradient(135deg, #4A5D23 0%, #5D7028 100%);
+    background: linear-gradient(135deg, rgba(198, 124, 78, 0.05) 0%, rgba(212, 163, 115, 0.05) 100%);
     text-align: center;
-    padding: 2.5rem 2rem;
-    border: none;
+    padding: 3rem 2rem;
+    border: 1px solid rgba(198, 124, 78, 0.15);
 }
 
 .discovery-cta-section h2 {
-    color: #FDF8F3;
-    font-size: 1.4rem;
+    color: var(--text-dark);
+    font-size: 1.5rem;
     justify-content: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .discovery-cta-section h2::before {
@@ -455,41 +480,39 @@
 }
 
 .discovery-subtitle {
-    color: #E8DFD3;
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cta-button.game-btn {
     padding: 1rem 1.75rem;
-    border-radius: 16px;
-    font-size: 0.95rem;
+    border-radius: 50px;
+    font-size: 1rem;
     text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
-.cta-button.game-btn.tournament {
-    background: linear-gradient(135deg, #C67C4E 0%, #D4A373 100%);
-    color: #FDF8F3;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-}
-
-.cta-button.game-btn.tournament:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-}
-
+.cta-button.game-btn.tournament,
 .cta-button.game-btn.quiz {
-    background: #FDF8F3;
-    color: #4A5D23;
-    border: 2px solid #FDF8F3;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: var(--bg-white);
+    color: var(--accent-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-soft);
 }
 
+.cta-button.game-btn.tournament:hover,
 .cta-button.game-btn.quiz:hover {
-    background: #E8DFD3;
-    color: #3D4A1C;
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-3px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-medium);
 }
+
+
 
 /* ============================================
    Legacy CTA Styles (kept for compatibility)
@@ -747,5 +770,145 @@
 
     .related-food-card {
         flex: 0 0 160px;
+    }
+}
+
+/* ============================================
+   DARK MODE - Unified Color System
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+
+    /* Base Colors */
+    .food-detail-page {
+        --dark-bg: #1C1612;
+        --dark-card: #2A231C;
+        --dark-card-hover: #352C23;
+        --dark-border: rgba(198, 124, 78, 0.2);
+        --dark-text-primary: #F5EDE6;
+        --dark-text-secondary: #C9B8A8;
+        --dark-text-muted: #8D7B6A;
+        --dark-accent: #D4976A;
+    }
+
+    /* All Cards - Unified Background */
+    .food-section {
+        background: var(--dark-card) !important;
+        border-color: var(--dark-border) !important;
+    }
+
+    /* Text Colors */
+    .food-section h2,
+    .food-hero-title,
+    .pairing-card h4,
+    .local-tip h4,
+    .related-food-card span {
+        color: var(--dark-text-primary) !important;
+    }
+
+    .food-section p,
+    .pairing-card p,
+    .local-tip p,
+    .cuisine-tags span,
+    .breadcrumb span {
+        color: var(--dark-text-secondary) !important;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+        background: var(--dark-card) !important;
+    }
+
+    .breadcrumb a {
+        color: var(--dark-accent) !important;
+    }
+
+    /* Hero Content */
+    .food-hero-content {
+        background: linear-gradient(to top, var(--dark-bg) 0%, transparent 100%) !important;
+    }
+
+    .cuisine-tags span {
+        background: rgba(212, 151, 106, 0.15) !important;
+        border-color: rgba(212, 151, 106, 0.3) !important;
+        color: var(--dark-accent) !important;
+    }
+
+    /* Section Headers */
+    .food-section h2::before {
+        background: var(--dark-accent) !important;
+    }
+
+    /* Pairing Cards */
+    .pairing-card {
+        background: var(--dark-bg) !important;
+        border-color: var(--dark-border) !important;
+    }
+
+    .pairing-icon {
+        background: rgba(212, 151, 106, 0.1) !important;
+    }
+
+    /* Local Tips */
+    .local-tip {
+        background: var(--dark-bg) !important;
+        border-color: var(--dark-border) !important;
+    }
+
+    .local-tip-icon {
+        background: rgba(212, 151, 106, 0.15) !important;
+    }
+
+    /* Related Food Cards */
+    .related-food-card {
+        background: var(--dark-card) !important;
+    }
+
+    .related-food-card:hover {
+        background: var(--dark-card-hover) !important;
+    }
+
+    /* ========== CTA Sections - Unified Dark Style ========== */
+    .primary-cta-section,
+    .discovery-cta-section,
+    .cta-section {
+        background: linear-gradient(135deg, #2A231C 0%, #352C23 100%) !important;
+        border: 1px solid var(--dark-border) !important;
+    }
+
+    .primary-cta-section h2,
+    .discovery-cta-section h2,
+    .cta-section h2 {
+        color: var(--dark-text-primary) !important;
+    }
+
+    .discovery-subtitle {
+        color: var(--dark-text-secondary) !important;
+    }
+
+    /* CTA Buttons - Unified Style */
+    .cta-button.primary,
+    .cta-button.primary.large,
+    .cta-button.game-btn.tournament {
+        background: linear-gradient(135deg, #C67C4E 0%, #D4A373 100%) !important;
+        color: #FDF8F3 !important;
+        box-shadow: 0 6px 20px rgba(198, 124, 78, 0.3) !important;
+    }
+
+    .cta-button.game-btn.quiz,
+    .cta-button.secondary {
+        background: transparent !important;
+        color: var(--dark-accent) !important;
+        border: 2px solid var(--dark-accent) !important;
+    }
+
+    .cta-button.game-btn.quiz:hover,
+    .cta-button.secondary:hover {
+        background: rgba(212, 151, 106, 0.15) !important;
+    }
+
+    /* Explore Link */
+    .explore-link {
+        background: linear-gradient(135deg, #C67C4E 0%, #D4A373 100%) !important;
+        color: #FDF8F3 !important;
     }
 }

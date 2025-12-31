@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FilterOptions } from '../../types';
@@ -35,6 +35,7 @@ const itemVariants = {
 
 const TournamentSetupScreen: React.FC = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [tournamentSize, setTournamentSize] = useState<number>(16);
   const [filters, setFilters] = useState<FilterOptions>({ dietary: [], cuisine: [] });
   const [moodFilter, setMoodFilter] = useState<string | null>(null);
@@ -42,7 +43,13 @@ const TournamentSetupScreen: React.FC = () => {
 
   useEffect(() => {
     document.body.classList.remove('home-background');
-  }, []);
+
+    // Pre-select cuisine from URL parameter
+    const initialCuisine = searchParams.get('cuisine');
+    if (initialCuisine && CUISINE_OPTIONS.some(opt => opt.value === initialCuisine)) {
+      setFilters(prev => ({ ...prev, cuisine: [initialCuisine] }));
+    }
+  }, [searchParams]);
 
   const filteredFoods = useMemo(() => {
     let foods = ALL_FOODS_COMBINED;

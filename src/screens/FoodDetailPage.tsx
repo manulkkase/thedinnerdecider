@@ -67,8 +67,8 @@ const FoodDetailPage: React.FC = () => {
         window.open(url, '_blank', 'noopener,noreferrer');
     };
 
-    const handleDecideThis = () => {
-        navigate(`/result/${encodeURIComponent(food.name)}`);
+    const handlePlayTournament = () => {
+        navigate('/tournament-setup');
     };
 
     return (
@@ -211,21 +211,35 @@ const FoodDetailPage: React.FC = () => {
                     </motion.section>
                 )}
 
-                {/* CTA Section */}
+                {/* Primary CTA - Find This Food */}
                 <motion.section
-                    className="food-section cta-section"
+                    className="food-section primary-cta-section"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7 }}
                 >
-                    <h2>Ready to Try {food.name}?</h2>
+                    <h2>📍 Find {food.name} Nearby</h2>
+                    <button onClick={handleSearchNearby} className="cta-button primary large">
+                        Search on Google Maps
+                    </button>
+                </motion.section>
+
+                {/* Discovery CTA - Explore More */}
+                <motion.section
+                    className="food-section discovery-cta-section"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 }}
+                >
+                    <h2>🍽️ Enjoyed learning about {food.name}?</h2>
+                    <p className="discovery-subtitle">Explore 150+ dishes with our fun games!</p>
                     <div className="cta-buttons">
-                        <button onClick={handleSearchNearby} className="cta-button primary">
-                            📍 Find Nearby
+                        <button onClick={handlePlayTournament} className="cta-button game-btn tournament">
+                            🎮 Play Food Tournament
                         </button>
-                        <button onClick={handleDecideThis} className="cta-button secondary">
-                            🎯 Make it Tonight's Choice
-                        </button>
+                        <Link to="/quiz" className="cta-button game-btn quiz">
+                            🎲 Discover Your Food Personality
+                        </Link>
                     </div>
                 </motion.section>
 

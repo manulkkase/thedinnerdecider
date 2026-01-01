@@ -110,34 +110,52 @@
 
 .essence-card {
     position: relative;
-    background: var(--bg-white);
-    border: 2px solid rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
-    padding: 1rem 0.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    padding: 1.25rem 0.75rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
-    box-shadow: var(--shadow-soft);
+    gap: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
 .essence-card:hover:not(:disabled) {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-medium);
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     border-color: var(--accent-primary-light);
 }
 
 .essence-card.selected {
     border-color: var(--accent-primary-light);
-    background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(16, 185, 129, 0.1));
-    box-shadow: 0 8px 30px rgba(78, 205, 196, 0.2);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 253, 250, 0.9));
+    box-shadow: 0 0 0 2px var(--accent-primary-light), 0 10px 15px -3px rgba(78, 205, 196, 0.2);
 }
 
 .essence-card:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
+}
+
+.essence-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.25rem;
+    transition: transform 0.3s ease;
+}
+
+.essence-card:hover .essence-icon-wrapper {
+    transform: scale(1.1);
 }
 
 .essence-emoji {
@@ -234,6 +252,7 @@
 }
 
 /* Brewing Animation - Vortex Effect */
+/* Brewing Animation - Liquid Mixing Effect */
 .cauldron-brewing {
     display: flex;
     flex-direction: column;
@@ -242,132 +261,37 @@
     z-index: 10;
 }
 
-.vortex-container {
+.liquid-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
+    filter: url(#goo);
+    /* The Magic Gooey Filter */
 }
 
-/* Rotating Rings */
-.vortex-ring {
+/* Central Core Blob */
+.liquid-core {
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, #fff, var(--accent-gold));
     border-radius: 50%;
-    border: 2px solid transparent;
-    animation: vortex-spin 2s linear infinite;
+    box-shadow: 0 0 20px var(--accent-gold);
 }
 
-.vortex-ring-1 {
-    width: 160px;
-    height: 160px;
-    margin: -80px 0 0 -80px;
-    border-top-color: rgba(78, 205, 196, 0.8);
-    border-right-color: rgba(78, 205, 196, 0.4);
-    animation-duration: 1.5s;
-}
-
-.vortex-ring-2 {
-    width: 120px;
-    height: 120px;
-    margin: -60px 0 0 -60px;
-    border-top-color: rgba(16, 185, 129, 0.8);
-    border-left-color: rgba(16, 185, 129, 0.4);
-    animation-duration: 1.2s;
-    animation-direction: reverse;
-}
-
-.vortex-ring-3 {
-    width: 80px;
-    height: 80px;
-    margin: -40px 0 0 -40px;
-    border-top-color: rgba(255, 107, 53, 0.8);
-    border-right-color: rgba(255, 107, 53, 0.4);
-    animation-duration: 0.9s;
-}
-
-@keyframes vortex-spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Swirling Essences */
-.vortex-essence {
-    position: absolute;
-    font-size: 1.5rem;
-    filter: drop-shadow(0 0 15px var(--essence-color));
-    animation: swirl-in 2.5s ease-in-out forwards;
-}
-
-.vortex-essence-1 {
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    animation-delay: 0s;
-}
-
-.vortex-essence-2 {
-    bottom: 20%;
-    left: 0;
-    animation-delay: 0.2s;
-}
-
-.vortex-essence-3 {
-    bottom: 20%;
-    right: 0;
-    animation-delay: 0.4s;
-}
-
-@keyframes swirl-in {
-    0% {
-        opacity: 1;
-        transform: translateX(-50%) rotate(0deg) translateY(0);
-    }
-
-    50% {
-        opacity: 1;
-        transform: translateX(-50%) rotate(360deg) translateY(0) scale(1.2);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translate(-50%, 50%) rotate(720deg) scale(0);
-    }
-}
-
-/* Center Glow */
-.vortex-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+/* Orbiting Essence Blobs */
+.liquid-orb {
     width: 40px;
     height: 40px;
-    margin: -20px 0 0 -20px;
-    background: radial-gradient(circle, rgba(255, 107, 53, 0.7) 0%, rgba(78, 205, 196, 0.4) 50%, transparent 70%);
     border-radius: 50%;
-    animation: center-pulse 0.8s ease-in-out infinite;
-}
-
-@keyframes center-pulse {
-
-    0%,
-    100% {
-        transform: scale(0.8);
-        opacity: 0.6;
-    }
-
-    50% {
-        transform: scale(1.3);
-        opacity: 1;
-    }
+    /* Gradient handled by inline style for color, but basic shape here */
+    box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.1), 0 0 15px currentColor;
 }
 
 .brewing-text {

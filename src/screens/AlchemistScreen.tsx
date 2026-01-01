@@ -3,7 +3,25 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { ESSENCES, Essence, brewRandomFood, generateBrewingMessage } from '../data/alchemistData';
+import {
+    AlchemistIconDefs,
+    FireIcon,
+    CoinIcon,
+    MoonIcon,
+    HerbIcon,
+    EnergyIcon,
+    MagicIcon
+} from '../components/AlchemistIcons';
 import './AlchemistScreen.css';
+
+const ICON_MAP: Record<string, React.ElementType> = {
+    fire: FireIcon,
+    coin: CoinIcon,
+    moon: MoonIcon,
+    herb: HerbIcon,
+    energy: EnergyIcon,
+    magic: MagicIcon
+};
 
 const AlchemistScreen: React.FC = () => {
     const navigate = useNavigate();
@@ -31,7 +49,7 @@ const AlchemistScreen: React.FC = () => {
         setBrewingMessage(generateBrewingMessage(selectedEssences));
 
         // Simulate brewing animation
-        await new Promise(resolve => setTimeout(resolve, 2500));
+        await new Promise(resolve => setTimeout(resolve, 3000)); // Slightly longer for the liquid effect to shine
 
         const result = brewRandomFood(selectedEssences);
         setBrewedFood(result);
@@ -49,6 +67,7 @@ const AlchemistScreen: React.FC = () => {
 
     return (
         <div className="alchemist-container">
+            <AlchemistIconDefs />
             <Helmet>
                 <title>The Dinner Alchemist - Mix Your Cravings | The Dinner Decider</title>
                 <meta name="description" content="Mix magical essences to discover your perfect meal. Combine Fire, Coin, Moon, Herb, Energy, and Magic to brew your dinner destiny!" />
@@ -58,20 +77,6 @@ const AlchemistScreen: React.FC = () => {
                 <meta property="og:url" content="https://www.thedinnerdecider.au/alchemist" />
                 <meta property="og:type" content="website" />
                 <meta name="twitter:card" content="summary" />
-                <script type="application/ld+json">
-                    {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "WebPage",
-                        "name": "The Dinner Alchemist",
-                        "description": "An interactive food discovery tool that helps you find your perfect meal by mixing magical essences.",
-                        "url": "https://www.thedinnerdecider.au/alchemist",
-                        "isPartOf": {
-                            "@type": "WebSite",
-                            "name": "The Dinner Decider",
-                            "url": "https://www.thedinnerdecider.au"
-                        }
-                    })}
-                </script>
             </Helmet>
 
             {/* Floating Particles */}
@@ -154,36 +159,41 @@ const AlchemistScreen: React.FC = () => {
                         >
                             {/* Essence Grid */}
                             <div className="essence-grid">
-                                {ESSENCES.map((essence, index) => (
-                                    <motion.button
-                                        key={essence.id}
-                                        className={`essence-card ${isSelected(essence) ? 'selected' : ''}`}
-                                        onClick={() => toggleEssence(essence)}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.1 * index }}
-                                        whileHover={{ scale: 1.05, y: -5 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        style={{
-                                            '--essence-color': essence.color,
-                                            borderColor: isSelected(essence) ? essence.color : 'rgba(255,255,255,0.1)'
-                                        } as React.CSSProperties}
-                                        disabled={isBrewing}
-                                    >
-                                        <span className="essence-emoji">{essence.emoji}</span>
-                                        <span className="essence-name">{essence.name}</span>
-                                        <span className="essence-desc">{essence.description}</span>
-                                        {isSelected(essence) && (
-                                            <motion.div
-                                                className="essence-check"
-                                                initial={{ scale: 0 }}
-                                                animate={{ scale: 1 }}
-                                            >
-                                                ✓
-                                            </motion.div>
-                                        )}
-                                    </motion.button>
-                                ))}
+                                {ESSENCES.map((essence, index) => {
+                                    const Icon = ICON_MAP[essence.id];
+                                    return (
+                                        <motion.button
+                                            key={essence.id}
+                                            className={`essence-card ${isSelected(essence) ? 'selected' : ''}`}
+                                            onClick={() => toggleEssence(essence)}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.1 * index }}
+                                            whileHover={{ scale: 1.05, y: -5 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            style={{
+                                                '--essence-color': essence.color,
+                                                borderColor: isSelected(essence) ? essence.color : 'rgba(255,255,255,0.4)'
+                                            } as React.CSSProperties}
+                                            disabled={isBrewing}
+                                        >
+                                            <div className="essence-icon-wrapper">
+                                                {Icon ? <Icon size={48} /> : <span>{essence.emoji}</span>}
+                                            </div>
+                                            <span className="essence-name">{essence.name}</span>
+                                            <span className="essence-desc">{essence.description}</span>
+                                            {isSelected(essence) && (
+                                                <motion.div
+                                                    className="essence-check"
+                                                    initial={{ scale: 0 }}
+                                                    animate={{ scale: 1 }}
+                                                >
+                                                    ✓
+                                                </motion.div>
+                                            )}
+                                        </motion.button>
+                                    );
+                                })}
                             </div>
 
                             {/* Cauldron */}
@@ -192,24 +202,44 @@ const AlchemistScreen: React.FC = () => {
                                 animate={isBrewing ? { scale: [1, 1.02, 1] } : {}}
                                 transition={{ repeat: isBrewing ? Infinity : 0, duration: 1 }}
                             >
-                                {/* Vortex Effect */}
+                                {/* Gooey Filter Definition */}
+                                <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+                                    <defs>
+                                        <filter id="goo">
+                                            <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
+                                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                                            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+                                        </filter>
+                                    </defs>
+                                </svg>
+
+                                {/* Liquid Mixing Effect (The core animation) */}
                                 {isBrewing && (
-                                    <div className="vortex-container">
-                                        <div className="vortex-ring vortex-ring-1"></div>
-                                        <div className="vortex-ring vortex-ring-2"></div>
-                                        <div className="vortex-ring vortex-ring-3"></div>
-                                        {/* Swirling Essences */}
+                                    <div className="liquid-container">
+                                        <motion.div
+                                            className="liquid-core"
+                                            initial={{ scale: 0 }}
+                                            animate={{ scale: [0, 1.2, 0.9, 1.5, 30] }}
+                                            transition={{ duration: 3, times: [0, 0.2, 0.5, 0.8, 1] }}
+                                        />
                                         {selectedEssences.map((essence, index) => (
-                                            <div
+                                            <motion.div
                                                 key={essence.id}
-                                                className={`vortex-essence vortex-essence-${index + 1}`}
-                                                style={{ '--essence-color': essence.color } as React.CSSProperties}
+                                                className="liquid-orb-wrapper"
+                                                initial={{ rotate: index * (360 / selectedEssences.length) }}
+                                                animate={{ rotate: index * (360 / selectedEssences.length) + 1080 }}
+                                                transition={{ duration: 3, ease: "easeInOut" }}
+                                                style={{ position: 'absolute', width: '100%', height: '100%', display: 'flex', justifyContent: 'center' }}
                                             >
-                                                {essence.emoji}
-                                            </div>
+                                                <motion.div
+                                                    className="liquid-orb"
+                                                    style={{ backgroundColor: essence.color }}
+                                                    initial={{ y: -60, scale: 1 }}
+                                                    animate={{ y: 0, scale: 0.1 }}
+                                                    transition={{ duration: 2.8, ease: "easeIn" }}
+                                                />
+                                            </motion.div>
                                         ))}
-                                        {/* Center Glow */}
-                                        <div className="vortex-center"></div>
                                     </div>
                                 )}
 
@@ -222,18 +252,21 @@ const AlchemistScreen: React.FC = () => {
                                         <>
                                             <div className="cauldron-essences">
                                                 <AnimatePresence>
-                                                    {selectedEssences.map((essence) => (
-                                                        <motion.span
-                                                            key={essence.id}
-                                                            className="cauldron-essence"
-                                                            initial={{ scale: 0, y: -30 }}
-                                                            animate={{ scale: 1, y: 0 }}
-                                                            exit={{ scale: 0, y: 30 }}
-                                                            style={{ color: essence.color }}
-                                                        >
-                                                            {essence.emoji}
-                                                        </motion.span>
-                                                    ))}
+                                                    {selectedEssences.map((essence) => {
+                                                        const Icon = ICON_MAP[essence.id];
+                                                        return (
+                                                            <motion.span
+                                                                key={essence.id}
+                                                                className="cauldron-essence"
+                                                                initial={{ scale: 0, y: -30 }}
+                                                                animate={{ scale: 1, y: 0 }}
+                                                                exit={{ scale: 0, y: 30 }}
+                                                                style={{ color: essence.color }}
+                                                            >
+                                                                {Icon ? <Icon size={24} /> : essence.emoji}
+                                                            </motion.span>
+                                                        );
+                                                    })}
                                                 </AnimatePresence>
                                             </div>
                                             <span className="cauldron-count">

@@ -44,22 +44,48 @@ const FoodDetailPage: React.FC = () => {
     const pageDescription = food.description || `Discover everything about ${food.name} - taste profile, origins, and how to enjoy it like a local.`;
     const canonicalUrl = `https://www.thedinnerdecider.au/food/${slug}`;
 
-    // Structured Data for SEO
+    // Structured Data for SEO (Article + FAQPage)
     const structuredData = {
         "@context": "https://schema.org",
-        "@type": "Article",
-        "name": food.name,
-        "description": pageDescription,
-        "image": `https://www.thedinnerdecider.au${food.imageUrl}`,
-        "url": canonicalUrl,
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": canonicalUrl
-        },
-        "author": {
-            "@type": "Organization",
-            "name": "The Dinner Decider"
-        }
+        "@graph": [
+            {
+                "@type": "Article",
+                "name": food.name,
+                "headline": pageTitle,
+                "description": pageDescription,
+                "image": `https://www.thedinnerdecider.au${food.imageUrl}`,
+                "url": canonicalUrl,
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": canonicalUrl
+                },
+                "author": {
+                    "@type": "Organization",
+                    "name": "The Dinner Decider"
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "The Dinner Decider",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://www.thedinnerdecider.au/logo.png"
+                    }
+                }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": food.qaTitle || `What is ${food.name}?`,
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": food.funFact || food.description
+                        }
+                    }
+                ]
+            }
+        ]
     };
 
     const handleSearchNearby = () => {
@@ -82,7 +108,15 @@ const FoodDetailPage: React.FC = () => {
                 <meta property="og:description" content={pageDescription} />
                 <meta property="og:image" content={`https://www.thedinnerdecider.au${food.imageUrl}`} />
                 <meta property="og:url" content={canonicalUrl} />
+                <meta property="og:site_name" content="The Dinner Decider" />
                 <meta property="og:type" content="article" />
+
+                {/* Twitter Card for better social sharing */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={pageTitle} />
+                <meta name="twitter:description" content={pageDescription} />
+                <meta name="twitter:image" content={`https://www.thedinnerdecider.au${food.imageUrl}`} />
+
                 <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
             </Helmet>
 
@@ -104,7 +138,11 @@ const FoodDetailPage: React.FC = () => {
                     transition={{ duration: 0.5 }}
                 >
                     <div className="food-hero-image">
-                        <img src={food.imageUrl} alt={food.name} loading="eager" />
+                        <img
+                            src={food.imageUrl}
+                            alt={`Authentic ${food.name} dish - ${food.tags?.join(', ')}`}
+                            loading="eager"
+                        />
                     </div>
                     <div className="food-hero-content">
                         <h1>{food.name}</h1>

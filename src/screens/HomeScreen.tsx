@@ -135,7 +135,7 @@ const HomeScreen: React.FC = () => {
         <link rel="canonical" href="https://www.thedinnerdecider.au/" />
         <meta property="og:title" content="The Dinner Decider - Fun Food Games" />
         <meta property="og:description" content="Play Food Battle Royale Tournament, The Dinner Alchemist, or Food Personality Quiz to decide what to eat!" />
-        <meta property="og:image" content="https://www.thedinnerdecider.au/images/og-image.jpg" />
+        <meta property="og:image" content="https://www.thedinnerdecider.au/images/og-image-new.png" />
         <meta property="og:url" content="https://www.thedinnerdecider.au" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />

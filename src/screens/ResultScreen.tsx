@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Confetti from 'react-confetti';
 import { ALL_FOODS } from '../../constants/foods';
+import { generateSlug } from '../utils/foodUtils';
 import Modal from '../../components/Modal';
 import { Helmet } from 'react-helmet-async';
 import './ResultScreen.css';
@@ -132,12 +133,13 @@ const ResultScreen: React.FC = () => {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <link rel="canonical" href={`https://www.thedinnerdecider.au/result/${foodName}`} />
+        {/* Canonical points to /food/ page to consolidate SEO signals */}
+        <link rel="canonical" href={`https://www.thedinnerdecider.au/food/${generateSlug(winner.name)}`} />
         <link rel="preload" fetchPriority="high" as="image" href={winner.imageUrl} />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
         <meta property="og:image" content={`https://www.thedinnerdecider.au${winner.imageUrl}`} />
-        <meta property="og:url" content={`https://www.thedinnerdecider.au/result/${foodName}`} />
+        <meta property="og:url" content={`https://www.thedinnerdecider.au/food/${generateSlug(winner.name)}`} />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">

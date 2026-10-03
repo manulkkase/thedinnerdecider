@@ -3,7 +3,13 @@ import { useState, useEffect, useMemo } from 'react';
 import { FoodItem } from '../types';
 
 const shuffleArray = <T,>(array: T[]): T[] => {
-  return [...array].sort(() => Math.random() - 0.5);
+  // Fisher-Yates 셔플: 편향 없는 무작위 셔플
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
 };
 
 const useTournament = (foods: FoodItem[], tournamentSize: number, isPlaying: boolean) => {

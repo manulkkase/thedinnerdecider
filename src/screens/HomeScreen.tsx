@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './HomeScreen.css';
@@ -19,19 +19,24 @@ const structuredData = {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "AUD"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "ratingCount": "156"
   }
 };
 
-// 오늘의 랜덤 인기 음식 3개 선택
+// 오늘의 랜덤 인기 음식 3개 선택 (날짜 기반 시드로 하루 동안 고정)
 const getTodaysPopularFoods = () => {
   const today = new Date().toDateString();
-  const seed = today.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-  const shuffled = [...ALL_FOODS].sort(() => 0.5 - ((seed * Math.random()) % 1));
+  let seed = today.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+  // 간단한 시드 기반 난수 생성기 (mulberry32 스타일)
+  const rand = () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+  // Fisher-Yates 셔플
+  const shuffled = [...ALL_FOODS];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
   return shuffled.slice(0, 3);
 };
 
@@ -114,14 +119,13 @@ const SpotlightCard: React.FC<{
 
 const HomeScreen: React.FC = () => {
   const [playCount, setPlayCount] = useState(0);
-  const popularFoods = getTodaysPopularFoods();
+  // 렌더마다 바뀌지 않도록 하루 동안 고정된 목록 사용
+  const popularFoods = useMemo(() => getTodaysPopularFoods(), []);
 
-  // 소셜 증거용 플레이 카운트 (localStorage 기반)
+  // 실제 플레이 횟수 (정직한 카운터 - 토너먼트 완료 시 1씩 증가)
   useEffect(() => {
-    const storedCount = localStorage.getItem('totalPlayCount');
-    const baseCount = 1247; // 기본 시작 수치
-    const count = storedCount ? parseInt(storedCount) : baseCount;
-    setPlayCount(count);
+    const count = parseInt(localStorage.getItem('dd_decisions') || '0', 10);
+    setPlayCount(Number.isNaN(count) ? 0 : count);
   }, []);
 
   return (
@@ -170,7 +174,7 @@ const HomeScreen: React.FC = () => {
             transition={{ delay: 0.5, duration: 0.4 }}
           >
             <span className="pulse-dot"></span>
-            <span>{playCount.toLocaleString()}+ decisions made today</span>
+            <span>You've made {playCount.toLocaleString()} decisions</span>
           </motion.div>
         </motion.div>
 

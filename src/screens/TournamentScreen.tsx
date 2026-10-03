@@ -143,6 +143,9 @@ const TournamentScreen: React.FC = () => {
   // 🏆 우승자 감지 - winner 상태가 변경되면 결과 페이지로 이동
   useEffect(() => {
     if (tournament.winner) {
+      // 실제 플레이 횟수 기록 (홈 화면의 정직한 카운터용)
+      const prev = parseInt(localStorage.getItem('dd_decisions') || '0', 10);
+      localStorage.setItem('dd_decisions', String((Number.isNaN(prev) ? 0 : prev) + 1));
       navigate(`/result/${encodeURIComponent(tournament.winner.name)}`);
     }
   }, [tournament.winner, navigate]);

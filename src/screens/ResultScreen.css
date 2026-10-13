@@ -1,4 +1,15 @@
-/* ======= RESULT SCREEN - PREMIUM REDESIGN ======= */
+/* ======= RESULT SCREEN ======= */
+
+.dinner-result .result-hero { width: min(100% - 48px, 1000px); height: 390px; min-height: 0; margin: 20px auto 0; border-radius: 14px; }
+.dinner-result .result-hero-overlay { background: linear-gradient(to top, rgba(36,40,32,.2), transparent 55%); }
+.dinner-result .result-content { max-width: 760px; margin-top: -50px; }
+.dinner-result .result-glass-card { border-radius: 12px; box-shadow: none; backdrop-filter: none; }
+.dinner-result .result-title { background: none; -webkit-text-fill-color: #242820; color: #242820; letter-spacing: -1.5px; font-weight: 800; }
+.dinner-result .winner-badge { background: #f2c94c; color: #242820; font-family: 'DM Sans', sans-serif; font-size: 14px; border-radius: 8px; box-shadow: none; animation: none; }
+.dinner-result .result-tag { color: #526145; background: #f2f4ed; border-color: #dce1d3; }
+.dinner-result .result-cta-primary, .dinner-result .result-cta-secondary { border-radius: 8px; box-shadow: none; }
+.dinner-result .result-tabs-container { border: 1px solid #dedfd5; border-radius: 12px; box-shadow: none; }
+@media (max-width: 600px) { .dinner-result .result-hero { height: 260px; width: calc(100% - 32px); } }
 
 /* 전체 컨테이너 */
 .result-page {

@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, MotionConfig, useReducedMotion } from 'framer-motion';
 import Confetti from 'react-confetti';
 import { ALL_FOODS } from '../../constants/foods';
 import { generateSlug } from '../utils/foodUtils';
 import Modal from '../../components/Modal';
 import { Helmet } from 'react-helmet-async';
 import './ResultScreen.css';
+import DinnerHeader from '../../components/DinnerHeader';
 
 // 관련 음식 추천 함수 (같은 태그 기반)
 const getRelatedFoods = (currentFood: typeof ALL_FOODS[0] | null, count: number = 6) => {
@@ -22,6 +23,7 @@ const getRelatedFoods = (currentFood: typeof ALL_FOODS[0] | null, count: number 
 type TabType = 'story' | 'order' | 'similar';
 
 const ResultScreen: React.FC = () => {
+  const reduceMotion = useReducedMotion();
   const [showConfetti, setShowConfetti] = useState(true);
   const [activeTab, setActiveTab] = useState<TabType>('story');
   const [windowDimensions, setWindowDimensions] = useState({
@@ -80,7 +82,7 @@ const ResultScreen: React.FC = () => {
   };
 
   const handlePlayAgain = () => {
-    navigate('/');
+    navigate('/tournament-setup');
   };
 
   const handleShare = async () => {
@@ -115,9 +117,11 @@ const ResultScreen: React.FC = () => {
   }
 
   return (
-    <div className="result-page">
+    <MotionConfig reducedMotion="user">
+    <div className="dinner-shell result-page dinner-result">
+      <DinnerHeader />
       {/* 🎉 Confetti */}
-      {showConfetti && (
+      {showConfetti && !reduceMotion && (
         <div className="confetti-container">
           <Confetti
             width={windowDimensions.width}
@@ -125,7 +129,7 @@ const ResultScreen: React.FC = () => {
             recycle={false}
             numberOfPieces={300}
             gravity={0.3}
-            colors={['#E07B3C', '#D4915A', '#4DB6AC', '#3D9A91', '#F4A574']}
+            colors={['#D93825', '#526145', '#F2C94C']}
           />
         </div>
       )}
@@ -174,7 +178,7 @@ const ResultScreen: React.FC = () => {
           transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.3 }}
         >
           <span className="winner-badge-icon">🏆</span>
-          WINNER
+          Dinner, decided
         </motion.div>
       </div>
 
@@ -394,6 +398,7 @@ const ResultScreen: React.FC = () => {
         </Modal>
       )}
     </div>
+    </MotionConfig>
   );
 };
 

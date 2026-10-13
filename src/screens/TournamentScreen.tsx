@@ -1,256 +1,92 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FoodItem } from '../../types';
+import { useReducedMotion } from 'framer-motion';
 import { ALL_FOODS } from '../../constants/foods';
+import { FoodItem } from '../../types';
 import useTournament from '../../hooks/useTournament';
+import DinnerHeader from '../../components/DinnerHeader';
 import BattleCard from '../../components/BattleCard';
-import VSDivider from '../../components/VSDivider';
 import './TournamentScreen.css';
 
-// 라운드 스플래시 컴포넌트
-const RoundSplash: React.FC<{ roundName: string; onComplete: () => void }> = ({ roundName, onComplete }) => {
-  useEffect(() => {
-    const timer = setTimeout(onComplete, 1500);
-    return () => clearTimeout(timer);
-  }, [onComplete]);
-
-  return (
-    <motion.div
-      className="round-splash-overlay"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <motion.div
-        className="round-splash-content"
-        initial={{ scale: 0.5, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-      >
-        <h1 className="round-splash-title">{roundName}</h1>
-        <p className="round-splash-subtitle">Who will win this round?</p>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-// 진행 바 컴포넌트
-const BattleProgressBar: React.FC<{
-  current: number;
-  total: number;
-  roundName: string;
-  totalRounds: number;
-  currentRound: number;
-}> = ({ current, total, roundName, totalRounds, currentRound }) => {
-  const progress = ((current) / total) * 100;
-
-  return (
-    <div className="progress-container">
-      <div className="progress-header">
-        <span className="progress-round-name">{roundName}</span>
-        <span className="progress-count">{current} / {total} matches</span>
-      </div>
-      <div className="progress-bar-track">
-        <motion.div
-          className="progress-bar-fill"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.5 }}
-        />
-      </div>
-      <div className="round-indicators">
-        {[...Array(totalRounds)].map((_, i) => (
-          <div
-            key={i}
-            className={`round-indicator ${i < currentRound ? 'completed' : ''} ${i === currentRound ? 'active' : ''}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const TournamentScreen: React.FC = () => {
-  const [searchParams] = useSearchParams();
+  const [params] = useSearchParams();
   const navigate = useNavigate();
-
-  // 선택 애니메이션 상태
-  const [selectedFood, setSelectedFood] = useState<FoodItem | null>(null);
-  const [showRoundSplash, setShowRoundSplash] = useState(true);
-  const [lastRoundName, setLastRoundName] = useState('');
-  const [matchupKey, setMatchupKey] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const size = Number(params.get('size') || 16);
+  const [selected, setSelected] = useState<FoodItem | null>(null);
+  const [completed, setCompleted] = useState(0);
+  const selectionLock = useRef(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const recordedWinner = useRef<number | null>(null);
+  const arena = useRef<HTMLDivElement>(null);
+  const foods = useMemo(() => {
+    const dietary = params.get('dietary')?.split(',').filter(Boolean) || [];
+    const cuisine = params.get('cuisine')?.split(',').filter(Boolean) || [];
+    const mood = params.get('mood');
+    return ALL_FOODS.filter(food => dietary.every(tag => food.tags.includes(tag)) &&
+      (!cuisine.length || cuisine.some(tag => food.tags.includes(tag))) &&
+      (!mood || food.mood?.some(tag => tag === mood)));
+  }, [params]);
+  const valid = [8, 16, 32].includes(size) && foods.length >= size;
+  const tournament = useTournament(foods, size, valid);
+  useEffect(() => {
+    if (completed > 0) arena.current?.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
+  }, [completed]);
 
   useEffect(() => {
-    document.body.classList.remove('home-background');
-
-    // 🎮 게임 집중 모드: auto-ads 숨기기
     document.body.classList.add('no-ads');
-
     return () => {
-      // 페이지 떠날 때 다시 광고 활성화
       document.body.classList.remove('no-ads');
+      if (timer.current) clearTimeout(timer.current);
     };
   }, []);
-
-  const tournamentSize = parseInt(searchParams.get('size') || '16');
-
-  const dietaryFilters = useMemo(() =>
-    searchParams.get('dietary')?.split(',').filter(Boolean) || []
-    , [searchParams]);
-
-  const cuisineFilters = useMemo(() =>
-    searchParams.get('cuisine')?.split(',').filter(Boolean) || []
-    , [searchParams]);
-
-  const filteredFoods = useMemo(() => {
-    let foods = ALL_FOODS;
-    if (dietaryFilters.length > 0) {
-      foods = foods.filter(food => dietaryFilters.every(tag => food.tags.includes(tag)));
-    }
-    if (cuisineFilters.length > 0) {
-      foods = foods.filter(food => cuisineFilters.some(tag => food.tags.includes(tag)));
-    }
-    return foods;
-  }, [dietaryFilters, cuisineFilters]);
-
-  const tournament = useTournament(filteredFoods, tournamentSize, true);
-
-  // 현재 라운드에 맞는 총 라운드 수 계산
-  const getTotalRounds = (size: number) => Math.log2(size);
-  const getCurrentRoundIndex = (roundName: string, size: number) => {
-    const totalRounds = getTotalRounds(size);
-    if (roundName.includes('Final')) return totalRounds - 1;
-    if (roundName.includes('Semi')) return totalRounds - 2;
-    if (roundName.includes('Quarter')) return totalRounds - 3;
-    const match = roundName.match(/Round of (\d+)/);
-    if (match) {
-      const roundSize = parseInt(match[1]);
-      return getTotalRounds(size) - getTotalRounds(roundSize) - 1;
-    }
-    return 0;
-  };
-
-  // 라운드 변경 감지
   useEffect(() => {
-    if (tournament.roundName && tournament.roundName !== lastRoundName && !lastRoundName.includes('Loading')) {
-      setShowRoundSplash(true);
-      setLastRoundName(tournament.roundName);
-    }
-  }, [tournament.roundName, lastRoundName]);
-
-  // 🏆 우승자 감지 - winner 상태가 변경되면 결과 페이지로 이동
+    setCompleted(0);
+    setSelected(null);
+    selectionLock.current = false;
+    recordedWinner.current = null;
+    if (timer.current) clearTimeout(timer.current);
+  }, [params]);
   useEffect(() => {
-    if (tournament.winner) {
-      // 실제 플레이 횟수 기록 (홈 화면의 정직한 카운터용)
-      const prev = parseInt(localStorage.getItem('dd_decisions') || '0', 10);
-      localStorage.setItem('dd_decisions', String((Number.isNaN(prev) ? 0 : prev) + 1));
-      navigate(`/result/${encodeURIComponent(tournament.winner.name)}`);
-    }
+    if (!tournament.winner || recordedWinner.current === tournament.winner.id) return;
+    recordedWinner.current = tournament.winner.id;
+    try {
+      const previous = Number(localStorage.getItem('dd_decisions'));
+      localStorage.setItem('dd_decisions', String((Number.isSafeInteger(previous) && previous >= 0 ? previous : 0) + 1));
+    } catch { /* Storage restrictions must not prevent showing the winner. */ }
+    navigate(`/result/${encodeURIComponent(tournament.winner.name)}`, { replace: true });
   }, [tournament.winner, navigate]);
 
-  const handleSelectWinner = useCallback((food: FoodItem) => {
-    if (selectedFood) return; // 이미 선택 중이면 무시
-
-    setSelectedFood(food);
-
-    // 선택 애니메이션 후 다음 매치업으로
-    setTimeout(() => {
+  const select = (food: FoodItem) => {
+    if (selectionLock.current) return;
+    selectionLock.current = true;
+    setSelected(food);
+    timer.current = setTimeout(() => {
       tournament.selectWinner(food);
-      setSelectedFood(null);
-      setMatchupKey(prev => prev + 1);
-      // winner 체크는 위 useEffect에서 처리
-    }, 800);
-  }, [selectedFood, tournament]);
-
-  const handleRoundSplashComplete = useCallback(() => {
-    setShowRoundSplash(false);
-  }, []);
-
-  if (!tournament.currentMatchup) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Helmet>
-          <title>Loading Tournament... - The Dinner Decider</title>
-          <meta name="robots" content="noindex" />
-        </Helmet>
-        <motion.p
-          className="text-lg text-slate-300"
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
-          Loading your tournament...
-        </motion.p>
-      </div>
-    );
-  }
-
-  const [item1, item2] = tournament.currentMatchup;
+      setCompleted(count => count + 1);
+      setSelected(null);
+      selectionLock.current = false;
+    }, reduceMotion ? 0 : 350);
+  };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-b from-slate-900 to-slate-950">
-      <Helmet>
-        <title>{tournament.roundName}: {item1.name} vs {item2.name} - The Dinner Decider</title>
-        <meta name="description" content={`Vote for your dinner! Which one will win this round: ${item1.name} or ${item2.name}?`} />
-        <meta name="robots" content="noindex" />
-      </Helmet>
-
-      {/* 라운드 스플래시 */}
-      <AnimatePresence>
-        {showRoundSplash && (
-          <RoundSplash
-            roundName={tournament.roundName}
-            onComplete={handleRoundSplashComplete}
-          />
-        )}
-      </AnimatePresence>
-
-      <div className="max-w-7xl mx-auto p-4">
-        {/* 진행 바 */}
-        <BattleProgressBar
-          current={tournament.progress.current}
-          total={tournament.progress.total}
-          roundName={tournament.roundName}
-          totalRounds={getTotalRounds(tournamentSize)}
-          currentRound={getCurrentRoundIndex(tournament.roundName, tournamentSize)}
-        />
-
-        {/* 배틀 아레나 */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={matchupKey}
-            className="battle-container"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* 왼쪽 카드 */}
-            <BattleCard
-              food={item1}
-              onSelect={() => handleSelectWinner(item1)}
-              position="left"
-              isSelected={selectedFood?.id === item1.id}
-              isLoser={selectedFood !== null && selectedFood?.id !== item1.id}
-            />
-
-            {/* VS 디바이더 */}
-            <VSDivider />
-
-            {/* 오른쪽 카드 */}
-            <BattleCard
-              food={item2}
-              onSelect={() => handleSelectWinner(item2)}
-              position="right"
-              isSelected={selectedFood?.id === item2.id}
-              isLoser={selectedFood !== null && selectedFood?.id !== item2.id}
-            />
-          </motion.div>
-        </AnimatePresence>
-      </div>
+    <div className="dinner-shell">
+      <Helmet><title>{valid ? `${tournament.roundName} - The Dinner Decider` : 'Adjust your tournament - The Dinner Decider'}</title><meta name="robots" content="noindex" /></Helmet>
+      <DinnerHeader />
+      {!valid ? <div className="dinner-battle-empty"><h1>Let’s reset the table.</h1><p>Choose 8, 16 or 32 dishes and enough matching food options to start.</p><Link to="/tournament-setup" className="dinner-button dinner-button-primary">Adjust your tournament</Link></div> : !tournament.currentMatchup ? <p className="dinner-battle-loading" role="status">Setting the table…</p> : (
+        <section className="dinner-battle" aria-labelledby="battle-heading">
+          <div className="dinner-battle-topline"><Link to="/tournament-setup" className="dinner-back">‹ Start over</Link><span>{size - 1 - completed} {size - 1 - completed === 1 ? 'choice' : 'choices'} to dinner</span></div>
+          <div className="dinner-battle-heading"><p>{tournament.roundName}</p><h1 id="battle-heading">What would you rather eat?</h1><p>Go with your gut. Pick one to keep it in the running.</p></div>
+          <div className="dinner-battle-progress"><span>Match {Math.min(completed + 1, size - 1)} of {size - 1}</span><progress value={completed} max={size - 1} aria-label="Completed tournament matches" /></div>
+          <div className="dinner-battle-arena" ref={arena}>
+            {tournament.currentMatchup.map((food, index) => <BattleCard key={`${completed}-${food.id}`} food={food} position={index === 0 ? 'left' : 'right'} onSelect={() => select(food)} isSelected={selected?.id === food.id} isLoser={selected !== null && selected.id !== food.id} />)}
+            <span className="dinner-battle-vs" aria-hidden="true">vs</span>
+          </div>
+          <p className="dinner-battle-status" role="status">{selected ? `${selected.name} is your pick.` : `${tournament.roundName}: ${tournament.currentMatchup[0].name} or ${tournament.currentMatchup[1].name}.`}</p>
+        </section>
+      )}
     </div>
   );
 };
-
 export default TournamentScreen;

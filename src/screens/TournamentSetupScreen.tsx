@@ -1,258 +1,87 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useMemo, useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FilterOptions } from '../../types';
-import { ALL_FOODS_COMBINED, CUISINE_OPTIONS, DIETARY_OPTIONS, MOOD_OPTIONS } from '../../constants/foods';
-import HowToPlayModal from '../../components/HowToPlayModal';
+import { FilterOptions, FoodItem } from '../../types';
+import { ALL_FOODS, CUISINE_OPTIONS, DIETARY_OPTIONS, MOOD_OPTIONS } from '../../constants/foods';
+import DinnerHeader, { PlateMark } from '../../components/DinnerHeader';
 import AdSense from '../../components/AdSense';
 import './TournamentSetupScreen.css';
 
-// 사이즈 옵션 정의
-const SIZE_OPTIONS = [
-  { size: 8, icon: '⚡', label: 'Quick Battle', matches: 7 },
-  { size: 16, icon: '🏆', label: 'Classic', matches: 15 },
-  { size: 32, icon: '👑', label: 'Epic Marathon', matches: 31 },
+const SIZES = [
+  { size: 8, label: 'A quick bite', detail: '7 choices to dinner' },
+  { size: 16, label: 'The full spread', detail: '15 choices to dinner' },
+  { size: 32, label: 'A proper feast', detail: '31 choices to dinner' },
 ];
-
-// 애니메이션 variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 }
-  }
-};
 
 const TournamentSetupScreen: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [tournamentSize, setTournamentSize] = useState<number>(16);
-  const [filters, setFilters] = useState<FilterOptions>({ dietary: [], cuisine: [] });
-  const [moodFilter, setMoodFilter] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    document.body.classList.remove('home-background');
-
-    // Pre-select cuisine from URL parameter
-    const initialCuisine = searchParams.get('cuisine');
-    if (initialCuisine && CUISINE_OPTIONS.some(opt => opt.value === initialCuisine)) {
-      setFilters(prev => ({ ...prev, cuisine: [initialCuisine] }));
-    }
-  }, [searchParams]);
-
-  const filteredFoods = useMemo(() => {
-    let foods = ALL_FOODS_COMBINED;
-    // Mood filter (single select)
-    if (moodFilter) {
-      foods = foods.filter(food => food.mood?.includes(moodFilter as any));
-    }
-    if (filters.dietary.length > 0) {
-      foods = foods.filter(food => filters.dietary.every(tag => food.tags.includes(tag)));
-    }
-    if (filters.cuisine.length > 0) {
-      foods = foods.filter(food => filters.cuisine.some(tag => food.tags.includes(tag)));
-    }
-    return foods;
-  }, [filters, moodFilter]);
-
-  const handleStartTournament = () => {
-    if (filteredFoods.length >= tournamentSize) {
-      const params = new URLSearchParams();
-      params.append('size', tournamentSize.toString());
-      if (filters.dietary.length > 0) {
-        params.append('dietary', filters.dietary.join(','));
-      }
-      if (filters.cuisine.length > 0) {
-        params.append('cuisine', filters.cuisine.join(','));
-      }
-      navigate(`/tournament?${params.toString()}`);
-    } else {
-      alert(`Not enough food options for a ${tournamentSize}-item tournament. Found ${filteredFoods.length} items.`);
-    }
+  const [tournamentSize, setTournamentSize] = useState(16);
+  const [filters, setFilters] = useState<FilterOptions>(() => ({
+    dietary: [], cuisine: CUISINE_OPTIONS.some(item => item.value === searchParams.get('cuisine')) ? [searchParams.get('cuisine')!] : [],
+  }));
+  const [mood, setMood] = useState<NonNullable<FoodItem['mood']>[number] | null>(null);
+  const filteredFoods = useMemo(() => ALL_FOODS.filter(food =>
+    (!mood || food.mood?.includes(mood)) &&
+    filters.dietary.every(tag => food.tags.includes(tag)) &&
+    (!filters.cuisine.length || filters.cuisine.some(tag => food.tags.includes(tag)))
+  ), [filters, mood]);
+  const ready = filteredFoods.length >= tournamentSize;
+  const hasFilters = Boolean(mood || filters.dietary.length || filters.cuisine.length);
+  const resetFilters = () => { setFilters({ dietary: [], cuisine: [] }); setMood(null); };
+  const toggle = (type: keyof FilterOptions, value: string) => setFilters(previous => ({
+    ...previous, [type]: previous[type].includes(value) ? previous[type].filter(tag => tag !== value) : [...previous[type], value],
+  }));
+  const start = () => {
+    if (!ready) return;
+    const params = new URLSearchParams({ size: String(tournamentSize) });
+    if (mood) params.set('mood', mood);
+    if (filters.dietary.length) params.set('dietary', filters.dietary.join(','));
+    if (filters.cuisine.length) params.set('cuisine', filters.cuisine.join(','));
+    navigate(`/tournament?${params}`);
   };
-
-  const toggleFilter = (type: 'dietary' | 'cuisine', value: string) => {
-    setFilters(prev => {
-      const current = prev[type];
-      const newFilters = current.includes(value)
-        ? current.filter(item => item !== value)
-        : [...current, value];
-      return { ...prev, [type]: newFilters };
-    });
-  };
-
-  const isReady = filteredFoods.length >= tournamentSize;
 
   return (
-    <div className="setup-container">
-      <Helmet>
-        <title>Start a Food Battle Royale - The Dinner Decider</title>
-        <meta name="description" content="Set up your dinner tournament. Choose your tournament size, filter by dietary needs or cuisine!" />
-        <link rel="canonical" href="https://www.thedinnerdecider.au/tournament-setup" />
-      </Helmet>
-
-      {/* 플로팅 파티클 */}
-      <div className="setup-particles">
-        {[...Array(4)].map((_, i) => (
-          <div key={i} className="setup-particle" />
-        ))}
+    <div className="dinner-shell">
+      <Helmet><title>Set the table - The Dinner Decider</title><meta name="description" content="Choose your dinner tournament size, cuisines and dietary preferences. Then let your cravings decide." /><link rel="canonical" href="https://www.thedinnerdecider.au/tournament-setup" /></Helmet>
+      <DinnerHeader />
+      <div className="dinner-setup">
+        <div className="dinner-setup-heading"><Link to="/" className="dinner-back">‹ Back to the table</Link><h1>What’s on the menu?</h1><p>A few favourites or a whole feast. Set up tonight’s tournament.</p></div>
+        <div className="dinner-setup-grid">
+          <div className="dinner-preferences">
+            <fieldset className="dinner-fieldset"><legend>How big is the appetite?</legend><p>Choose how many dishes enter the tournament.</p>
+              <div className="dinner-size-options">{SIZES.map(option => (
+                <label key={option.size} className={`dinner-size-option${tournamentSize === option.size ? ' selected' : ''}`}>
+                  <input type="radio" name="tournament-size" value={option.size} checked={tournamentSize === option.size} onChange={() => setTournamentSize(option.size)} />
+                  <strong>{option.size}<span> dishes</span></strong><span className="dinner-size-name">{option.label}</span><small>{option.detail}</small>
+                </label>
+              ))}</div>
+            </fieldset>
+            <fieldset className="dinner-fieldset"><legend>What are you craving?</legend><p>Pick a mood, or leave it open to anything.</p>
+              <div className="dinner-filter-list">{MOOD_OPTIONS.map(option => (
+                <button type="button" key={option.value} aria-pressed={mood === option.value} onClick={() => setMood(mood === option.value ? null : option.value as NonNullable<FoodItem['mood']>[number])} className="dinner-filter"><span aria-hidden="true">{option.icon}</span> {option.label}</button>
+              ))}</div>
+            </fieldset>
+            <fieldset className="dinner-fieldset"><legend>Any dietary preferences?</legend><p>We’ll only include dishes matching all your selections.</p>
+              <div className="dinner-filter-list">{DIETARY_OPTIONS.map(option => <button type="button" key={option.value} className="dinner-filter" aria-pressed={filters.dietary.includes(option.value)} onClick={() => toggle('dietary', option.value)}>{option.label}</button>)}</div>
+            </fieldset>
+            <fieldset className="dinner-fieldset"><legend>A world of good food</legend><p>Choose your cuisines. No selection means everything’s on the table.</p>
+              <div className="dinner-filter-list">{CUISINE_OPTIONS.map(option => <button type="button" key={option.value} className="dinner-filter" aria-pressed={filters.cuisine.includes(option.value)} onClick={() => toggle('cuisine', option.value)}><span aria-hidden="true">{option.icon}</span> {option.label}</button>)}</div>
+            </fieldset>
+          </div>
+          <aside className="dinner-ticket" aria-label="Tournament summary">
+            <span className="dinner-ticket-mark"><PlateMark /></span><h2>Your dinner plans</h2><p>No more “you choose”.</p>
+            <dl><div><dt>Dishes in the draw</dt><dd>{tournamentSize}</dd></div><div><dt>Choices to a winner</dt><dd>{tournamentSize - 1}</dd></div><div><dt>Dinner decisions</dt><dd>Sorted.</dd></div></dl>
+            <div className="dinner-match-count" role="status"><strong>{filteredFoods.length}</strong> dishes match your appetite</div>
+            {!ready && <p className="dinner-filter-warning">Not quite enough for {tournamentSize} dishes. {filteredFoods.length >= 8 ? 'Choose a smaller tournament or clear a filter.' : 'Clear a filter to add more dishes.'}</p>}
+            <button type="button" onClick={start} disabled={!ready} className="dinner-button dinner-button-primary">Start a tournament</button>
+            {hasFilters && <button type="button" className="dinner-clear-filters" onClick={resetFilters}>Clear all filters</button>}
+            <details className="dinner-rules"><summary>How do I play?</summary><p>Choose the dish you’d rather eat in each pair. Your picks move into the next round until just one winner remains. There are no wrong answers.</p></details>
+          </aside>
+        </div>
+        <AdSense className="dinner-setup-ad" />
       </div>
-
-      <motion.div
-        className="setup-content"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* 헤더 */}
-        <motion.div className="setup-header" variants={itemVariants}>
-          <h1 className="setup-title">Food Battle Royale</h1>
-          <p className="setup-subtitle">Set up your epic dinner tournament!</p>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="how-to-play-btn"
-          >
-            ❓ How to Play
-          </button>
-        </motion.div>
-
-        {/* Mood 선택 (Optional) */}
-        <motion.div className="setup-card" variants={itemVariants}>
-          <h2 className="setup-card-title">
-            <span className="step-number">✨</span> What's Your Mood?
-            <span style={{ fontSize: '0.75rem', color: '#9ca3af', marginLeft: '0.5rem' }}>(Optional)</span>
-          </h2>
-          <div className="mood-selector">
-            {MOOD_OPTIONS.map(opt => (
-              <motion.button
-                key={opt.value}
-                className={`mood-card ${moodFilter === opt.value ? 'active' : ''}`}
-                onClick={() => setMoodFilter(moodFilter === opt.value ? null : opt.value)}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="mood-icon">{opt.icon}</span>
-                <span className="mood-label">{opt.label}</span>
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* 사이즈 선택 */}
-        <motion.div className="setup-card" variants={itemVariants}>
-          <h2 className="setup-card-title">
-            <span className="step-number">1</span> Tournament Size
-          </h2>
-          <div className="size-selector">
-            {SIZE_OPTIONS.map(option => (
-              <motion.div
-                key={option.size}
-                className={`size-card ${tournamentSize === option.size ? 'active' : ''}`}
-                onClick={() => setTournamentSize(option.size)}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="size-card-icon">{option.icon}</div>
-                <div className="size-card-info">
-                  <div className="size-card-number">{option.size} Items</div>
-                  <div className="size-card-label">{option.label}</div>
-                  <div className="size-card-matches">{option.matches} matches</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Dietary 필터 */}
-        <motion.div className="setup-card" variants={itemVariants}>
-          <h2 className="setup-card-title">
-            <span className="step-number">2</span> Dietary Preference
-          </h2>
-          <div className="filter-chips">
-            {DIETARY_OPTIONS.map(opt => (
-              <motion.button
-                key={opt.value}
-                className={`filter-chip ${filters.dietary.includes(opt.value) ? 'active' : ''}`}
-                onClick={() => toggleFilter('dietary', opt.value)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {opt.label}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Cuisine 필터 */}
-        <motion.div className="setup-card" variants={itemVariants}>
-          <h2 className="setup-card-title">
-            <span className="step-number">3</span> Cuisine Type
-          </h2>
-          <div className="cuisine-grid">
-            {CUISINE_OPTIONS.map(opt => (
-              <motion.button
-                key={opt.value}
-                className={`cuisine-card ${filters.cuisine.includes(opt.value) ? 'active' : ''}`}
-                onClick={() => toggleFilter('cuisine', opt.value)}
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.95 }}
-                title={opt.label}
-              >
-                <span className="cuisine-icon">{opt.icon}</span>
-                <span className="cuisine-label">{opt.label}</span>
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* 시작 섹션 */}
-        <motion.div className="setup-card" variants={itemVariants}>
-          <div className="start-section">
-            <motion.div
-              className="food-counter"
-              key={filteredFoods.length}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 500, damping: 20 }}
-            >
-              🍽️ Found <span className="food-counter-number">{filteredFoods.length}</span> delicious options!
-            </motion.div>
-
-            <motion.button
-              className={`start-button ${isReady ? 'ready' : ''}`}
-              onClick={handleStartTournament}
-              disabled={!isReady}
-              whileHover={isReady ? { scale: 1.02 } : undefined}
-              whileTap={isReady ? { scale: 0.98 } : undefined}
-            >
-              {isReady ? '🔥 Start Tournament!' : `Need ${tournamentSize - filteredFoods.length} more options`}
-            </motion.button>
-          </div>
-        </motion.div>
-
-        {/* AdSense */}
-        <motion.div variants={itemVariants} style={{ marginTop: '1.5rem' }}>
-          <AdSense className="rounded-xl overflow-hidden" />
-        </motion.div>
-      </motion.div>
-
-      {/* Modal */}
-      <AnimatePresence>
-        {isModalOpen && <HowToPlayModal onClose={() => setIsModalOpen(false)} />}
-      </AnimatePresence>
     </div>
   );
 };
-
 export default TournamentSetupScreen;
